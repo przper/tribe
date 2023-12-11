@@ -1,6 +1,9 @@
 # tribe
 
 ## Description
+
+[Miro Event Storming](https://miro.com/app/board/uXjVNEcy_3I=/)
+
 ### Lista zakupów
 Cel: Lista zakupów współdzielona między użytkownikami. 
 Wymagania:
