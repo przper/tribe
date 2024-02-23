@@ -14,5 +14,8 @@
             "email": "avan.radien@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "friendsofphp/php-cs-fixer": "^3.49"
+    }
 }
