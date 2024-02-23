@@ -2,14 +2,14 @@
 
 require_once './vendor/autoload.php';
 
-use Przper\Tribe\FoodRecipies\Domain\Recipie;
+use Przper\Tribe\FoodRecipies\Domain\Recipe;
 use Przper\Tribe\FoodRecipies\Domain\Name;
 use Przper\Tribe\FoodRecipies\Domain\Ingredient;
 use Przper\Tribe\FoodRecipies\Domain\Unit;
 use Przper\Tribe\FoodRecipies\Domain\Quantity;
 use Przper\Tribe\FoodRecipies\Domain\Ingredients;
 
-$recipie = new Recipie();
+$recipie = new Recipe();
 $recipie->name = new Name("Chili Con Carne");
 
 $ingredient1 = new Ingredient();
