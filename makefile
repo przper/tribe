@@ -25,5 +25,5 @@ lint: vendor
 	vendor/bin/phpstan analyse -c phpstan.neon
 
 unit-tests: vendor
-	vendor/bin/phpunit
+	vendor/bin/phpunit --testsuite=unit
 
