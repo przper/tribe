@@ -10,7 +10,7 @@ fix: vendor
 
 ## Back end
 vendor: composer.lock
-		composer.install
+	composer install
 
 ## Refresh project
 .PHONY: clean
@@ -22,5 +22,5 @@ clean:
 test: lint
 
 lint: vendor
-	  vendor/bin/phpstan analyse -c phpstan.neon
+	vendor/bin/phpstan analyse -c phpstan.neon
 
