@@ -5,6 +5,7 @@
 all: vendor
 
 .PHONY: fix
+fix:
 	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
 
 ## Back end
