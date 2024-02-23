@@ -1,0 +1,18 @@
+{
+    "name": "przper/tribe",
+    "description": "Tribe management helper",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Przper\\Tribe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "przper",
+            "email": "avan.radien@gmail.com"
+        }
+    ],
+    "require": {}
+}
