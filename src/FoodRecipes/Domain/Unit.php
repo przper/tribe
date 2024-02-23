@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Przper\Tribe\FoodRecipies\Domain;
+namespace Przper\Tribe\FoodRecipes\Domain;
 
-class Quantity
+class Unit
 {
     public function __construct(
         public string $value,

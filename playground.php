@@ -1,11 +1,11 @@
 <?php
 
-use Przper\Tribe\FoodRecipies\Domain\Recipe;
-use Przper\Tribe\FoodRecipies\Domain\Name;
-use Przper\Tribe\FoodRecipies\Domain\Ingredient;
-use Przper\Tribe\FoodRecipies\Domain\Unit;
-use Przper\Tribe\FoodRecipies\Domain\Quantity;
-use Przper\Tribe\FoodRecipies\Domain\Ingredients;
+use Przper\Tribe\FoodRecipes\Domain\Recipe;
+use Przper\Tribe\FoodRecipes\Domain\Name;
+use Przper\Tribe\FoodRecipes\Domain\Ingredient;
+use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\FoodRecipes\Domain\Quantity;
+use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 
 $recipe = new Recipe();
 $recipe->name = new Name("Chili Con Carne");
