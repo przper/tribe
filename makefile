@@ -4,6 +4,10 @@
 .PHONY: all
 all: vendor
 
+.PHONY: fix
+fix: vendor
+	vendor/bin/php-cs-fixer fix src
+
 ## Back end
 vendor: composer.lock
 		composer.install
