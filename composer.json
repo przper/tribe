@@ -5,7 +5,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Przper\\Tribe\\": "src/",
+            "Przper\\Tribe\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Tests": "/tests"
         }
     },
