@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Przper\Tribe\FoodRecipes\Domain;
 
-final readonly class Unit
+final readonly class Amount
 {
     public function __construct(
-        public string $value,
+        private Unit $unit,
+        private Quantity $quantity,
     ) {}
 }

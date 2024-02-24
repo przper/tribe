@@ -7,7 +7,12 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 class Ingredients
 {
     /** @var Ingredient[] */
-    public array $ingredients = [];
+    private array $ingredients = [];
+
+    public function getAll(): array
+    {
+        return $this->ingredients;
+    }
 
     public function add(Ingredient $ingredient): void
     {
@@ -19,7 +24,7 @@ class Ingredients
     public function contains(Ingredient $ingredient): bool
     {
         foreach ($this->ingredients as $i) {
-            if ($i->name === $ingredient->name) {
+            if ($i->isTheSameIngredient($ingredient)) {
                 return true;
             }
         }
