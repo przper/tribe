@@ -7,6 +7,6 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 final readonly class Quantity
 {
     public function __construct(
-        public string $value,
+        public float $value,
     ) {}
 }

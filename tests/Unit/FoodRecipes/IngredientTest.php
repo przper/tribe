@@ -8,14 +8,6 @@ use Przper\Tribe\FoodRecipes\Domain\Name;
 
 class IngredientTest extends TestCase
 {
-    public function test_it_has_name(): void
-    {
-        $ingredient = new Ingredient(new Name("Meat"));
-
-        $this->assertInstanceOf(Name::class, $ingredient->getName());
-        $this->assertSame("Meat", $ingredient->getName()->value);
-    }
-
     public function test_isTheSameIngredient(): void
     {
         $ingredient1 = new Ingredient(new Name("Meat"));

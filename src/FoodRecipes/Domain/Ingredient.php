@@ -6,15 +6,22 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 
 class Ingredient
 {
-    public Amount $amount;
+    private Amount $amount;
 
     public function __construct(
-        private Name $name,
+        public readonly Name $name,
     ) {}
 
-    public function getName(): Name
+    public function getAmount(): Amount
     {
-        return $this->name;
+        return $this->amount;
+    }
+
+    public function setAmount(Amount $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
     }
 
     public function isTheSameIngredient(Ingredient $ingredient): bool
