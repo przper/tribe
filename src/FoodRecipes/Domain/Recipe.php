@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Przper\Tribe\FoodRecipes\Domain;
 
+use Przper\Tribe\Shared\Domain\AggregateRoot;
+
 final class Recipe extends AggregateRoot
 {
     private Ingredients $ingredients;
