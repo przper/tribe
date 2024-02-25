@@ -1,5 +1,7 @@
 /vendor/
 
+.env
+
 .php-cs-fixer.cache
 /.phpunit.cache
 docker-compose.override.yaml

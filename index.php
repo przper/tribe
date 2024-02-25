@@ -2,6 +2,7 @@
 
 require_once './vendor/autoload.php';
 
-echo "Hello World!\n";
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-require_once './playground.php';
+echo "Hello World!\n";
