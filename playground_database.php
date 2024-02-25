@@ -6,7 +6,7 @@ use Doctrine\DBAL\Tools\DsnParser;
 require 'index.php';
 
 $connectionParams = (new DsnParser())->parse($_ENV['DATABASE_URL']);
-echo json_encode($connectionParams)."\n";
+echo json_encode($connectionParams) . "\n";
 
 $connection = DriverManager::getConnection($connectionParams);
 
@@ -15,4 +15,4 @@ $statement = $connection->prepare($sql);
 
 $result = $statement->executeQuery();
 
-echo json_encode($result)."\n";
+echo json_encode($result) . "\n";
