@@ -1,0 +1,13 @@
+version: "3.4"
+
+# Override docker-compose.yml base file with dev environment parameters
+services:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      # number means: Host port random, container port specified port number
+      # number:number means: first number is host port, 2nd number is container port
+      - '33546:80'
+    environment:
+      PMA_HOST: database
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
