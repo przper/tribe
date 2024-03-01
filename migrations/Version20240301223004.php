@@ -17,17 +17,17 @@ final class Version20240301223004 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            CREATE TABLE `recipe` (
-                `id`    VARCHAR(255) DEFAULT (UUID()) PRIMARY KEY,
-                `name`  VARCHAR(255) NOT NULL
-            );
-        SQL);
+                CREATE TABLE `recipe` (
+                    `id`    VARCHAR(255) DEFAULT (UUID()) PRIMARY KEY,
+                    `name`  VARCHAR(255) NOT NULL
+                );
+            SQL);
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            DROP TABLE IF EXISTS recipe;
-        SQL);
+                DROP TABLE IF EXISTS recipe;
+            SQL);
     }
 }
