@@ -21,7 +21,9 @@
     ],
     "require": {
         "doctrine/dbal": "^4.0",
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+        "doctrine/migrations": "3.7.2",
+        "symfony/yaml": "^7.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
