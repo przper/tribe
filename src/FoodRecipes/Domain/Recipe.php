@@ -10,9 +10,17 @@ final class Recipe extends AggregateRoot
 {
     private Ingredients $ingredients;
 
-    public function __construct(
+    private function __construct(
+        private RecipeId $id,
         private Name $name,
     ) {}
+
+    public static function restore(
+        RecipeId $id,
+        Name $name,
+    ) {
+        return new self($id, $name);
+    }
 
     public function getName(): Name
     {

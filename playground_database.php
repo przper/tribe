@@ -2,17 +2,25 @@
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\DsnParser;
+use Przper\Tribe\FoodRecipes\Domain\RecipeId;
+use Przper\Tribe\FoodRecipes\Infrastructure\RecipeDbRepository;
 
 require 'index.php';
 
 $connectionParams = (new DsnParser())->parse($_ENV['DATABASE_URL']);
-echo json_encode($connectionParams) . "\n";
+// echo json_encode($connectionParams) . "\n";
 
 $connection = DriverManager::getConnection($connectionParams);
 
-$sql = "SELECT * FROM test";
-$statement = $connection->prepare($sql);
+// $sql = "SELECT * FROM recipe";
+// $statement = $connection->prepare($sql);
 
-$result = $statement->executeQuery();
+// $result = $statement->executeQuery();
+// foreach ($result->fetchAllAssociativeIndexed() as  $index => $row) {
+//     echo json_encode($row) . "\n";
+// }
 
-echo json_encode($result) . "\n";
+$recipeRepository = new RecipeDbRepository($connection);
+
+$recipe = $recipeRepository->get(new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002'));
+echo $recipe->getName()->value . "\n";
