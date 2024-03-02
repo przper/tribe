@@ -8,9 +8,17 @@ class Ingredient
 {
     private Amount $amount;
 
-    public function __construct(
-        public readonly Name $name,
+    private function __construct(
+        private readonly Name $name,
     ) {}
+
+    public static function create(Name $name): self
+    {
+        $ingredient = new self($name);
+        $ingredient->guard();
+
+        return $ingredient;
+    }
 
     public function getAmount(): Amount
     {
@@ -24,8 +32,15 @@ class Ingredient
         return $this;
     }
 
-    public function equals(Ingredient $ingredient): bool
+    public function getName(): Name
     {
-        return $this->name->value === $ingredient->name->value;
+        return $this->name;
+    }
+
+    private function guard(): void {}
+
+    public function equals(self $ingredient): bool
+    {
+        return $this->name->equal($ingredient->name);
     }
 }

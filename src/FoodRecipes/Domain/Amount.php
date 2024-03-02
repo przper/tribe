@@ -4,10 +4,18 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 
 class Amount
 {
-    public function __construct(
-        private Unit $unit,
+    private function __construct(
         private Quantity $quantity,
+        private Unit $unit,
     ) {}
+
+    public static function create(Quantity $quantity, Unit $unit): self
+    {
+        $amount = new self($quantity, $unit);
+        $amount->guard();
+
+        return $amount;
+    }
 
     public function getUnit(): Unit
     {
@@ -31,5 +39,12 @@ class Amount
         $this->quantity = $quantity;
 
         return $this;
+    }
+
+    private function guard(): void {}
+
+    public function __toString(): string
+    {
+        return "$this->quantity [$this->unit]";
     }
 }

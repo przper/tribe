@@ -5,10 +5,10 @@ namespace Przper\Tribe\Shared\Domain;
 readonly class Id
 {
     public function __construct(
-        public string $id,
+        private string $id,
     ) {}
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->id;
     }

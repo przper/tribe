@@ -9,13 +9,14 @@ use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Amount;
+use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 
-$recipe = new Recipe(new Name("Chili Con Carne"));
+$recipe = Recipe::restore(new RecipeId('test'), Name::fromString("Chili Con Carne"));
 
-$ingredient1 = new Ingredient(new Name("Meat"));
-$ingredient1->setAmount(new Amount(new Unit("kg"), new Quantity(1)));
-$ingredient2 = new Ingredient(new Name("Beans"));
-$ingredient2->setAmount(new Amount(new Unit("can"), new Quantity(1)));
+$ingredient1 = Ingredient::create(Name::fromString("Meat"));
+$ingredient1->setAmount(Amount::create(Quantity::fromFloat(1.2), Unit::fromString("kg")));
+$ingredient2 = Ingredient::create(Name::fromString("Beans"));
+$ingredient2->setAmount(Amount::create(Quantity::fromFloat(1), Unit::fromString("can")));
 
 $ingredients = new Ingredients();
 $ingredients->add($ingredient1);
@@ -23,8 +24,8 @@ $ingredients->add($ingredient2);
 
 $recipe->setIngredients($ingredients);
 
-echo "Recipe for \"{$recipe->getName()->value}\"" . "\n";
+echo "Recipe for \"{$recipe->getName()}\"" . "\n";
 
 foreach ($ingredients->getAll() as $i => $ingredient) {
-    echo "{$i}: {$ingredient->name->value}" . "\n";
+    echo "{$i}: {$ingredient->getName()}" . "\n";
 }

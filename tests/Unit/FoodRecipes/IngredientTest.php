@@ -10,9 +10,9 @@ class IngredientTest extends TestCase
 {
     public function test_isTheSameIngredient(): void
     {
-        $ingredient1 = new Ingredient(new Name("Meat"));
-        $ingredient2 = new Ingredient(new Name("Cheese"));
-        $ingredient3 = new Ingredient(new Name("Meat"));
+        $ingredient1 = Ingredient::create(Name::fromString("Meat"));
+        $ingredient2 = Ingredient::create(Name::fromString("Cheese"));
+        $ingredient3 = Ingredient::create(Name::fromString("Meat"));
 
         $this->assertTrue($ingredient1->equals($ingredient1));
         $this->assertFalse($ingredient1->equals($ingredient2));

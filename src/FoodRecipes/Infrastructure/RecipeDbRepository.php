@@ -25,7 +25,7 @@ class RecipeDbRepository implements RecipeRepositoryInterface
 
         return Recipe::restore(
             new RecipeId($result['id']),
-            new Name($result['name']),
+            Name::fromString($result['name']),
         );
     }
 }

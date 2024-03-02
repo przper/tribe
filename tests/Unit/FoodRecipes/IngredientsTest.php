@@ -15,7 +15,7 @@ class IngredientsTest extends TestCase
 
         $this->assertEquals([], $ingredients->getAll());
 
-        $ingredient = new Ingredient(new Name("New Ingredient"));
+        $ingredient = Ingredient::create(Name::fromString("New Ingredient"));
         $ingredients->add($ingredient);
 
         $this->assertEquals([$ingredient], $ingredients->getAll());
@@ -25,7 +25,7 @@ class IngredientsTest extends TestCase
     {
         $ingredients = new Ingredients();
 
-        $ingredient = new Ingredient(new Name("New Ingredient"));
+        $ingredient = Ingredient::create(Name::fromString("New Ingredient"));
 
         $this->assertFalse($ingredients->contains($ingredient));
 
@@ -38,7 +38,7 @@ class IngredientsTest extends TestCase
     {
         $ingredients = new Ingredients();
 
-        $ingredient = new Ingredient(new Name("New Ingredient"));
+        $ingredient = Ingredient::create(Name::fromString("New Ingredient"));
 
         $ingredients->add($ingredient);
 

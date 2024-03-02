@@ -23,4 +23,4 @@ $connection = DriverManager::getConnection($connectionParams);
 $recipeRepository = new RecipeDbRepository($connection);
 
 $recipe = $recipeRepository->get(new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002'));
-echo $recipe->getName()->value . "\n";
+echo $recipe->getName() . "\n";
