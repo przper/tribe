@@ -16,16 +16,22 @@ class RecipeDbRepository implements RecipeRepositoryInterface
 
     public function persist(Recipe $recipe): void {}
 
-    public function get(RecipeId $id): Recipe
+    public function get(RecipeId $id): ?Recipe
     {
         $sql = "SELECT * FROM recipe WHERE id = ?";
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $id);
-        $result = $statement->executeQuery()->fetchAssociative();
+        $result = $statement->executeQuery();
 
-        return Recipe::restore(
-            new RecipeId($result['id']),
-            Name::fromString($result['name']),
-        );
+        if ($result->rowCount()) {
+            $data = $result->fetchAssociative();
+
+            return Recipe::restore(
+                new RecipeId($data['id']),
+                Name::fromString($data['name']),
+            );
+        }
+
+        return null;
     }
 }
