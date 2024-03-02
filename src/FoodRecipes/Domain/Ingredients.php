@@ -24,7 +24,7 @@ class Ingredients
     public function contains(Ingredient $ingredient): bool
     {
         foreach ($this->ingredients as $i) {
-            if ($i->isTheSameIngredient($ingredient)) {
+            if ($i->equals($ingredient)) {
                 return true;
             }
         }

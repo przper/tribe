@@ -24,7 +24,7 @@ class Ingredient
         return $this;
     }
 
-    public function isTheSameIngredient(Ingredient $ingredient): bool
+    public function equals(Ingredient $ingredient): bool
     {
         return $this->name->value === $ingredient->name->value;
     }

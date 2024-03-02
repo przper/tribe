@@ -42,6 +42,6 @@ class IngredientsTest extends TestCase
 
         $ingredients->add($ingredient);
 
-        $this->assertTrue($ingredients->getAll()[0]->isTheSameIngredient($ingredient));
+        $this->assertTrue($ingredients->getAll()[0]->equals($ingredient));
     }
 }

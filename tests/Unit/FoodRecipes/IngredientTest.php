@@ -14,8 +14,8 @@ class IngredientTest extends TestCase
         $ingredient2 = new Ingredient(new Name("Cheese"));
         $ingredient3 = new Ingredient(new Name("Meat"));
 
-        $this->assertTrue($ingredient1->isTheSameIngredient($ingredient1));
-        $this->assertFalse($ingredient1->isTheSameIngredient($ingredient2));
-        $this->assertTrue($ingredient1->isTheSameIngredient($ingredient3));
+        $this->assertTrue($ingredient1->equals($ingredient1));
+        $this->assertFalse($ingredient1->equals($ingredient2));
+        $this->assertTrue($ingredient1->equals($ingredient3));
     }
 }
