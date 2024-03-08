@@ -23,15 +23,16 @@ class RecipeDbRepository implements RecipeRepositoryInterface
         $statement->executeQuery();
     }
 
-    public function persist(Recipe $recipe): void {
+    public function persist(Recipe $recipe): void
+    {
         $sql = <<<SQL
-            UPDATE recipe
-            SET
-                id = ?,
-                name = ?
-            WHERE
-                id = ?
-        SQL;
+                UPDATE recipe
+                SET
+                    id = ?,
+                    name = ?
+                WHERE
+                    id = ?
+            SQL;
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $recipe->getId());
         $statement->bindValue(2, $recipe->getName());

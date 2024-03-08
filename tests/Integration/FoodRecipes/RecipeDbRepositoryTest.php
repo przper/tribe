@@ -28,12 +28,12 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $connection = DriverManager::getConnection($connectionParams);
 
         $connection->executeQuery(<<<SQL
-            INSERT INTO tribe.recipe
-                (id, name)
-            VALUES
-                ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
-            ON DUPLICATE KEY UPDATE `name` = `name`;
-        SQL);
+                INSERT INTO tribe.recipe
+                    (id, name)
+                VALUES
+                    ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
+                ON DUPLICATE KEY UPDATE `name` = `name`;
+            SQL);
 
         $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
 
@@ -43,10 +43,7 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $this->assertSame('RecipeDb test', (string) $result->getName());
     }
 
-    public function test_create(): void
-    {
-
-    }
+    public function test_create(): void {}
 
 
     public function test_persist(): void
