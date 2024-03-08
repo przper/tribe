@@ -8,6 +8,15 @@ use Przper\Tribe\FoodRecipes\Domain\Name;
 
 class IngredientTest extends TestCase
 {
+    public function test_it_be_created_when_data_is_valid(): void
+    {
+        $name = Name::fromString('Meat');
+
+        $ingredient = Ingredient::create($name);
+
+        $this->assertSame($name, $ingredient->getName());
+    }
+
     public function test_isTheSameIngredient(): void
     {
         $ingredient1 = Ingredient::create(Name::fromString("Meat"));
