@@ -14,7 +14,30 @@ class RecipeDbRepository implements RecipeRepositoryInterface
         private Connection $connection,
     ) {}
 
-    public function persist(Recipe $recipe): void {}
+    public function create(Recipe $recipe): void
+    {
+        $sql = "INSERT INTO `recipe` (`id`, `name`) VALUES(?, ?)";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $recipe->getId());
+        $statement->bindValue(2, $recipe->getName());
+        $statement->executeQuery();
+    }
+
+    public function persist(Recipe $recipe): void {
+        $sql = <<<SQL
+            UPDATE recipe
+            SET
+                id = ?,
+                name = ?
+            WHERE
+                id = ?
+        SQL;
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $recipe->getId());
+        $statement->bindValue(2, $recipe->getName());
+        $statement->bindValue(3, $recipe->getId());
+        $statement->executeQuery();
+    }
 
     public function get(RecipeId $id): ?Recipe
     {
