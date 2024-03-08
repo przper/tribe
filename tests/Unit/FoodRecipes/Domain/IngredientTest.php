@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\FoodRecipes;
+namespace FoodRecipes\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
