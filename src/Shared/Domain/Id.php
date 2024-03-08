@@ -4,16 +4,10 @@ namespace Przper\Tribe\Shared\Domain;
 
 readonly class Id
 {
-    private function __construct(
+    public function __construct(
         private string $id,
-    ) {}
-
-    public static function create(string $id): self
-    {
-        $idClass = new self($id);
-        $idClass->guard();
-
-        return $idClass;
+    ) {
+        $this->guard();
     }
 
     public function getId(): string
