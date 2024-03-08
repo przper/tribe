@@ -18,7 +18,7 @@ class CreateRecipeHandlerTest extends TestCase
         $recipeRepositoryMock = $this->createMock(RecipeRepositoryInterface::class);
         $recipeRepositoryMock
             ->expects($this->once())
-            ->method('persist')
+            ->method('create')
         ;
 
         $handler = new CreateRecipeHandler($recipeRepositoryMock);
