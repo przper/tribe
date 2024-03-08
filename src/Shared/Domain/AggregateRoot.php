@@ -4,8 +4,10 @@ namespace Przper\Tribe\Shared\Domain;
 
 abstract class AggregateRoot
 {
+    /** @var DomainEvent[] */
     protected array $events = [];
 
+    /** @return DomainEvent[] */
     final public function pullEvents(): array
     {
         $events = $this->events;

@@ -9,6 +9,7 @@ class Ingredients
     /** @var Ingredient[] */
     private array $ingredients = [];
 
+    /** @return Ingredient[] */
     public function getAll(): array
     {
         return $this->ingredients;
