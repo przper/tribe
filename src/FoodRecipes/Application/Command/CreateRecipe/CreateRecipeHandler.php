@@ -17,10 +17,10 @@ final class CreateRecipeHandler
     public function __invoke(CreateRecipeCommand $command): void
     {
         $recipe = Recipe::create(
-            new RecipeId('test'),
+            new RecipeId((string) rand(1000000, 9999999)),
             Name::fromString($command->name),
         );
 
-        $this->repository->persist($recipe);
+        $this->repository->create($recipe);
     }
 }
