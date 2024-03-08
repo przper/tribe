@@ -11,8 +11,7 @@ final class CreateRecipeHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(CreateRecipeCommand $command): void
     {
