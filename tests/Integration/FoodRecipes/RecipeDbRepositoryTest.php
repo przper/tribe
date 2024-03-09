@@ -44,10 +44,7 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $this->assertSame('RecipeDb test', (string) $result->getName());
     }
 
-    public function test_create(): void
-    {
-
-    }
+    public function test_create(): void {}
 
     public function test_persist(): void
     {

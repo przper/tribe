@@ -18,16 +18,14 @@ final class Recipe extends AggregateRoot
     public static function create(
         RecipeId $id,
         Name $name,
-    ): Recipe
-    {
+    ): Recipe {
         return new self($id, $name);
     }
 
     public static function restore(
         RecipeId $id,
         Name $name,
-    ): Recipe
-    {
+    ): Recipe {
         return new self($id, $name);
     }
 

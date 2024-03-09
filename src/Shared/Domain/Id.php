@@ -15,10 +15,7 @@ readonly class Id
         return $this->id;
     }
 
-    private function guard(): void
-    {
-
-    }
+    private function guard(): void {}
 
     public function __toString(): string
     {
