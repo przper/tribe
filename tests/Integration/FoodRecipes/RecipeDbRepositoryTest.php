@@ -25,12 +25,12 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $connection = DriverManager::getConnection($connectionParams);
 
         $connection->executeQuery(<<<SQL
-            INSERT INTO tribe.recipe
-                (id, name)
-            VALUES
-                ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
-            ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
-        SQL);
+                INSERT INTO tribe.recipe
+                    (id, name)
+                VALUES
+                    ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
+                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+            SQL);
     }
 
     public function test_get(): void
