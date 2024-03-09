@@ -20,10 +20,7 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         parent::setUp();
 
         $this->repository = self::getContainer()[RecipeRepositoryInterface::class];
-    }
 
-    public function test_get(): void
-    {
         $connectionParams = (new DsnParser())->parse($_ENV['DATABASE_URL']);
         $connection = DriverManager::getConnection($connectionParams);
 
@@ -32,12 +29,16 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
                 (id, name)
             VALUES
                 ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
-            ON DUPLICATE KEY UPDATE `name` = `name`;
+            ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
         SQL);
+    }
 
+    public function test_get(): void
+    {
         $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
 
         $result = $this->repository->get($id);
+
         $this->assertNotNull($result);
         $this->assertInstanceOf(Recipe::class, $result);
         $this->assertSame('RecipeDb test', (string) $result->getName());
@@ -48,17 +49,15 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
 
     }
 
-
     public function test_persist(): void
     {
         $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
 
+        $result = $this->repository->get($id);
         $this->assertNotNull($this->repository->get($id));
+        $this->assertSame('RecipeDb test', (string) $result->getName());
 
-        $recipe = Recipe::create(
-            $id,
-            Name::fromString('I am updated name'),
-        );
+        $recipe = Recipe::create($id, Name::fromString('I am updated name'));
 
         $this->repository->persist($recipe);
 
