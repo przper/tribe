@@ -5,7 +5,8 @@
 all: vendor
 
 .PHONY: fix
-fix:
+fix: tools/php-cs-fixer/composer.lock
+	cd tools/php-cs-fixer; composer install
 	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
 
 ## Back end
