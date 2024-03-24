@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\FoodRecipes\Infrastructure;
+namespace Przper\Tribe\FoodRecipes\Infrastructure\Database;
 
 use Doctrine\DBAL\Connection;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
@@ -8,7 +8,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 
-class RecipeDbRepository implements RecipeRepositoryInterface
+class RecipeMysqlRepository implements RecipeRepositoryInterface
 {
     public function __construct(
         private Connection $connection,

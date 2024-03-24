@@ -7,7 +7,7 @@ use Doctrine\DBAL\Tools\DsnParser;
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\FoodRecipes\Infrastructure\RecipeDbRepository;
+use Przper\Tribe\FoodRecipes\Infrastructure\Database\RecipeMysqlRepository;
 
 class IntegrationTestCase extends TestCase
 {
@@ -25,7 +25,7 @@ class IntegrationTestCase extends TestCase
         $connection = DriverManager::getConnection($connectionParams);
 
         $this->container = [
-            RecipeRepositoryInterface::class => new RecipeDbRepository($connection),
+            RecipeRepositoryInterface::class => new RecipeMysqlRepository($connection),
         ];
     }
 

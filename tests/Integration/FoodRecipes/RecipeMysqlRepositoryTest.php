@@ -9,12 +9,12 @@ use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\FoodRecipes\Infrastructure\RecipeDbRepository;
+use Przper\Tribe\FoodRecipes\Infrastructure\Database\RecipeMysqlRepository;
 use Tests\IntegrationTestCase;
 
-class RecipeDbRepositoryTest extends IntegrationTestCase
+class RecipeMysqlRepositoryTest extends IntegrationTestCase
 {
-    private RecipeDbRepository $repository;
+    private RecipeMysqlRepository $repository;
 
     private Connection $connection;
 
