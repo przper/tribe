@@ -9,8 +9,6 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 
 class CreateRecipeHandlerTest extends TestCase
 {
-    private CreateRecipeHandler $handler;
-
     public function test_it_persists_recipe(): void
     {
         $command = new CreateRecipeCommand('Chili con Carne');

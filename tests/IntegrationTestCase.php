@@ -29,6 +29,9 @@ class IntegrationTestCase extends TestCase
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getContainer(): array
     {
         return $this->container;
