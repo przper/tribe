@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\FoodRecipes;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\DsnParser;
 use Przper\Tribe\FoodRecipes\Domain\Name;
@@ -15,6 +16,8 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
 {
     private RecipeDbRepository $repository;
 
+    private Connection $connection;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -22,14 +25,25 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $this->repository = self::getContainer()[RecipeRepositoryInterface::class];
 
         $connectionParams = (new DsnParser())->parse($_ENV['DATABASE_URL']);
-        $connection = DriverManager::getConnection($connectionParams);
+        $this->connection = DriverManager::getConnection($connectionParams);
 
-        $connection->executeQuery(<<<SQL
+        $this->connection->executeQuery(<<<SQL
                 INSERT INTO tribe.recipe
                     (id, name)
                 VALUES
                     ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+            SQL);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->connection->executeQuery(<<<SQL
+                DELETE FROM tribe.recipe
+                WHERE `id` IN (
+                    'test',
+                    '0c53c94a-d821-11ee-8fbc-0242ac190002'
+                ); 
             SQL);
     }
 
@@ -44,7 +58,17 @@ class RecipeDbRepositoryTest extends IntegrationTestCase
         $this->assertSame('RecipeDb test', (string) $result->getName());
     }
 
-    public function test_create(): void {}
+    public function test_create(): void
+    {
+        $id = new RecipeId('test');
+
+        $this->assertNull($this->repository->get($id));
+
+        $recipe = Recipe::create($id, Name::fromString('New Recipe'));
+        $this->repository->create($recipe);
+
+        $this->assertNotNull($this->repository->get($id));
+    }
 
     public function test_persist(): void
     {
