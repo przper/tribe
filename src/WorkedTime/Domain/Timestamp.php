@@ -20,6 +20,11 @@ final readonly class Timestamp
         return $timestamp;
     }
 
+    public function isPastTimestamp(Timestamp $timestamp)
+    {
+        return $this->datetime->getTimestamp() > $timestamp->datetime->getTimestamp();
+    }
+
     private function guard(): void {}
 
     public function __toString(): string
