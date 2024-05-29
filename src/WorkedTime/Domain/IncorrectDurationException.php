@@ -4,4 +4,4 @@ namespace Przper\Tribe\WorkedTime\Domain;
 
 use Exception;
 
-class IncorrectWorkedTimeException extends Exception {}
+class IncorrectDurationException extends Exception {}
