@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "Przper\\Tribe\\": "src/",
-            "Przper\\Tribe\\Tests": "tests/"
+            "Przper\\Tribe\\Tests\\": "tests/"
         }
     },
     "autoload-dev": {
@@ -24,7 +24,8 @@
         "doctrine/dbal": "^4.0",
         "vlucas/phpdotenv": "^5.6",
         "doctrine/migrations": "3.7.2",
-        "symfony/yaml": "^7.0"
+        "symfony/yaml": "^7.0",
+        "guzzlehttp/guzzle": "^7.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
