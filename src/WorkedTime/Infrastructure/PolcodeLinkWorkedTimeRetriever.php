@@ -2,17 +2,18 @@
 
 namespace Przper\Tribe\WorkedTime\Infrastructure;
 
-use Przper\Tribe\WorkedTime\Domain\Timestamp;
 use GuzzleHttp\Client;
+use Przper\Tribe\WorkedTime\Domain\Date;
 
 class PolcodeLinkWorkedTimeRetriever
 {
     private const POLCODE_WORKED_TIME_API = 'https://link.polcode.com/api/time/';
+
     public function __construct(
-        private readonly $linkApiKey,
+        private readonly string $linkApiKey,
     ) {}
 
-    public function retrieve(Timestamp $start, ?Timestamp $end = null)
+    public function retrieve(Date $start, ?Date $end = null)
     {
         $httpClient = new Client();
 
@@ -27,8 +28,8 @@ class PolcodeLinkWorkedTimeRetriever
         }
     }
 
-    private function getLinkForDay(Timestamp $timestamp): string
+    private function getLinkForDay(Date $date): string
     {
-        return self::POLCODE_WORKED_TIME_API . $timestamp;
+        return self::POLCODE_WORKED_TIME_API . $date;
     }
 }

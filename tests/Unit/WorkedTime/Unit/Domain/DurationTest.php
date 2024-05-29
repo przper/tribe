@@ -19,6 +19,16 @@ class DurationTest extends TestCase
         $this->assertInstanceOf(Duration::class, $duration);
     }
 
+    public function test_duration_with_zero_length_can_be_created(): void
+    {
+        $start = Time::fromString('08:00');
+        $end = Time::fromString('08:00');
+
+        $duration = Duration::create($start, $end);
+
+        $this->assertInstanceOf(Duration::class, $duration);
+    }
+
     public function test_it_throws_IncorrectDurationException(): void
     {
         $this->expectException(IncorrectDurationException::class);
