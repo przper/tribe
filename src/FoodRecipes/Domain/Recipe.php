@@ -26,7 +26,10 @@ final class Recipe extends AggregateRoot
         RecipeId $id,
         Name $name,
     ): Recipe {
-        return new self($id, $name);
+        $recipe = new self($id, $name);
+        $recipe->raise(RecipeCreated::fromRecipe($recipe));
+
+        return $recipe;
     }
 
     public function getId(): RecipeId
