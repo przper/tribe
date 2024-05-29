@@ -1,6 +1,6 @@
 <?php
 
-namespace FoodRecipes\Application;
+namespace Tests\Unit\FoodRecipes\Application;
 
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;

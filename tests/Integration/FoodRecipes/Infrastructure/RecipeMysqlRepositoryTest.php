@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\FoodRecipes;
+namespace Tests\Integration\FoodRecipes\Infrastructure;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;

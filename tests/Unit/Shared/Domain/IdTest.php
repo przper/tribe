@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared;
+namespace Tests\Unit\Shared\Domain;
 
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\Shared\Domain\Id;
