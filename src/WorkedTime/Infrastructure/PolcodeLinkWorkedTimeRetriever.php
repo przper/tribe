@@ -10,9 +10,7 @@ class PolcodeLinkWorkedTimeRetriever
     private const POLCODE_WORKED_TIME_API = 'https://link.polcode.com/api/time/';
     public function __construct(
         private readonly $linkApiKey,
-    ) {
-        
-    }
+    ) {}
 
     public function retrieve(Timestamp $start, ?Timestamp $end = null)
     {

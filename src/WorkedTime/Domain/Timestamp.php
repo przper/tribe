@@ -9,8 +9,7 @@ final readonly class Timestamp
 {
     private function __construct(
         private \DateTimeImmutable $datetime,
-    ) {
-    }
+    ) {}
 
     public static function fromDateTimeInterface(DateTimeInterface $datetime): self
     {

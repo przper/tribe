@@ -20,7 +20,7 @@ class TimestampTest extends TestCase
     {
         $timestamp = Timestamp::fromDateTimeInterface($before);
         $toCheckTimestamp = Timestamp::fromDateTimeInterface($after);
-        
+
         $this->assertEquals($expected, $timestamp->isPastTimestamp($toCheckTimestamp));
     }
 

@@ -7,8 +7,7 @@ class WorkedTime
     private function __construct(
         private Timestamp $start,
         private Timestamp $end,
-    ) {
-    }
+    ) {}
 
     public static function create(Timestamp $start, Timestamp $end): self
     {
