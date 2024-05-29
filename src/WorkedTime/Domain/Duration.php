@@ -5,11 +5,11 @@ namespace Przper\Tribe\WorkedTime\Domain;
 class Duration
 {
     private function __construct(
-        private Timestamp $start,
-        private Timestamp $end,
+        private Time $start,
+        private Time $end,
     ) {}
 
-    public static function create(Timestamp $start, Timestamp $end): self
+    public static function create(Time $start, Time $end): self
     {
         $duration = new self($start, $end);
         $duration->guard();
@@ -19,7 +19,7 @@ class Duration
 
     private function guard(): void
     {
-        if ($this->start->isPastTimestamp($this->end)) {
+        if ($this->start->isPast($this->end)) {
             throw new IncorrectDurationException("$this->end must be after $this->start");
         }
     }
