@@ -4,12 +4,11 @@ namespace Przper\Tribe\WorkedTime\Domain;
 
 final readonly class Date
 {
-    final const DATE_FORMAT = 'Y-m-d';
+    final public const DATE_FORMAT = 'Y-m-d';
 
     private function __construct(
         private \DateTimeImmutable $date,
-    ) {
-    }
+    ) {}
 
     public static function fromString(string $date): self
     {

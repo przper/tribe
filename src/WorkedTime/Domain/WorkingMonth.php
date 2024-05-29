@@ -12,8 +12,7 @@ final class WorkingMonth extends AggregateRoot
     private function __construct(
         private string $monthName,
         private array $workingDays,
-    ) {
-    }
+    ) {}
 
     /**
      * @param WorkingDay[] $workingDays
