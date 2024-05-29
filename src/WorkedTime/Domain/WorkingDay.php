@@ -4,7 +4,7 @@ namespace Przper\Tribe\WorkedTime\Domain;
 
 use Przper\Tribe\Shared\Domain\AggregateRoot;
 
-class WorkingDay extends AggregateRoot
+class WorkingDay
 {
     /**
      * @param Duration[] $workedTimes
@@ -20,7 +20,6 @@ class WorkingDay extends AggregateRoot
     public static function create(Date $date, array $workedTimes): self
     {
         $workedDay = new self($date, $workedTimes);
-        $workedDay->raise(new WorkingDayCreated('test', 'WorkingDay', '1'));
 
         return $workedDay;
     }
