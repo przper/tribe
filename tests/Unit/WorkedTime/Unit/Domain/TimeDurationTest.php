@@ -39,4 +39,24 @@ class TimeDurationTest extends TestCase
 
         $this->assertSame("06:47", (string) $duration);
     }
+
+    #[Test]
+    public function it_can_add_time(): void
+    {
+        $duration = TimeDuration::create();
+
+        $this->assertSame("00:00", (string) $duration);
+
+        $duration->add(TimeDuration::create(hours: 1));
+
+        $this->assertSame("01:00", (string) $duration);
+
+        $duration->add(TimeDuration::create(minutes: 47));
+
+        $this->assertSame("01:47", (string) $duration);
+
+        $duration->add(TimeDuration::create(minutes: 47));
+
+        $this->assertSame("02:34", (string) $duration);
+    }
 }

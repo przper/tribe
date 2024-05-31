@@ -24,6 +24,11 @@ final class TimeDuration
         return new self($totalMinutes);
     }
 
+    public function add(TimeDuration $newDuration): void
+    {
+        $this->minutes += $newDuration->minutes;
+    }
+
     public function __toString(): string
     {
         $hours = floor($this->minutes / 60);
