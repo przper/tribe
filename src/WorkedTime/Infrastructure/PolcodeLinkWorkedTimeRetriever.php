@@ -4,6 +4,11 @@ namespace Przper\Tribe\WorkedTime\Infrastructure;
 
 use GuzzleHttp\Client;
 use Przper\Tribe\WorkedTime\Domain\Date;
+use Przper\Tribe\WorkedTime\Domain\Month;
+use Przper\Tribe\WorkedTime\Domain\Time;
+use Przper\Tribe\WorkedTime\Domain\TimeRange;
+use Przper\Tribe\WorkedTime\Domain\WorkingDay;
+use Przper\Tribe\WorkedTime\Domain\WorkingMonth;
 
 class PolcodeLinkWorkedTimeRetriever
 {
@@ -13,7 +18,7 @@ class PolcodeLinkWorkedTimeRetriever
         private readonly string $linkApiKey,
     ) {}
 
-    public function retrieve(Date $start, ?Date $end = null)
+    public function retrieve(int $year, Month $month): WorkingMonth
     {
         /**
          * Request
@@ -34,15 +39,43 @@ class PolcodeLinkWorkedTimeRetriever
          */
         $httpClient = new Client();
 
-        $days = [$start];
+        $dateRange = new \DatePeriod(
+            new \DateTimeImmutable("01 $month->name $year"),
+            new \DateInterval('P1D'),
+            new \DateTimeImmutable("last day of $month->name $year"),
+            \DatePeriod::INCLUDE_END_DATE,
+        );
 
-        foreach ($days as $day) {
+        $workingMonth = WorkingMonth::create(Month::May);
+
+        foreach ($dateRange as $date) {
+            $day = Date::fromString($date->format(Date::DATE_FORMAT));
             $response = $httpClient->request(
                 'GET',
                 $this->getLinkForDay($day),
                 ['headers' => ['Authorization' => $this->linkApiKey]],
             );
+
+            $responseData = json_decode($response->getBody(), true);
+
+            $workingDay = WorkingDay::create($day);
+
+            foreach ($responseData as $item) {
+                $start = new \DateTimeImmutable($item['fromDate']);
+                $end = new \DateTimeImmutable($item['toDate']);
+
+                $timeRange = TimeRange::create(
+                    Time::fromString($start->format('H:i')),
+                    Time::fromString($end->format('H:i')),
+                );
+
+                $workingDay->add($timeRange);
+            }
+
+            $workingMonth->add($workingDay);
         }
+
+        return $workingMonth;
     }
 
     private function getLinkForDay(Date $date): string
