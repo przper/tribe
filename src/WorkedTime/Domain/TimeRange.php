@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\WorkedTime\Domain;
 
-class Duration
+final readonly class TimeRange
 {
     private function __construct(
         private Time $start,
@@ -22,5 +22,18 @@ class Duration
         if ($this->start->isPast($this->end)) {
             throw new IncorrectDurationException("$this->end must be after $this->start");
         }
+    }
+
+    public function intersects(TimeRange $timeRange): bool
+    {
+        if ($this->end->isPast($timeRange->start)) {
+            return true;
+        }
+
+        if ($this->start->isPast($timeRange->end)) {
+            return true;
+        }
+
+        return false;
     }
 }
