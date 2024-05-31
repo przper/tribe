@@ -45,4 +45,15 @@ final class WorkingMonth extends AggregateRoot
     {
         return $this->workingDays;
     }
+
+    public function getWorkedTimeDuration(): TimeDuration
+    {
+        $duration = TimeDuration::create();
+
+        foreach ($this->workingDays as $workedDay) {
+            $duration->add($workedDay->getWorkedTimeDuration());
+        }
+
+        return $duration;
+    }
 }
