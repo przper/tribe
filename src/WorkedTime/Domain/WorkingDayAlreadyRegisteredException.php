@@ -2,7 +2,4 @@
 
 namespace Przper\Tribe\WorkedTime\Domain;
 
-class WorkingDayAlreadyRegisteredException extends \Exception
-{
-
-}
+class WorkingDayAlreadyRegisteredException extends \Exception {}

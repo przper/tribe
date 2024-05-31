@@ -6,8 +6,7 @@ final class TimeDuration
 {
     private function __construct(
         private int $minutes,
-    ) {
-    }
+    ) {}
 
     public static function create(int $hours = 0, int $minutes = 0): self
     {
