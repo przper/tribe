@@ -53,7 +53,7 @@ class WorkingMonthTest extends TestCase
         $workingDay2 = WorkingDay::create(Date::fromString('2000-08-02'));
         $workingDay2->add(TimeRange::create(Time::fromString('08:00'), Time::fromString('15:00')));
         $workingMonth->add($workingDay2);
-        
+
         $workingDay3 = WorkingDay::create(Date::fromString('2000-08-03'));
         $workingDay3->add(TimeRange::create(Time::fromString('07:00'), Time::fromString('16:00')));
         $workingMonth->add($workingDay3);
