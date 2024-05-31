@@ -2,24 +2,20 @@
 
 namespace Przper\Tribe\WorkedTime\Domain;
 
-use Przper\Tribe\Shared\Domain\AggregateRoot;
-
-class WorkingDay
+final class WorkingDay
 {
     /**
-     * @param Duration[] $workedTimes
+     * @var TimeRange[] $workedTimes
      */
+    private array $workedTimes = [];
+
     private function __construct(
         private Date $date,
-        private array $workedTimes,
     ) {}
 
-    /**
-     * @param Duration[] $workedTimes
-     */
-    public static function create(Date $date, array $workedTimes): self
+    public static function create(Date $date): self
     {
-        $workedDay = new self($date, $workedTimes);
+        $workedDay = new self($date);
 
         return $workedDay;
     }
@@ -29,8 +25,29 @@ class WorkingDay
         return $this->date;
     }
 
+    public function add(TimeRange $timeRange): void
+    {
+        foreach ($this->workedTimes as $workedTime) {
+            if ($workedTime->intersects($timeRange)) {
+                throw new \InvalidArgumentException('New worked overlaps already registered worked time');
+            }
+        }
+        $this->workedTimes[] = $timeRange;
+    }
+
+    public function getWorkedTimeDuration(): TimeDuration
+    {
+        $duration = TimeDuration::create();
+
+        foreach ($this->workedTimes as $workedTime) {
+            $duration->add($workedTime->getDuration());
+        }
+
+        return $duration;
+    }
+
     /**
-     * @return Duration[]
+     * @return TimeRange[]
      */
     public function getWorkedTimes(): array
     {
