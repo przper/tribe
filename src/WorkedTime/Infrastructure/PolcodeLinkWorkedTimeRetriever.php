@@ -15,6 +15,23 @@ class PolcodeLinkWorkedTimeRetriever
 
     public function retrieve(Date $start, ?Date $end = null)
     {
+        /**
+         * Request
+         * curl -H "Authorization: TOPSECRET" https://link.polcode.com/api/time/2024-05-31
+         *
+         * Response
+         * [
+         *      {
+         *          "id":119744,
+         *          "categoryId":434,
+         *          "categoryName":"Vertuoza",
+         *          "fromDate":"2024-05-31T07:43:00+02:00",
+         *          "toDate":"2024-05-31T15:25:00+02:00",
+         *          "comment":"VS-3845, 2716, 3846",
+         *          "minutes":462
+         *      }
+         * ]
+         */
         $httpClient = new Client();
 
         $days = [$start];
