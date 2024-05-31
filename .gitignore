@@ -1,7 +1,7 @@
 /vendor/
 /.idea
 
-.env.*
+.env
 
 .php-cs-fixer.cache
 /.phpunit.cache
