@@ -21,6 +21,16 @@ final readonly class Time
         return new self($time);
     }
 
+    public function getHours(): int
+    {
+        return (int) $this->datetime->format('H');
+    }
+
+    public function getMinutes(): int
+    {
+        return (int) $this->datetime->format('i');
+    }
+
     public function isPast(Time $time): bool
     {
         return $this->datetime->getTimestamp() > $time->datetime->getTimestamp();

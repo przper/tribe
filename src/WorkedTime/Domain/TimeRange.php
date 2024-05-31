@@ -36,4 +36,14 @@ final readonly class TimeRange
 
         return false;
     }
+
+    public function getDuration(): TimeDuration
+    {
+        $endTotalMinutes = $this->end->getHours() * 60 + $this->end->getMinutes();
+        $startTotalMinutes = $this->start->getHours() * 60 + $this->start->getMinutes();
+
+        $minutes = $endTotalMinutes - $startTotalMinutes;
+
+        return TimeDuration::create(minutes: $minutes);
+    }
 }

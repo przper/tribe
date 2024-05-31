@@ -3,6 +3,7 @@
 namespace Tests\Unit\WorkedTime\Domain;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\WorkedTime\Domain\IncorrectDurationException;
 use Przper\Tribe\WorkedTime\Domain\Time;
@@ -46,7 +47,7 @@ class TimeRangeTest extends TestCase
         $this->assertEquals($a->intersects($b), $expected);
     }
 
-    public static function intersect(): iterable
+    public static function intersect(): \Generator
     {
         yield [
             TimeRange::create(Time::fromString('08:00'), Time::fromString('10:00')),
@@ -63,5 +64,23 @@ class TimeRangeTest extends TestCase
             TimeRange::create(Time::fromString('07:00'), Time::fromString('09:00')),
             true,
         ];
+    }
+
+    #[Test]
+    #[DataProvider('durations')]
+    public function it_calculates_duration(Time $a, Time $b, string $expectedDuration): void
+    {
+        $timeRange = TimeRange::create($a, $b);
+
+        $this->assertSame($expectedDuration, (string) $timeRange->getDuration());
+    }
+
+    public static function durations(): \Generator
+    {
+        yield [Time::fromString('08:00'), Time::fromString('10:00'), '02:00'];
+        yield [Time::fromString('06:47'), Time::fromString('07:00'), '00:13'];
+        yield [Time::fromString('07:00'), Time::fromString('07:13'), '00:13'];
+        yield [Time::fromString('06:47'), Time::fromString('07:13'), '00:26'];
+        yield [Time::fromString('10:00'), Time::fromString('10:00'), '00:00'];
     }
 }
