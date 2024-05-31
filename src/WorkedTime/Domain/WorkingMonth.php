@@ -7,28 +7,35 @@ use Przper\Tribe\Shared\Domain\AggregateRoot;
 final class WorkingMonth extends AggregateRoot
 {
     /**
-     * @param WorkingDay[] $workingDays
+     * @var WorkingDay[] $workingDays
      */
+    private array $workingDays = [];
+
     private function __construct(
-        private string $monthName,
-        private array $workingDays,
+        private Month $month,
     ) {}
 
-    /**
-     * @param WorkingDay[] $workingDays
-     */
-    public static function create(string $monthName, array $workingDays): self
+    public static function create(Month $month): self
     {
-        $month = new self($monthName, $workingDays);
+        $workingMonth = new self($month);
 
-        $month->raise(new WorkingMonthCreated($monthName, $monthName, '1'));
+        $workingMonth->raise(new WorkingMonthCreated($month->value, $month->name, '1'));
 
-        return $month;
+        return $workingMonth;
     }
 
-    public function getMonthName(): string
+    public function getMonth(): Month
     {
-        return $this->monthName;
+        return $this->month;
+    }
+
+    public function add(WorkingDay $workingDay): void
+    {
+        if (array_key_exists((string) $workingDay->getDate(), $this->workingDays)) {
+            throw new WorkingDayAlreadyRegisteredException();
+        }
+
+        $this->workingDays[(string) $workingDay->getDate()] = $workingDay;
     }
 
     /**
