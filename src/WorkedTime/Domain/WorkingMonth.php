@@ -7,7 +7,7 @@ use Przper\Tribe\Shared\Domain\AggregateRoot;
 final class WorkingMonth extends AggregateRoot
 {
     /**
-     * @var WorkingDay[] $workingDays
+     * @var array<string, WorkingDay> $workingDays
      */
     private array $workingDays = [];
 
@@ -46,7 +46,7 @@ final class WorkingMonth extends AggregateRoot
         return $this->workingDays;
     }
 
-    public function getWorkedTimeDuration(): TimeDuration
+    public function getTotalWorkedTimeDuration(): TimeDuration
     {
         $duration = TimeDuration::create();
 
@@ -55,5 +55,24 @@ final class WorkingMonth extends AggregateRoot
         }
 
         return $duration;
+    }
+
+    /**
+     * Get the expected WorkedTimeDuration at the current moment.
+     *
+     * Example: If worked 2 days (9h + 8h) so far, this method will return
+     * "16:00".
+     *
+     * @return TimeDuration
+     */
+    public function getExpectedWorkedTimeDuration(): TimeDuration
+    {
+        $expectedWorkedTime = TimeDuration::create();
+
+        foreach ($this->workingDays as $workedDay) {
+            $expectedWorkedTime->add(TimeDuration::create(hours: 8));
+        }
+
+        return $expectedWorkedTime;
     }
 }

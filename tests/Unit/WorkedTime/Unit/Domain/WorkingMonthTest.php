@@ -42,22 +42,32 @@ class WorkingMonthTest extends TestCase
     }
 
     #[Test]
-    public function it_calculates_total_duration(): void
+    public function it_calculates_worked_time_duration(): void
     {
         $workingMonth = WorkingMonth::create(Month::August);
+
+        $this->assertSame("00:00", (string) $workingMonth->getExpectedWorkedTimeDuration());
+        $this->assertSame("00:00", (string) $workingMonth->getTotalWorkedTimeDuration());
 
         $workingDay1 = WorkingDay::create(Date::fromString('2000-08-01'));
         $workingDay1->add(TimeRange::create(Time::fromString('08:00'), Time::fromString('16:00')));
         $workingMonth->add($workingDay1);
 
+        $this->assertSame("08:00", (string) $workingMonth->getExpectedWorkedTimeDuration());
+        $this->assertSame("08:00", (string) $workingMonth->getTotalWorkedTimeDuration());
+
         $workingDay2 = WorkingDay::create(Date::fromString('2000-08-02'));
         $workingDay2->add(TimeRange::create(Time::fromString('08:00'), Time::fromString('15:00')));
         $workingMonth->add($workingDay2);
+
+        $this->assertSame("16:00", (string) $workingMonth->getExpectedWorkedTimeDuration());
+        $this->assertSame("15:00", (string) $workingMonth->getTotalWorkedTimeDuration());
 
         $workingDay3 = WorkingDay::create(Date::fromString('2000-08-03'));
         $workingDay3->add(TimeRange::create(Time::fromString('07:00'), Time::fromString('16:00')));
         $workingMonth->add($workingDay3);
 
-        $this->assertSame("24:00", (string) $workingMonth->getWorkedTimeDuration());
+        $this->assertSame("24:00", (string) $workingMonth->getExpectedWorkedTimeDuration());
+        $this->assertSame("24:00", (string) $workingMonth->getTotalWorkedTimeDuration());
     }
 }
