@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\WorkedTime\Infrastructure;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Przper\Tribe\WorkedTime\Domain\Date;
 use Przper\Tribe\WorkedTime\Domain\Month;
 use Przper\Tribe\WorkedTime\Domain\Time;
@@ -16,9 +16,10 @@ class PolcodeLinkWorkedTimeRetriever
 
     public function __construct(
         private readonly string $linkApiKey,
+        private readonly ClientInterface $httpClient,
     ) {}
 
-    public function retrieve(int $year, Month $month): WorkingMonth
+    public function retrieve(\DateTimeInterface $start, \DateTimeInterface $end): WorkingMonth
     {
         /**
          * Request
@@ -37,12 +38,13 @@ class PolcodeLinkWorkedTimeRetriever
          *      }
          * ]
          */
-        $httpClient = new Client();
 
         $dateRange = new \DatePeriod(
-            new \DateTimeImmutable("01 $month->name $year"),
+//            new \DateTimeImmutable("01 $month->name $year"),
+            $start,
             new \DateInterval('P1D'),
-            new \DateTimeImmutable("last day of $month->name $year"),
+            $end,
+//            new \DateTimeImmutable("last day of $month->name $year"),
             \DatePeriod::INCLUDE_END_DATE,
         );
 
@@ -50,13 +52,14 @@ class PolcodeLinkWorkedTimeRetriever
 
         foreach ($dateRange as $date) {
             $day = Date::fromString($date->format(Date::DATE_FORMAT));
-            $response = $httpClient->request(
+            $response = $this->httpClient->request(
                 'GET',
                 $this->getLinkForDay($day),
                 ['headers' => ['Authorization' => $this->linkApiKey]],
             );
 
             $responseData = json_decode($response->getBody(), true);
+            var_dump($responseData);
 
             $workingDay = WorkingDay::create($day);
 
@@ -72,7 +75,9 @@ class PolcodeLinkWorkedTimeRetriever
                 $workingDay->add($timeRange);
             }
 
-            $workingMonth->add($workingDay);
+//            if ($workingDay->getWorkedTimeDuration()->isGreaterThan(TimeDuration::create())) {
+                $workingMonth->add($workingDay);
+//            }
         }
 
         return $workingMonth;

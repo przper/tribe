@@ -28,6 +28,11 @@ final class TimeDuration
         $this->minutes += $newDuration->minutes;
     }
 
+    public function isGreaterThan(TimeDuration $timeDuration): bool
+    {
+        return $timeDuration->minutes > $this->minutes;
+    }
+
     public function __toString(): string
     {
         $hours = floor($this->minutes / 60);
