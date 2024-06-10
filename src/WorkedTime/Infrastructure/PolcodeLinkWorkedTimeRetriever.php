@@ -40,11 +40,11 @@ class PolcodeLinkWorkedTimeRetriever
          */
 
         $dateRange = new \DatePeriod(
-//            new \DateTimeImmutable("01 $month->name $year"),
+            //            new \DateTimeImmutable("01 $month->name $year"),
             $start,
             new \DateInterval('P1D'),
             $end,
-//            new \DateTimeImmutable("last day of $month->name $year"),
+            //            new \DateTimeImmutable("last day of $month->name $year"),
             \DatePeriod::INCLUDE_END_DATE,
         );
 
@@ -75,9 +75,9 @@ class PolcodeLinkWorkedTimeRetriever
                 $workingDay->add($timeRange);
             }
 
-//            if ($workingDay->getWorkedTimeDuration()->isGreaterThan(TimeDuration::create())) {
-                $workingMonth->add($workingDay);
-//            }
+            //            if ($workingDay->getWorkedTimeDuration()->isGreaterThan(TimeDuration::create())) {
+            $workingMonth->add($workingDay);
+            //            }
         }
 
         return $workingMonth;
