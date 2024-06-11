@@ -30,7 +30,12 @@ final class TimeDuration
 
     public function isGreaterThan(TimeDuration $timeDuration): bool
     {
-        return $timeDuration->minutes > $this->minutes;
+        return $this->minutes > $timeDuration->minutes;
+    }
+
+    public function difference(TimeDuration $timeDuration): self
+    {
+        return self::create(minutes: abs($this->minutes - $timeDuration->minutes));
     }
 
     public function __toString(): string

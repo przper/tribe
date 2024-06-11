@@ -59,4 +59,24 @@ class TimeDurationTest extends TestCase
 
         $this->assertSame("02:34", (string) $duration);
     }
+
+    #[Test]
+    public function it_checks_if_it_is_greater_than(): void
+    {
+        $duration = TimeDuration::create(hours: 5);
+
+        $this->assertTrue($duration->isGreaterThan(TimeDuration::create(4)));
+        $this->assertFalse($duration->isGreaterThan(TimeDuration::create(5)));
+        $this->assertFalse($duration->isGreaterThan(TimeDuration::create(6)));
+    }
+
+    #[Test]
+    public function it_calculates_difference(): void
+    {
+        $duration = TimeDuration::create(hours: 5);
+
+        $this->assertSame("00:00", (string) $duration->difference(TimeDuration::create(5)));
+        $this->assertSame("00:15", (string) $duration->difference(TimeDuration::create(5, 15)));
+        $this->assertSame("00:15", (string) $duration->difference(TimeDuration::create(4, 45)));
+    }
 }
