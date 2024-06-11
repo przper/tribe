@@ -79,7 +79,7 @@ class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
         $mockedHttpClient
             ->method('request')
             ->willReturnOnConsecutiveCalls(...array_map(
-                fn (array $i): Response => new Response(body: json_encode($i)),
+                fn(array $i): Response => new Response(body: json_encode($i)),
                 $workedHoursDataMap,
             ));
 
