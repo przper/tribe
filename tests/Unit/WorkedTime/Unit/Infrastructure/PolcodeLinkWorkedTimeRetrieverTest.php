@@ -87,7 +87,7 @@ class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
 
         $workingMonth = $retriever->retrieve(
             new \DateTimeImmutable('2024-06-01'),
-            new \DateTimeImmutable('2024-06-10')
+            new \DateTimeImmutable('2024-06-09')
         );
 
         $this->assertSame("32:00", (string) $workingMonth->getExpectedWorkedTimeDuration());
