@@ -1,20 +1,17 @@
 <?php
 
-namespace Tests\Integration\FoodRecipes\Infrastructure;
+namespace FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Tools\DsnParser;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
-use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\FoodRecipes\Infrastructure\Database\RecipeMysqlRepository;
+use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
 use Tests\IntegrationTestCase;
 
-class RecipeMysqlRepositoryTest extends IntegrationTestCase
+class RecipeRepositoryTest extends IntegrationTestCase
 {
-    private RecipeMysqlRepository $repository;
+    private RecipeRepository $repository;
 
     private Connection $connection;
 
@@ -22,10 +19,8 @@ class RecipeMysqlRepositoryTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->repository = self::getContainer()[RecipeRepositoryInterface::class];
-
-        $connectionParams = (new DsnParser())->parse($_ENV['DATABASE_URL']);
-        $this->connection = DriverManager::getConnection($connectionParams);
+        $this->repository = new RecipeRepository(self::getContainer()[Connection::class]);
+        $this->connection = self::getContainer()[Connection::class];
 
         $this->connection->executeQuery(<<<SQL
                 INSERT INTO tribe.recipe
