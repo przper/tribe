@@ -2,12 +2,11 @@
 
 namespace Tests;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\DsnParser;
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\FoodRecipes\Infrastructure\Database\RecipeMysqlRepository;
 
 class IntegrationTestCase extends TestCase
 {
@@ -25,7 +24,7 @@ class IntegrationTestCase extends TestCase
         $connection = DriverManager::getConnection($connectionParams);
 
         $this->container = [
-            RecipeRepositoryInterface::class => new RecipeMysqlRepository($connection),
+            Connection::class => $connection,
         ];
     }
 
