@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\FoodRecipes\Infrastructure;
+namespace FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use Przper\Tribe\FoodRecipes\Domain\Name;
@@ -9,9 +9,9 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
 use Tests\IntegrationTestCase;
 
-class RecipeMysqlRepositoryTest extends IntegrationTestCase
+class RecipeRepositoryTest extends IntegrationTestCase
 {
-    private RecipeMysqlRepository $repository;
+    private RecipeRepository $repository;
 
     private Connection $connection;
 
