@@ -11,8 +11,7 @@ final class GetRecipe implements GetRecipeQuery
 {
     public function __construct(
         private readonly RecipeRepository $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function execute(RecipeId $id): ?Recipe
     {
