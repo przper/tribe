@@ -1,8 +1,7 @@
-/vendor/
 /.idea
 
 .php-cs-fixer.cache
-/.phpunit.cache
+
 docker-compose.override.yaml
 ###> phpstan/phpstan ###
 phpstan.neon
@@ -11,4 +10,15 @@ phpstan.neon
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
+/.phpunit.cache
 ###< phpunit/phpunit ###
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
