@@ -7,20 +7,20 @@ use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
-use Tests\IntegrationTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class RecipeRepositoryTest extends IntegrationTestCase
+class RecipeRepositoryTest extends KernelTestCase
 {
     private RecipeRepository $repository;
-
     private Connection $connection;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        self::bootKernel();
+        $container = self::getContainer();
 
-        $this->repository = new RecipeRepository(self::getContainer()[Connection::class]);
-        $this->connection = self::getContainer()[Connection::class];
+        $this->repository = $container->get(RecipeRepository::class);
+        $this->connection = $container->get(Connection::class);
 
         $this->connection->executeQuery(<<<SQL
                 INSERT INTO tribe.recipe

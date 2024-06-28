@@ -2,11 +2,11 @@
 
 namespace Przper\Tribe\Tests\Unit\WorkedTime\Unit\Infrastructure;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\WorkedTime\Infrastructure\PolcodeLinkWorkedTimeRetriever;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 
 class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
 {
@@ -14,7 +14,6 @@ class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
     public function it_creates_WorkingMonth(): void
     {
         $linkApiKey = 'test link api key';
-        $mockedHttpClient = $this->createMock(Client::class);
         $workedHoursDataMap = [
             [], //saturday
             [], //sunday
@@ -76,12 +75,8 @@ class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
             [], //sunday
         ];
 
-        $mockedHttpClient
-            ->method('request')
-            ->willReturnOnConsecutiveCalls(...array_map(
-                fn(array $i): Response => new Response(body: json_encode($i)),
-                $workedHoursDataMap,
-            ));
+        $responses = array_map(fn (array $i) => new MockResponse(json_encode($i)), $workedHoursDataMap);
+        $mockedHttpClient = new MockHttpClient($responses);
 
         $retriever = new PolcodeLinkWorkedTimeRetriever($linkApiKey, $mockedHttpClient);
 

@@ -2,21 +2,21 @@
 
 namespace Przper\Tribe\WorkedTime\Infrastructure;
 
-use GuzzleHttp\ClientInterface;
 use Przper\Tribe\WorkedTime\Domain\Date;
 use Przper\Tribe\WorkedTime\Domain\Month;
 use Przper\Tribe\WorkedTime\Domain\Time;
 use Przper\Tribe\WorkedTime\Domain\TimeRange;
 use Przper\Tribe\WorkedTime\Domain\WorkingDay;
 use Przper\Tribe\WorkedTime\Domain\WorkingMonth;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PolcodeLinkWorkedTimeRetriever
 {
-    private const POLCODE_WORKED_TIME_API = 'https://link.polcode.com/api/time/';
+    private const POLCODE_WORKED_TIME_API_URL = 'https://link.polcode.com/api/time/';
 
     public function __construct(
-        private readonly string $linkApiKey,
-        private readonly ClientInterface $httpClient,
+        private readonly string $polcodeLinkApiKey,
+        private readonly HttpClientInterface $httpClient,
     ) {}
 
     public function retrieve(\DateTimeInterface $start, \DateTimeInterface $end): WorkingMonth
@@ -53,10 +53,10 @@ class PolcodeLinkWorkedTimeRetriever
             $response = $this->httpClient->request(
                 'GET',
                 $this->getLinkForDay($day),
-                ['headers' => ['Authorization' => $this->linkApiKey]],
+                ['headers' => ['Authorization' => $this->polcodeLinkApiKey]],
             );
 
-            $responseData = json_decode($response->getBody(), true);
+            $responseData = json_decode($response->getContent(), true);
 
             if ($responseData === []) {
                 continue;
@@ -84,6 +84,6 @@ class PolcodeLinkWorkedTimeRetriever
 
     private function getLinkForDay(Date $date): string
     {
-        return self::POLCODE_WORKED_TIME_API . $date;
+        return self::POLCODE_WORKED_TIME_API_URL . $date;
     }
 }
