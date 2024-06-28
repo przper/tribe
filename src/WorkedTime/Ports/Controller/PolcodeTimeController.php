@@ -11,8 +11,7 @@ class PolcodeTimeController extends AbstractController
 {
     public function __construct(
         private readonly PolcodeLinkWorkedTimeRetriever $timeRetriever,
-    ) {
-    }
+    ) {}
 
     #[Route('/worked-time/polcode')]
     public function __invoke(): Response

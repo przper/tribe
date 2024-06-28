@@ -75,7 +75,7 @@ class PolcodeLinkWorkedTimeRetrieverTest extends TestCase
             [], //sunday
         ];
 
-        $responses = array_map(fn (array $i) => new MockResponse(json_encode($i)), $workedHoursDataMap);
+        $responses = array_map(fn(array $i) => new MockResponse(json_encode($i)), $workedHoursDataMap);
         $mockedHttpClient = new MockHttpClient($responses);
 
         $retriever = new PolcodeLinkWorkedTimeRetriever($linkApiKey, $mockedHttpClient);
