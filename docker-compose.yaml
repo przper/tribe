@@ -1,12 +1,32 @@
 version: '3.7'
 services:
-    database:
-        image: 'mysql:8.0'
+    web:
+        build:
+            context: .
+            target: web
         environment:
-            MYSQL_DATABASE: tribe
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
-            MYSQL_ROOT_PASSWORD: root
+            APP_ENV: dev
+            XDEBUG_ENABLED: 1
+            DATABASE_URL: mysql://db_user:db_password@db:3306/app?serverVersion=8.0
+        volumes:
+            - ./:/var/www/html:rw,cached
+            - ./docker/php/php.dev.ini:/usr/local/etc/php/conf.d/php.dev.ini:rw,cached
+        networks:
+            - default
+            - web
+        labels:
+            traefik.enable: 'true'
+            traefik.http.routers.tribe.rule: 'Host(`tribe.localhost`)'
+            traefik.http.routers.tribe.entrypoints: web
+            traefik.docker.network: web
+
+    database:
+        image: mariadb:10.6
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         ports:
             # To allow the host machine to access the ports below, modify the lines below.
             # For example, to allow the host to connect to port 3306 on the container, you would change
@@ -18,3 +38,7 @@ services:
 
 volumes:
   db-volume:
+
+networks:
+  web:
+      external: true
