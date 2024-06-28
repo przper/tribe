@@ -6,3 +6,6 @@
 .php-cs-fixer.cache
 /.phpunit.cache
 docker-compose.override.yaml
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
