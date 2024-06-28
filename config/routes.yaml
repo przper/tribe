@@ -1,5 +1,5 @@
-controllers:
-#    resource:
-#        path: ../src/Controller/
-#        namespace: App\Controller
-#    type: attribute
+worked_time:
+    resource:
+        path: ../src/WorkedTime/Ports/Controller
+        namespace: Przper\Tribe\WorkedTime\Ports\Controller
+    type: attribute
