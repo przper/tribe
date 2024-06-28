@@ -34,8 +34,14 @@
     "symfony/flex": {
         "version": "2.4",
         "recipe": {
-            "version": "1.0"
-        }
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b172"
+        },
+        "files": [
+            ".env"
+        ]
     },
     "symfony/framework-bundle": {
         "version": "v7.0.8"
