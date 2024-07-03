@@ -7,7 +7,7 @@ services:
         environment:
             APP_ENV: dev
             XDEBUG_ENABLED: 1
-            DATABASE_URL: mysql://db_user:db_password@db:3306/app?serverVersion=8.0
+            DATABASE_URL: mysql://user:password@db:3306/tribe?serverVersion=mariadb-10.6.17
         volumes:
             - ./:/var/www/html:rw,cached
             - ./docker/php/php.dev.ini:/usr/local/etc/php/conf.d/php.dev.ini:rw,cached
@@ -20,7 +20,7 @@ services:
             traefik.http.routers.tribe.entrypoints: web
             traefik.docker.network: web
 
-    database:
+    db:
         image: mariadb:10.6
         environment:
             MYSQL_USER: ${MYSQL_USER}

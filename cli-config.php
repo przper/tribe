@@ -2,13 +2,14 @@
 
 # This is script for `vendor/bin/doctrine-migrations` to run
 
-require 'index.php';
-
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
 use Doctrine\Migrations\Configuration\Migration\YamlFile;
 use Doctrine\Migrations\DependencyFactory;
+use Symfony\Component\Dotenv\Dotenv;
+
+(new Dotenv())->load(__DIR__ . '/.env');
 
 $config = new YamlFile('migrations.yaml');
 
