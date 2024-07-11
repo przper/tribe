@@ -15,11 +15,9 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
 
     Doctrine\DBAL\Connection:
+        factory: ['Przper\Tribe\Shared\Infrastructure\DBAL\DoctrineConnectionFactory', 'createConnection']
         arguments:
-            $params:
-                url: '%env(resolve:DATABASE_URL)%'
-                driver: pdo_mysql
-        factory: ['Doctrine\DBAL\DriverManager', 'getConnection']
+            - '%env(resolve:DATABASE_URL)%'
 
     Przper\Tribe\:
         bind:
