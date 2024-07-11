@@ -1,3 +1,9 @@
+food_recipes:
+    resource:
+        path: ../src/FoodRecipes/Ports/Controller
+        namespace: Przper\Tribe\FoodRecipes\Ports\Controller
+    type: attribute
+
 worked_time:
     resource:
         path: ../src/WorkedTime/Ports/Controller
