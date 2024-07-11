@@ -7,6 +7,7 @@ use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Doctrine\DBAL\Connection;
 
 #[Autoconfigure(public: true)]
 class RecipeRepository implements RecipeRepositoryInterface
