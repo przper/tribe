@@ -9,15 +9,15 @@ use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\Shared\Domain\DomainEvent;
+use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[Autoconfigure(public: true)]
 class RecipeRepository implements RecipeRepositoryInterface
 {
     public function __construct(
         private Connection $connection,
-        private EventDispatcherInterface $eventDispatcher,
+        private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
 
     public function get(RecipeId $id): ?Recipe
@@ -85,8 +85,6 @@ class RecipeRepository implements RecipeRepositoryInterface
      */
     private function dispatchEvents(array $events): void
     {
-        foreach ($events as $event) {
-            $this->eventDispatcher->dispatch($event);
-        }
+        $this->eventDispatcher->dispatch(...$events);
     }
 }
