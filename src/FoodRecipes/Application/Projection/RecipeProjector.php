@@ -8,8 +8,7 @@ final class RecipeProjector
 {
     public function __construct(
         private readonly RecipeProjection $projection,
-    ) {
-    }
+    ) {}
 
     public function createRecipe(Recipe $recipe): void
     {
