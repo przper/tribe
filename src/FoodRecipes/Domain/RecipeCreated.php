@@ -6,12 +6,19 @@ use Przper\Tribe\Shared\Domain\DomainEvent;
 
 final readonly class RecipeCreated extends DomainEvent
 {
-    public static function fromRecipe(Recipe $recipe): self
+    public const EVENT_VERSION = 1;
+
+    public const EVENT_NAME = 'recipe_created';
+
+    private function __construct(string $aggregateId)
+    {
+        parent::__construct($aggregateId, self::EVENT_NAME, self::EVENT_VERSION);
+    }
+
+    public static function create(RecipeId $recipeId): self
     {
         return new self(
-            aggregateId: (string) $recipe->getId(),
-            name: $recipe->getName(),
-            version: '1',
+            aggregateId: $recipeId,
         );
     }
 }

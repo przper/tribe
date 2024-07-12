@@ -7,6 +7,6 @@ abstract readonly class DomainEvent
     public function __construct(
         public string $aggregateId,
         public string $name,
-        public string $version,
+        public int $version,
     ) {}
 }

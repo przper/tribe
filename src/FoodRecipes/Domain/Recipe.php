@@ -19,17 +19,17 @@ final class Recipe extends AggregateRoot
         RecipeId $id,
         Name $name,
     ): Recipe {
-        return new self($id, $name);
+        $recipe = new self($id, $name);
+        $recipe->raise(RecipeCreated::create($id));
+
+        return $recipe;
     }
 
     public static function restore(
         RecipeId $id,
         Name $name,
     ): Recipe {
-        $recipe = new self($id, $name);
-        $recipe->raise(RecipeCreated::fromRecipe($recipe));
-
-        return $recipe;
+        return new self($id, $name);
     }
 
     public function getId(): RecipeId
