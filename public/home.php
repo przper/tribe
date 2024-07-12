@@ -1,16 +1,16 @@
 <?php
 
 echo <<<HTML
-<head></head>
-<body>
-    <div>
-        <h1>Hello world!</h1>
-        
+    <head></head>
+    <body>
         <div>
-            <ul>
-                <li><a href="#">Przemek, jak stoisz z czasem?</a></li>
-            </ul>
+            <h1>Hello world!</h1>
+            
+            <div>
+                <ul>
+                    <li><a href="#">Przemek, jak stoisz z czasem?</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</body>
-HTML;
+    </body>
+    HTML;
