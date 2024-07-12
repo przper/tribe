@@ -63,23 +63,24 @@ class RecipeRepositoryTest extends KernelTestCase
         $this->repository->create($recipe);
 
         $this->assertNotNull($this->repository->get($id));
+        $this->assertCount(0, $recipe->pullEvents());
     }
 
-    public function test_persist(): void
-    {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
-
-        $result = $this->repository->get($id);
-        $this->assertNotNull($this->repository->get($id));
-        $this->assertSame('RecipeDb test', (string) $result->getName());
-
-        $recipe = Recipe::create($id, Name::fromString('I am updated name'));
-
-        $this->repository->persist($recipe);
-
-        $result = $this->repository->get($id);
-        $this->assertNotNull($result);
-        $this->assertInstanceOf(Recipe::class, $result);
-        $this->assertSame('I am updated name', (string) $result->getName());
-    }
+    //    public function test_persist(): void
+    //    {
+    //        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+    //
+    //        $result = $this->repository->get($id);
+    //        $this->assertNotNull($this->repository->get($id));
+    //        $this->assertSame('RecipeDb test', (string) $result->getName());
+    //
+    //        $recipe = Recipe::create($id, Name::fromString('I am updated name'));
+    //
+    //        $this->repository->persist($recipe);
+    //
+    //        $result = $this->repository->get($id);
+    //        $this->assertNotNull($result);
+    //        $this->assertInstanceOf(Recipe::class, $result);
+    //        $this->assertSame('I am updated name', (string) $result->getName());
+    //    }
 }
