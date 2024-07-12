@@ -19,7 +19,7 @@ final class WorkingMonth extends AggregateRoot
     {
         $workingMonth = new self($month);
 
-        $workingMonth->raise(new WorkingMonthCreated($month->value, $month->name, '1'));
+        $workingMonth->raise(new WorkingMonthCreated($month->value, $month->name, 1));
 
         return $workingMonth;
     }
