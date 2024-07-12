@@ -2,6 +2,7 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe;
 
+use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
@@ -11,6 +12,7 @@ final class CreateRecipeHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,
+        private RecipeProjector $recipeProjector,
     ) {}
 
     public function __invoke(CreateRecipeCommand $command): void
@@ -21,5 +23,6 @@ final class CreateRecipeHandler
         );
 
         $this->repository->create($recipe);
+        $this->recipeProjector->createRecipe($recipe);
     }
 }
