@@ -5,6 +5,7 @@ namespace Tests\Unit\FoodRecipes\Infrastructure\DBAL;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
+use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeDetail;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe as DomainRecipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
@@ -29,7 +30,7 @@ class GetRecipeTest extends TestCase
 
         $result = $query->execute($id);
 
-        $this->assertInstanceOf(Recipe::class, $result);
+        $this->assertInstanceOf(RecipeDetail::class, $result);
         $this->assertSame('1', $result->id);
         $this->assertSame('Chilli con Carne', $result->name);
     }
