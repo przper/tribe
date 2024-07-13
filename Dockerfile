@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install \
     bcmath \
     intl \
-    pdo_mysql \
+    mysqli \
     opcache
 RUN a2enmod rewrite && a2enmod headers && a2enmod expires
 COPY docker/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
