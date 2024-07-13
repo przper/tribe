@@ -12,8 +12,7 @@ class IndexController extends AbstractController
 {
     public function __construct(
         private readonly GetRecipes $getRecipesQuery,
-    ) {
-    }
+    ) {}
 
     #[Route('/recipe', name: 'recipe_index')]
     public function __invoke(): Response
@@ -21,28 +20,28 @@ class IndexController extends AbstractController
         $recipes = $this->getRecipesQuery->execute();
 
         $recipesHtml = $recipes !== []
-            ? implode("\n", array_map(fn (RecipeIndex $r) => "<li>$r->name</li>", $recipes))
+            ? implode("\n", array_map(fn(RecipeIndex $r) => "<li>$r->name</li>", $recipes))
             : "List is empty :( . Add something!"
         ;
 
         $html = <<<HTML
-            <html>
-                <head></head>
-                <body>
-                    <div>
-                        <h1>Our tasty recipes:</h1>
-                        
-                        <div><a href="#">Add new</a></div>
-                        
+                <html>
+                    <head></head>
+                    <body>
                         <div>
-                            <ol>
-                                $recipesHtml
-                            </ol>
+                            <h1>Our tasty recipes:</h1>
+                            
+                            <div><a href="#">Add new</a></div>
+                            
+                            <div>
+                                <ol>
+                                    $recipesHtml
+                                </ol>
+                            </div>
                         </div>
-                    </div>
-                </body>
-            </html>
-        HTML;
+                    </body>
+                </html>
+            HTML;
 
         return new Response($html);
     }

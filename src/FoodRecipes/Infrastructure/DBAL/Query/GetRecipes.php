@@ -10,8 +10,7 @@ final class GetRecipes implements GetRecipesQuery
 {
     public function __construct(
         private readonly Connection $connection,
-    ) {
-    }
+    ) {}
 
     /**
      * @inheritDoc
