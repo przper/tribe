@@ -5,6 +5,7 @@ namespace Tests\Unit\FoodRecipes\Application;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
+use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 
 class CreateRecipeHandlerTest extends TestCase
@@ -18,8 +19,9 @@ class CreateRecipeHandlerTest extends TestCase
             ->expects($this->once())
             ->method('create')
         ;
+        $recipeProjectorMock = $this->createMock(RecipeProjector::class);
 
-        $handler = new CreateRecipeHandler($recipeRepositoryMock);
+        $handler = new CreateRecipeHandler($recipeRepositoryMock, $recipeProjectorMock);
 
         $handler($command);
     }

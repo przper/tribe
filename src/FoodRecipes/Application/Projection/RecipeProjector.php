@@ -4,7 +4,7 @@ namespace Przper\Tribe\FoodRecipes\Application\Projection;
 
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 
-final class RecipeProjector
+class RecipeProjector
 {
     public function __construct(
         private readonly RecipeProjection $projection,
