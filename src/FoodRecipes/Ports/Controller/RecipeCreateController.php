@@ -26,20 +26,20 @@ class RecipeCreateController extends AbstractController
         }
 
         return new Response(<<<HTML
-            <html>
-                <head></head>
-                <body>
-                    <div>
-                        <h1>New Recipe</h1>
-                        
-                        <form method="POST">
-                            <input name="name">
+                <html>
+                    <head></head>
+                    <body>
+                        <div>
+                            <h1>New Recipe</h1>
                             
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
-                </body>
-            </html>
-        HTML);
+                            <form method="POST">
+                                <input name="name">
+                                
+                                <button type="submit">Save</button>
+                            </form>
+                        </div>
+                    </body>
+                </html>
+            HTML);
     }
 }

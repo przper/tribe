@@ -12,8 +12,7 @@ class RecipeDetailController extends AbstractController
 {
     public function __construct(
         private readonly GetRecipe $getRecipeQuery,
-    ) {
-    }
+    ) {}
 
     #[Route('/recipe/{id}', name: 'recipe_detail')]
     public function __invoke(string $id): Response
@@ -21,19 +20,19 @@ class RecipeDetailController extends AbstractController
         $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
 
         $html = <<<HTML
-            <html>
-                <head></head>
-                <body>
-                    <div>
-                        <h1>{$recipe->name}</h1>
-                        
+                <html>
+                    <head></head>
+                    <body>
                         <div>
-                            WIP
+                            <h1>{$recipe->name}</h1>
+                            
+                            <div>
+                                WIP
+                            </div>
                         </div>
-                    </div>
-                </body>
-            </html>
-        HTML;
+                    </body>
+                </html>
+            HTML;
 
         return new Response($html);
     }
