@@ -1,6 +1,6 @@
 <?php
 
-namespace FoodRecipes\Infrastructure\DBAL;
+namespace Tests\Integration\FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use Przper\Tribe\FoodRecipes\Domain\Name;
