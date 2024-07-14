@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class IndexController extends AbstractController
+class RecipeIndexController extends AbstractController
 {
     public function __construct(
         private readonly GetRecipes $getRecipesQuery,
@@ -21,7 +21,7 @@ class IndexController extends AbstractController
         $recipes = $this->getRecipesQuery->execute();
 
         $recipesHtml = $recipes !== []
-            ? implode("\n", array_map(fn (RecipeIndex $r) => "<li>$r->name</li>", $recipes))
+            ? implode("\n", array_map(fn (RecipeIndex $r) => "<li>{$r->name} <a href='/recipe/{$r->id}'>Show</a></li>", $recipes))
             : "List is empty :( . Add something!"
         ;
 

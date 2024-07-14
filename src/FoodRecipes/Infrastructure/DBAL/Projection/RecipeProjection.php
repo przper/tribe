@@ -18,5 +18,11 @@ class RecipeProjection implements Projection
         $statement->bindValue(1, $recipeId);
         $statement->bindValue(2, $recipeName);
         $statement->executeQuery();
+
+        $sql = "INSERT INTO `projection_recipe_detail` (`id`, `name`) VALUES (?, ?)";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $recipeId);
+        $statement->bindValue(2, $recipeName);
+        $statement->executeQuery();
     }
 }
