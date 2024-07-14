@@ -31,7 +31,7 @@ class RecipeIndexController extends AbstractController
                         <div>
                             <h1>Our tasty recipes:</h1>
                             
-                            <div><a href="#">Add new</a></div>
+                            <div><a href="/recipe/new">Add new</a></div>
                             
                             <div>
                                 <ol>
