@@ -3,9 +3,15 @@
 namespace Tests\Integration\FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\Attributes\Test;
+use Przper\Tribe\FoodRecipes\Domain\Amount;
+use Przper\Tribe\FoodRecipes\Domain\Ingredient;
+use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Name;
+use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
+use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -53,17 +59,47 @@ class RecipeRepositoryTest extends KernelTestCase
         $this->assertSame('RecipeDb test', (string) $result->getName());
     }
 
-    public function test_create(): void
+    #[Test]
+    public function it_can_be_created(): void
     {
         $id = new RecipeId('test');
 
         $this->assertNull($this->repository->get($id));
 
-        $recipe = Recipe::create($id, Name::fromString('New Recipe'));
+        $recipe = Recipe::create($id, Name::fromString('Chilli con Carne'));
+
+        $ingredients = new Ingredients();
+        $ingredients->add(Ingredient::create(
+            Name::fromString('Pork'),
+            Amount::create(Quantity::fromFloat(1.0), Unit::fromString('kilogram')),
+        ));
+        $ingredients->add(Ingredient::create(
+            Name::fromString('Tomatoes'),
+            Amount::create(Quantity::fromFloat(3.0), Unit::fromString('can')),
+        ));
+
+        $recipe->setIngredients($ingredients);
+
         $this->repository->create($recipe);
 
-        $this->assertNotNull($this->repository->get($id));
         $this->assertCount(0, $recipe->pullEvents());
+
+        /** @var Recipe $dbRecipe */
+        $dbRecipe = $this->repository->get($id);
+
+        $this->assertNotNull($dbRecipe);
+        $this->assertInstanceOf(Recipe::class, $dbRecipe);
+        $this->assertSame('Chilli con Carne', (string) $dbRecipe->getName());
+        $this->assertCount(2, $dbRecipe->getIngredients()->getAll());
+
+        [$dbIngredient1, $dbIngredient2] = $dbRecipe->getIngredients()->getAll();
+        $this->assertSame('Pork', (string) $dbIngredient1->getName());
+        $this->assertSame(1.0, (float) $dbIngredient1->getAmount()->getQuantity());
+        $this->assertSame('kilogram', (string) $dbIngredient1->getAmount()->getUnit());
+
+        $this->assertSame('Tomatoes', (string) $dbIngredient2->getName());
+        $this->assertSame(3.0, (float) $dbIngredient2->getAmount()->getQuantity());
+        $this->assertSame('can', (string) $dbIngredient2->getAmount()->getUnit());
     }
 
     //    public function test_persist(): void
