@@ -6,15 +6,14 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 
 class Ingredient
 {
-    private Amount $amount;
-
     private function __construct(
         private readonly Name $name,
+        private Amount $amount,
     ) {}
 
-    public static function create(Name $name): self
+    public static function create(Name $name, Amount $amount): self
     {
-        $ingredient = new self($name);
+        $ingredient = new self($name, $amount);
         $ingredient->guard();
 
         return $ingredient;
