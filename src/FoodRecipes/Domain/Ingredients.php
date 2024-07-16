@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Przper\Tribe\FoodRecipes\Domain;
 
-class Ingredients
+use Przper\Tribe\Shared\Domain\Collection;
+
+class Ingredients extends Collection
 {
     /** @var Ingredient[] */
     private array $ingredients = [];
@@ -31,5 +33,10 @@ class Ingredients
         }
 
         return false;
+    }
+
+    protected function getItems(): array
+    {
+        return $this->ingredients;
     }
 }
