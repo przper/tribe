@@ -20,7 +20,7 @@ class RecipeCreateController extends AbstractController
     public function __invoke(Request $request): Response
     {
         if ($request->getMethod() === 'POST') {
-            call_user_func($this->createRecipeHandler, new CreateRecipeCommand($request->get('name')));
+            call_user_func($this->createRecipeHandler, new CreateRecipeCommand($request->get('name'), []));
 
             return new RedirectResponse("/recipe");
         }
