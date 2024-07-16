@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared\Domain;
+namespace Tests\Unit\Shared\Domain;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
