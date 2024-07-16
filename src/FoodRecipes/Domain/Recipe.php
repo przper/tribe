@@ -8,11 +8,10 @@ use Przper\Tribe\Shared\Domain\AggregateRoot;
 
 final class Recipe extends AggregateRoot
 {
-    private Ingredients $ingredients;
-
     private function __construct(
         private RecipeId $id,
         private Name $name,
+        private Ingredients $ingredients = new Ingredients(),
     ) {}
 
     public static function create(
@@ -28,8 +27,9 @@ final class Recipe extends AggregateRoot
     public static function restore(
         RecipeId $id,
         Name $name,
+        Ingredients $ingredients
     ): Recipe {
-        return new self($id, $name);
+        return new self($id, $name, $ingredients);
     }
 
     public function getId(): RecipeId
