@@ -12,18 +12,20 @@ use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Application\IdGeneratorInterface;
 
 final class CreateRecipeHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,
         private RecipeProjector $recipeProjector,
+        private IdGeneratorInterface $idGenerator,
     ) {}
 
     public function __invoke(CreateRecipeCommand $command): void
     {
         $recipe = Recipe::create(
-            new RecipeId((string) rand(1000000, 9999999)),
+            new RecipeId((string) $this->idGenerator->generate()),
             Name::fromString($command->name),
         );
 
