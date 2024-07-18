@@ -19,19 +19,21 @@ final class Version20240718133148 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql(<<<SQL
-            ALTER TABLE `projection_recipe_detail`
-                ADD `ingredients` JSON NOT NULL
-        SQL
+        $this->addSql(
+            <<<SQL
+                    ALTER TABLE `projection_recipe_detail`
+                        ADD `ingredients` JSON NOT NULL
+                SQL
         );
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql(<<<SQL
-            ALTER TABLE `projection_recipe_detail`
-                DROP COLUMN `ingredients`
-        SQL
+        $this->addSql(
+            <<<SQL
+                    ALTER TABLE `projection_recipe_detail`
+                        DROP COLUMN `ingredients`
+                SQL
         );
 
     }

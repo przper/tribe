@@ -8,6 +8,5 @@ final readonly class Ingredient
         public string $name,
         public float $quantity,
         public string $unit,
-    ) {
-    }
+    ) {}
 }

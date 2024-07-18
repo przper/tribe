@@ -22,7 +22,7 @@ class RecipeDetailController extends AbstractController
         dump($recipe);
 
         $ingredientsHtml = implode("\n", array_map(
-            fn (Ingredient $i) => "<div>$i->name: $i->quantity$i->unit</div>",
+            fn(Ingredient $i) => "<div>$i->name: $i->quantity$i->unit</div>",
             $recipe->ingredients,
         ));
 

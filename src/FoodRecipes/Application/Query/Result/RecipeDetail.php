@@ -13,7 +13,7 @@ final readonly class RecipeDetail
         string $ingredients,
     ) {
         $this->ingredients = array_map(
-            fn (array $i) => new Ingredient(...$i),
+            fn(array $i) => new Ingredient(...$i),
             json_decode($ingredients, true),
         );
     }
