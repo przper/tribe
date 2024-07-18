@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
+use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
 use Tests\Doubles\InMemoryRecipeProjection;
 use Tests\Doubles\InMemoryRecipeRepository;
 
@@ -31,7 +32,7 @@ class CreateRecipeHandlerTest extends TestCase
 
         $repository = new InMemoryRecipeRepository();
         $projection = new InMemoryRecipeProjection();
-        $handler = new CreateRecipeHandler($repository, new RecipeProjector($projection));
+        $handler = new CreateRecipeHandler($repository, new RecipeProjector($projection), new IdGenerator());
 
         $handler($command);
 

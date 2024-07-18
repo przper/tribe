@@ -23,7 +23,7 @@ final class GetRecipe implements GetRecipeQuery
         if ($sqlResult->rowCount()) {
             $data = $sqlResult->fetchAssociative();
 
-            return new RecipeDetail($data['id'], $data['name']);
+            return new RecipeDetail(...$data);
         }
 
         return null;

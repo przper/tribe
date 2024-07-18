@@ -24,7 +24,7 @@ final class GetRecipes implements GetRecipesQuery
         $result = [];
 
         foreach ($sqlResult->iterateAssociative() as $db) {
-            $result[] = new RecipeIndex($db['id'], $db['name']);
+            $result[] = new RecipeIndex(...$db);
         }
 
         return $result;

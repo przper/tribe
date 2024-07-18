@@ -4,6 +4,7 @@ namespace Tests\Integration\FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Test;
+use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeDetail;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
@@ -25,13 +26,12 @@ class GetRecipeTest extends KernelTestCase
 
         $this->connection->executeQuery(<<<SQL
                 INSERT INTO tribe.projection_recipe_detail
-                    (id, name)
+                    (id, name, ingredients)
                 VALUES
-                    ('e3b8ee06-7377-451c-88c1-fde290a61ac4', 'GetRecipeTest Chilli con Carne')
+                    ('e3b8ee06-7377-451c-88c1-fde290a61ac4', 'GetRecipeTest Chilli con Carne', '[{"name": "Meat", "quantity": 1.123, "unit": "kilogram"}]')
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
             SQL);
     }
-
 
     protected function tearDown(): void
     {
@@ -51,5 +51,7 @@ class GetRecipeTest extends KernelTestCase
         $this->assertInstanceOf(RecipeDetail::class, $result);
         $this->assertSame('e3b8ee06-7377-451c-88c1-fde290a61ac4', $result->id);
         $this->assertSame('GetRecipeTest Chilli con Carne', $result->name);
+        $this->assertCount(1, $result->ingredients);
+        $this->assertInstanceOf(Ingredient::class, $result->ingredients[0]);
     }
 }
