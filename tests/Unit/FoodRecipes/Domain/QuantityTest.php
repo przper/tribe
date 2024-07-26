@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\FoodRecipes\Domain;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
 
@@ -12,5 +13,11 @@ class QuantityTest extends TestCase
         $quantity = Quantity::fromFloat(1.235);
 
         $this->assertEquals(1.235, (string) $quantity);
+    }
+
+    #[Test]
+    public function isEqual_to_another_Quantity(): void
+    {
+        $this->fail('TO DO');
     }
 }

@@ -38,8 +38,11 @@ class Ingredient
 
     private function guard(): void {}
 
-    public function equals(self $ingredient): bool
+    /**
+     * Check if an Ingredient is the same as other Ingredient
+     */
+    public function isTheSame(self $ingredient): bool
     {
-        return $this->name->equal($ingredient->name);
+        return $this->name->isEqual($ingredient->name);
     }
 }

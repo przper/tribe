@@ -20,6 +20,11 @@ final readonly class Quantity
 
     private function guard(): void {}
 
+    public function isEqual(Quantity $otherQuantity): bool
+    {
+        return $this->value === $otherQuantity->value;
+    }
+
     public function __toString(): string
     {
         return (string) $this->value;

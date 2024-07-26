@@ -27,7 +27,7 @@ class Ingredients extends Collection
     public function contains(Ingredient $ingredient): bool
     {
         foreach ($this->ingredients as $i) {
-            if ($i->equals($ingredient)) {
+            if ($i->isTheSame($ingredient)) {
                 return true;
             }
         }

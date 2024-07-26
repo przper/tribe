@@ -3,28 +3,27 @@
 namespace Tests\Unit\FoodRecipes\Domain;
 
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Name;
+use Tests\Doubles\MotherObjects\IngredientMother;
 
 class IngredientTest extends TestCase
 {
     public function test_it_be_created_when_data_is_valid(): void
     {
-        $name = Name::fromString('Meat');
+        $ingredient = IngredientMother::new()->kilogramsOfMeat()->build();
 
-        $ingredient = Ingredient::create($name);
-
-        $this->assertSame($name, $ingredient->getName());
+        $this->assertSame('Meat', (string) $ingredient->getName());
+        $this->assertSame('1', (string) $ingredient->getAmount()->getQuantity());
+        $this->assertSame('kilogram', (string) $ingredient->getAmount()->getUnit());
     }
 
-    public function test_isTheSameIngredient(): void
+    public function test_isTheSame(): void
     {
-        $ingredient1 = Ingredient::create(Name::fromString("Meat"));
-        $ingredient2 = Ingredient::create(Name::fromString("Cheese"));
-        $ingredient3 = Ingredient::create(Name::fromString("Meat"));
+        $ingredient1 = IngredientMother::new()->kilogramsOfMeat()->build();
+        $ingredient2 = IngredientMother::new()->cansOfTomatoes()->build();
+        $ingredient3 = IngredientMother::new()->kilogramsOfMeat(3.0)->build();
 
-        $this->assertTrue($ingredient1->equals($ingredient1));
-        $this->assertFalse($ingredient1->equals($ingredient2));
-        $this->assertTrue($ingredient1->equals($ingredient3));
+        $this->assertTrue($ingredient1->isTheSame($ingredient1));
+        $this->assertFalse($ingredient1->isTheSame($ingredient2));
+        $this->assertTrue($ingredient1->isTheSame($ingredient3));
     }
 }

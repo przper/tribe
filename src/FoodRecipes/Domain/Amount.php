@@ -41,6 +41,16 @@ class Amount
         return $this;
     }
 
+    public function isEqual(Amount $otherAmount): bool
+    {
+        return $this->quantity->isEqual($otherAmount->quantity) && $this->unit->isEqual($otherAmount->unit);
+    }
+
+    public function isTheSame(Amount $otherAmount): bool
+    {
+        return $this->unit->isEqual($otherAmount->unit);
+    }
+
     private function guard(): void {}
 
     public function __toString(): string
