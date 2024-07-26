@@ -24,8 +24,8 @@ class PolcodeTimeController extends AbstractController
         $timeDifference = $workingMonth->getTotalWorkedTimeDuration()->difference($workingMonth->getExpectedWorkedTimeDuration());
 
         $message = $workingMonth->getTotalWorkedTimeDuration()->isGreaterThan($workingMonth->getExpectedWorkedTimeDuration())
-            ? "* You are $timeDifference ahead"
-            : "* You are $timeDifference behind"
+            ? "Przemek is $timeDifference ahead"
+            : "Przemek is $timeDifference behind"
         ;
         return new Response($message);
     }

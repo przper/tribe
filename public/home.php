@@ -8,7 +8,7 @@ echo <<<HTML
             
             <div>
                 <ul>
-                    <li><a href="#">Przemek, jak stoisz z czasem (soon)?</a></li>
+                    <li><a href="/worked-time/polcode">Przemek, jak stoisz z czasem?</a></li>
                     <li><a href="/recipe">Food Recipes</a></li>
                 </ul>
             </div>
