@@ -18,7 +18,7 @@ final readonly class Name
         return $name;
     }
 
-    public function equal(self $otherName): bool
+    public function isEqual(self $otherName): bool
     {
         return $this->value === $otherName->value;
     }
