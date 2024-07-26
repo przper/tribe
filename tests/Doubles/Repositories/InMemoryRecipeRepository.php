@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles;
+namespace Tests\Doubles\Repositories;
 
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;

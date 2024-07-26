@@ -7,8 +7,8 @@ use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeComman
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
-use Tests\Doubles\InMemoryRecipeProjection;
-use Tests\Doubles\InMemoryRecipeRepository;
+use Tests\Doubles\Projection\InMemoryRecipeProjection;
+use Tests\Doubles\Repositories\InMemoryRecipeRepository;
 
 class CreateRecipeHandlerTest extends TestCase
 {

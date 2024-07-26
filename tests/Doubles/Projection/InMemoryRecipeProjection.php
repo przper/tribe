@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles;
+namespace Tests\Doubles\Projection;
 
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection;
 
