@@ -25,8 +25,5 @@ final readonly class Unit
         return $this->value;
     }
 
-    public function isEqual(Unit $unit): bool
-    {
-
-    }
+    public function isEqual(Unit $unit): bool {}
 }
