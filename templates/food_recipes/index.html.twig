@@ -7,16 +7,16 @@
         <div><a href="{{ path('recipe_create') }}">Add new</a></div>
 
         <div>
-            {% for recipe in recipes %}
-                <ol>
-                    <li>
-                        {{ recipe.name }}
-                        <a href="{{ path('recipe_detail', {id: recipe.recipe_id}) }}">Show</a>
-                    </li>
-                </ol>
-            {% else %}
-                <div>List is empty :( Add something!</div>
-            {% endfor %}
+            <ol>
+                {% for recipe in recipes %}
+                        <li>
+                            {{ recipe.name }}
+                            <a href="{{ path('recipe_detail', {id: recipe.recipe_id}) }}">Show</a>
+                        </li>
+                {% else %}
+                    <div>List is empty :( Add something!</div>
+                {% endfor %}
+            </ol>
         </div>
     </div>
 {% endblock %}
