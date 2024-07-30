@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>New Recipe</h1>
+        
+        <form method="POST">
+            <div>
+                <h3>Recipe</h3>
+                <div>
+                    <label for="name">Name</label>
+                    <input name="name">
+                </div>
+            </div>
+            
+            <div id="#ingredients">
+                <h3>Ingredients</h3>
+                <div>
+                    <div>#1</div>
+                    <div>
+                        <label>Name</label>
+                        <input name="ingredients[0][name]">
+                    </div>
+                    <div>
+                        <label>Quantity</label>
+                        <input name="ingredients[0][quantity]">
+                    </div>
+                    <div>
+                        <label>Unit</label>
+                        <input name="ingredients[0][unit]">
+                    </div>
+                </div>
+                
+                <div>
+                    <div>#2</div>
+                    <div>
+                        <label>Name</label>
+                        <input name="ingredients[1][name]">
+                    </div>
+                    <div>
+                        <label>Quantity</label>
+                        <input name="ingredients[1][quantity]">
+                    </div>
+                    <div>
+                        <label>Unit</label>
+                        <input name="ingredients[1][unit]">
+                    </div>
+                </div>
+                
+                <div>
+                    <button type="button">Add one more ingredient (soon)</button>
+                </div>
+            </div>
+            
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}
