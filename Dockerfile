@@ -1,4 +1,4 @@
-FROM composer:2.6.4 as composer-install
+FROM composer:2.7.7 as composer-install
 WORKDIR /var/www/html
 COPY composer.json composer.lock symfony.lock ./
 RUN composer install --no-dev --no-scripts
