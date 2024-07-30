@@ -12,6 +12,12 @@ class RecipeProjector
 
     public function createRecipe(Recipe $recipe): void
     {
-        $this->projection->createRecipe($recipe->getId(), $recipe->getName());
+        $serializedIngredients = [];
+
+        $this->projection->createRecipe(
+            $recipe->getId(),
+            $recipe->getName(),
+            $serializedIngredients,
+        );
     }
 }
