@@ -19,7 +19,12 @@ final class Version20240714202346 extends AbstractMigration
         $this->addSql(<<<'SQL'
                 CREATE TABLE `projection_recipe_detail` (
                     `id`    VARCHAR(255) DEFAULT (UUID()) PRIMARY KEY,
-                    `name`  VARCHAR(255) NOT NULL
+                    `recipe_id` VARCHAR(255) NOT NULL,
+                    `name`  VARCHAR(255) NOT NULL,
+                    `ingredients` JSON DEFAULT (JSON_ARRAY()),
+                    CONSTRAINT `fk_projection_recipe_detail_recipe`
+                        FOREIGN KEY (recipe_id) REFERENCES recipe (id)
+                        ON DELETE CASCADE
                 );
             SQL);
     }

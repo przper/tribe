@@ -20,32 +20,44 @@ class RecipeProjectionTest extends KernelTestCase
         $this->connection = $container->get(Connection::class);
         $this->projection = $container->get(RecipeProjection::class);
 
-        // $this->connection->executeQuery(<<<SQL
-        //         INSERT INTO tribe.recipe
-        //             (id, name)
-        //         VALUES
-        //             ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
-        //         ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
-        //     SQL);
+        $this->connection->executeQuery(<<<SQL
+                INSERT INTO tribe.recipe
+                    (id, name)
+                VALUES
+                    ('0c53c94a-d821-11ee-8fbc-0242ac190003', 'RecipeProjector test')
+                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+            SQL);
     }
 
     protected function tearDown(): void
     {
-        $this->connection->delete('projection_recipe_detail', ['id' => 'DbalProjectorRecipeDetail_1']);
+        $this->connection->executeQuery(<<<SQL
+                DELETE FROM tribe.recipe
+                WHERE `id` IN (
+                    '0c53c94a-d821-11ee-8fbc-0242ac190003'
+                ); 
+            SQL);
     }
 
     #[Test]
     public function it_creates_detail_projection(): void
     {
         $this->projection->createRecipe(
-            'DbalProjectorRecipeDetail_1',
-            'Test Recipe',
-            [],
+            '0c53c94a-d821-11ee-8fbc-0242ac190003',
+            'RecipeProjector Detail Projection test',
+            ['Tomato: 1 can', 'Pork: 1 kilogram'],
         );
 
         $projectionSaved = $this->connection->executeQuery(
-            "SELECT * FROM projection_recipe_detail WHERE id = 'DbalProjectorRecipeDetail_1'",
-        );
-        dump($projectionSaved);
+            "SELECT * FROM projection_recipe_detail WHERE recipe_id = '0c53c94a-d821-11ee-8fbc-0242ac190003'",
+        )->fetchAssociative();
+
+        $this->assertArrayHasKey('recipe_id', $projectionSaved);
+        $this->assertSame('0c53c94a-d821-11ee-8fbc-0242ac190003', $projectionSaved['recipe_id']);
+        $this->assertArrayHasKey('name', $projectionSaved);
+        $this->assertSame('RecipeProjector Detail Projection test', $projectionSaved['name']);
+        $this->assertArrayHasKey('ingredients', $projectionSaved);
+        $this->assertJson($projectionSaved['ingredients']);
+        $this->assertSame('["Tomato: 1 can","Pork: 1 kilogram"]', $projectionSaved['ingredients']);
     }
 }

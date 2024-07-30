@@ -16,18 +16,16 @@ class RecipeProjection implements Projection
         string $recipeName,
         array $ingredients,
     ): void {
-        $sql = "INSERT INTO `projection_recipe_index` (`id`, `name`) VALUES (?, ?)";
+        $sql = "INSERT INTO `projection_recipe_index` (`recipe_id`, `name`) VALUES (?, ?)";
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $recipeId);
         $statement->bindValue(2, $recipeName);
         $statement->executeQuery();
 
-        $sql = "INSERT INTO `projection_recipe_detail` (`id`, `name`, `ingredients`) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO `projection_recipe_detail` (`recipe_id`, `name`, `ingredients`) VALUES (?, ?, ?)";
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $recipeId);
         $statement->bindValue(2, $recipeName);
-        dump($ingredients);
-        dump(json_encode($ingredients));
         $statement->bindValue(3, json_encode($ingredients));
         $statement->executeQuery();
     }
