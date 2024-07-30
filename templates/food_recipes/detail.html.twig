@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>{{ recipe.name }}</h1>
+
+        <div>
+            <ol>
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                {% else %}}
+                    <div>No ingredients :( </div>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    
+{% endblock %}

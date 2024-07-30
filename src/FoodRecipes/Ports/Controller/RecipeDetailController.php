@@ -3,7 +3,6 @@
 namespace Przper\Tribe\FoodRecipes\Ports\Controller;
 
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipe;
-use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,23 +19,8 @@ class RecipeDetailController extends AbstractController
     {
         $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
 
-        $ingredientsHtml = implode("<br>\n", $recipe->ingredients);
-
-        $html = <<<HTML
-                <html>
-                    <head></head>
-                    <body>
-                        <div>
-                            <h1>{$recipe->name}</h1>
-                            
-                            <div>
-                                $ingredientsHtml
-                            </div>
-                        </div>
-                    </body>
-                </html>
-            HTML;
-
-        return new Response($html);
+        return $this->render('food_recipes/detail.html.twig', [
+            'recipe' => $recipe,
+        ]);
     }
 }
