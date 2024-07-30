@@ -25,7 +25,7 @@ class RecipeCreateController extends AbstractController
                 $request->get('ingredients'),
             ));
 
-            // return new RedirectResponse("/recipe");
+            return new RedirectResponse("/recipe");
         }
 
         return $this->render(
