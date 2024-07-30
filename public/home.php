@@ -1,7 +1,10 @@
 <?php
 
 echo <<<HTML
-    <head></head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Perzyna Tribe</title>
+    </head>
     <body>
         <div>
             <h1>Hello world!</h1>
