@@ -19,7 +19,6 @@ class RecipeDetailController extends AbstractController
     public function __invoke(string $id): Response
     {
         $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
-        dump($recipe);
 
         $ingredientsHtml = implode("\n", array_map(
             fn(Ingredient $i) => "<div>$i->name: $i->quantity$i->unit</div>",
