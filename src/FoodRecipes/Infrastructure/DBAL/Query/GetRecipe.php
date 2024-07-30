@@ -15,7 +15,7 @@ final class GetRecipe implements GetRecipeQuery
 
     public function execute(RecipeId $id): ?RecipeDetail
     {
-        $sql = "SELECT * FROM projection_recipe_detail WHERE id = ?";
+        $sql = "SELECT * FROM projection_recipe_detail WHERE recipe_id = ?";
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $id);
         $sqlResult = $statement->executeQuery();

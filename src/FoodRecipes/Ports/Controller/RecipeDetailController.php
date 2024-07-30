@@ -20,10 +20,7 @@ class RecipeDetailController extends AbstractController
     {
         $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
 
-        $ingredientsHtml = implode("\n", array_map(
-            fn(Ingredient $i) => "<div>$i->name: $i->quantity$i->unit</div>",
-            $recipe->ingredients,
-        ));
+        $ingredientsHtml = implode("<br>\n", $recipe->ingredients);
 
         $html = <<<HTML
                 <html>

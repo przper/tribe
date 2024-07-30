@@ -25,10 +25,21 @@ class GetRecipeTest extends KernelTestCase
         $this->connection = $container->get(Connection::class);
 
         $this->connection->executeQuery(<<<SQL
-                INSERT INTO tribe.projection_recipe_detail
-                    (id, name, ingredients)
+                INSERT INTO tribe.recipe
+                    (id, name)
                 VALUES
-                    ('e3b8ee06-7377-451c-88c1-fde290a61ac4', 'GetRecipeTest Chilli con Carne', '[{"name": "Meat", "quantity": 1.123, "unit": "kilogram"}]')
+                    ('e3b8ee06-7377-451c-88c1-fde290a61ac4', 'GetRecipeTest Chilli con Carne')
+                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+            SQL);
+        $this->connection->executeQuery(<<<SQL
+                INSERT INTO tribe.projection_recipe_detail
+                    (recipe_id, name, ingredients)
+                VALUES
+                    (
+                        'e3b8ee06-7377-451c-88c1-fde290a61ac4',
+                        'GetRecipeTest Chilli con Carne projection',
+                        '["Meat: 1.5 kilogram","Cheese: 0.7 kilogram"]'
+                    )
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
             SQL);
     }
@@ -36,7 +47,7 @@ class GetRecipeTest extends KernelTestCase
     protected function tearDown(): void
     {
         $this->connection->executeQuery(<<<SQL
-                DELETE FROM tribe.projection_recipe_detail
+                DELETE FROM tribe.recipe
                 WHERE `id` IN (
                     'e3b8ee06-7377-451c-88c1-fde290a61ac4'
                 ); 
@@ -49,9 +60,10 @@ class GetRecipeTest extends KernelTestCase
         $result = $this->query->execute(new RecipeId('e3b8ee06-7377-451c-88c1-fde290a61ac4'));
 
         $this->assertInstanceOf(RecipeDetail::class, $result);
-        $this->assertSame('e3b8ee06-7377-451c-88c1-fde290a61ac4', $result->id);
-        $this->assertSame('GetRecipeTest Chilli con Carne', $result->name);
-        $this->assertCount(1, $result->ingredients);
-        $this->assertInstanceOf(Ingredient::class, $result->ingredients[0]);
+        $this->assertSame('e3b8ee06-7377-451c-88c1-fde290a61ac4', $result->recipe_id);
+        $this->assertSame('GetRecipeTest Chilli con Carne projection', $result->name);
+        $this->assertCount(2, $result->ingredients);
+        $this->assertSame("Meat: 1.5 kilogram", $result->ingredients[0]);
+        $this->assertSame("Cheese: 0.7 kilogram", $result->ingredients[1]);
     }
 }
