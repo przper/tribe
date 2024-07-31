@@ -4,9 +4,10 @@ echo <<<HTML
     <head>
         <meta charset="UTF-8">
         <title>Perzyna Tribe</title>
+        <link rel="stylesheet" href="/tribe.css">
     </head>
     <body>
-        <div>
+        <div class="content">
             <h1>Hello world!</h1>
             
             <div>

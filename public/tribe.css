@@ -1,0 +1,27 @@
+html {
+    background-color: black;
+    color: white;
+    display: table;
+    margin: auto;
+}
+
+nav {
+    background-color: gray;
+    display: inline;
+    padding: 10px;
+}
+nav a {
+    margin-left: 10px;
+}
+
+body {
+    height: 100%;
+    display: table-cell;
+    vertical-align: center;
+}
+
+body .content {
+    background-color: gray;
+    padding: 10px;
+    margin-top: 50px;
+}

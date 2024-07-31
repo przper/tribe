@@ -13,7 +13,7 @@ class PolcodeTimeController extends AbstractController
         private readonly PolcodeLinkWorkedTimeRetriever $timeRetriever,
     ) {}
 
-    #[Route('/worked-time/polcode')]
+    #[Route('/worked-time/polcode', name: 'worked_time.polcode')]
     public function __invoke(): Response
     {
         $start = new \DateTimeImmutable('first day of this month');
