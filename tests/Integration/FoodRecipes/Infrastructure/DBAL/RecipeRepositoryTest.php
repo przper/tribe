@@ -94,12 +94,10 @@ class RecipeRepositoryTest extends KernelTestCase
 
         [$dbIngredient1, $dbIngredient2] = $dbRecipe->getIngredients()->getAll();
         $this->assertSame('Pork', (string) $dbIngredient1->getName());
-        $this->assertSame(1.0, (float) $dbIngredient1->getAmount()->getQuantity());
-        $this->assertSame('kilogram', (string) $dbIngredient1->getAmount()->getUnit());
+        $this->assertSame('1 [kilogram]', (string) $dbIngredient1->getAmount());
 
         $this->assertSame('Tomatoes', (string) $dbIngredient2->getName());
-        $this->assertSame(3.0, (float) $dbIngredient2->getAmount()->getQuantity());
-        $this->assertSame('can', (string) $dbIngredient2->getAmount()->getUnit());
+        $this->assertSame('3 [can]', (string) $dbIngredient2->getAmount());
     }
 
     //    public function test_persist(): void

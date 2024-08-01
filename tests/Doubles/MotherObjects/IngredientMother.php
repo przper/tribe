@@ -68,6 +68,11 @@ class IngredientMother
         return $this;
     }
 
+    /**
+     * @template T
+     * @param list<T> $list
+     * @return T
+     */
     private function getRandomArrayItem(array $list): mixed
     {
         return $list[array_rand($list)];

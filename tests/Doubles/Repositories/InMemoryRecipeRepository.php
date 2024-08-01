@@ -8,6 +8,9 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 
 class InMemoryRecipeRepository implements RecipeRepositoryInterface
 {
+    /**
+     * @var Recipe[] $recipes
+     */
     private array $recipes = [];
 
     public function create(Recipe $recipe): void

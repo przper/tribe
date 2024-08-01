@@ -6,6 +6,9 @@ namespace Przper\Tribe\FoodRecipes\Domain;
 
 use Przper\Tribe\Shared\Domain\Collection;
 
+/**
+ * @extends Collection<Ingredient>
+ */
 class Ingredients extends Collection
 {
     /** @var Ingredient[] */
