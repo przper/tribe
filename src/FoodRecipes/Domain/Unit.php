@@ -27,6 +27,6 @@ final readonly class Unit
 
     public function isEqual(Unit $unit): bool
     {
-        return false;
+        return strtolower($this->value) === strtolower($unit->value);
     }
 }

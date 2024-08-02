@@ -52,10 +52,4 @@ class RecipeTest extends TestCase
         $this->assertSame('Pork', (string) $recipe->getIngredients()->getAll()[0]->getName());
         $this->assertSame('Tomatoes', (string) $recipe->getIngredients()->getAll()[1]->getName());
     }
-
-    #[Test]
-    public function it_can_update_ingredients(): void
-    {
-        $this->fail("TO DO");
-    }
 }

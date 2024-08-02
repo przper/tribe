@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\FoodRecipes\Domain;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
@@ -16,8 +17,24 @@ class QuantityTest extends TestCase
     }
 
     #[Test]
-    public function isEqual_to_another_Quantity(): void
+    #[DataProvider('isEqual')]
+    public function isEqual_to_another_Quantity(Quantity $a, Quantity $b, bool $expected): void
     {
-        $this->fail('TO DO');
+        $this->assertSame($expected, $a->isEqual($b));
+    }
+
+    public static function isEqual(): \Generator
+    {
+        yield [
+            Quantity::fromFloat(1.235),
+            Quantity::fromFloat(1.235),
+            true,
+        ];
+
+        yield [
+            Quantity::fromFloat(1.235),
+            Quantity::fromFloat(10),
+            false,
+        ];
     }
 }

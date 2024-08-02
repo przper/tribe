@@ -12,17 +12,6 @@ class IngredientMother
 {
     private Ingredient $ingredient;
 
-    private function __construct()
-    {
-        $this->ingredient = Ingredient::create(
-            Name::fromString($this->getRandomArrayItem($this->names)),
-            Amount::create(
-                Quantity::fromFloat(1.0),
-                Unit::fromString($this->getRandomArrayItem($this->units)),
-            ),
-        );
-    }
-
     /** @var string[] $names */
     private array $names = [
         'Meat',
@@ -37,6 +26,17 @@ class IngredientMother
         'can',
         'liter',
     ];
+
+    private function __construct()
+    {
+        $this->ingredient = Ingredient::create(
+            Name::fromString($this->getRandomArrayItem($this->names)),
+            Amount::create(
+                Quantity::fromFloat(1.0),
+                Unit::fromString($this->getRandomArrayItem($this->units)),
+            ),
+        );
+    }
 
     public static function new(): self
     {
