@@ -17,8 +17,7 @@ class CollectionTest extends TestCase
             /** @phpstan-ignore-next-line  */
             public function __construct(
                 public array $items
-            ) {
-            }
+            ) {}
 
             protected function getItems(): array
             {

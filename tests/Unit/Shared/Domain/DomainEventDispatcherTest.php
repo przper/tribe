@@ -13,7 +13,7 @@ class DomainEventDispatcherTest extends TestCase
     #[Test]
     public function it_dispatches_events(): void
     {
-        $dummyListener = new class implements DomainEventListenerInterface {
+        $dummyListener = new class () implements DomainEventListenerInterface {
             /** @phpstan-ignore-next-line */
             public array $handledEvents = [];
 
@@ -23,13 +23,13 @@ class DomainEventDispatcherTest extends TestCase
             }
         };
 
-        $event1 = new readonly class extends DomainEvent {
+        $event1 = new readonly class () extends DomainEvent {
             public function __construct()
             {
                 parent::__construct('1', 'Event_1', 1);
             }
         };
-        $event2 = new readonly class extends DomainEvent {
+        $event2 = new readonly class () extends DomainEvent {
             public function __construct()
             {
                 parent::__construct('1', 'Event_2', 1);
