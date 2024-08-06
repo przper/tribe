@@ -11,7 +11,7 @@ class RecipeProjection implements Projection
         private readonly Connection $connection,
     ) {}
 
-    public function createRecipe(
+    public function persistRecipe(
         string $recipeId,
         string $recipeName,
         array $ingredients,

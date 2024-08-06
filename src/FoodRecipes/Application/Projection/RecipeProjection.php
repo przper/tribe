@@ -7,7 +7,7 @@ interface RecipeProjection
     /**
      * @param string[] $ingredients
      */
-    public function createRecipe(
+    public function persistRecipe(
         string $id,
         string $name,
         array $ingredients,

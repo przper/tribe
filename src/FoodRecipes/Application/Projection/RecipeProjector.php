@@ -11,7 +11,7 @@ class RecipeProjector
         private readonly RecipeProjection $projection,
     ) {}
 
-    public function createRecipe(Recipe $recipe): void
+    public function persistRecipe(Recipe $recipe): void
     {
         $serializedIngredients = [];
         /** @var Ingredient $ingredient */
@@ -24,7 +24,7 @@ class RecipeProjector
             );
         }
 
-        $this->projection->createRecipe(
+        $this->projection->persistRecipe(
             $recipe->getId(),
             $recipe->getName(),
             $serializedIngredients,

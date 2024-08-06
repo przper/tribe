@@ -23,7 +23,7 @@ class InMemoryRecipeProjection implements RecipeProjection
      */
     private array $recipeDetailProjection = [];
 
-    public function createRecipe(string $id, string $name, array $ingredients): void
+    public function persistRecipe(string $id, string $name, array $ingredients): void
     {
         $this->recipeIndexProjection[$id] = ['id' => $id, 'name' => $name];
         $this->recipeDetailProjection[$id] = ['id' => $id, 'name' => $name, 'ingredients' => $ingredients];

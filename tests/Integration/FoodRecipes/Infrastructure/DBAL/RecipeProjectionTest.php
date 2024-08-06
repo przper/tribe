@@ -42,7 +42,7 @@ class RecipeProjectionTest extends KernelTestCase
     #[Test]
     public function it_creates_detail_projection(): void
     {
-        $this->projection->createRecipe(
+        $this->projection->persistRecipe(
             '0c53c94a-d821-11ee-8fbc-0242ac190003',
             'RecipeProjector Detail Projection test',
             ['Tomato: 1 can', 'Pork: 1 kilogram'],
