@@ -60,7 +60,7 @@ class RecipeRepositoryTest extends KernelTestCase
     }
 
     #[Test]
-    public function it_can_be_created(): void
+    public function it_can_be_persisted(): void
     {
         $id = new RecipeId('test');
 
@@ -80,7 +80,7 @@ class RecipeRepositoryTest extends KernelTestCase
 
         $recipe->setIngredients($ingredients);
 
-        $this->repository->create($recipe);
+        $this->repository->persist($recipe);
 
         $this->assertCount(0, $recipe->pullEvents());
 
@@ -99,22 +99,4 @@ class RecipeRepositoryTest extends KernelTestCase
         $this->assertSame('Tomatoes', (string) $dbIngredient2->getName());
         $this->assertSame('3 [can]', (string) $dbIngredient2->getAmount());
     }
-
-    //    public function test_persist(): void
-    //    {
-    //        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
-    //
-    //        $result = $this->repository->get($id);
-    //        $this->assertNotNull($this->repository->get($id));
-    //        $this->assertSame('RecipeDb test', (string) $result->getName());
-    //
-    //        $recipe = Recipe::create($id, Name::fromString('I am updated name'));
-    //
-    //        $this->repository->persist($recipe);
-    //
-    //        $result = $this->repository->get($id);
-    //        $this->assertNotNull($result);
-    //        $this->assertInstanceOf(Recipe::class, $result);
-    //        $this->assertSame('I am updated name', (string) $result->getName());
-    //    }
 }

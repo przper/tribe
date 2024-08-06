@@ -63,15 +63,23 @@ class RecipeRepository implements RecipeRepositoryInterface
      * @throws Exception
      * @throws \Throwable
      */
-    public function create(Recipe $recipe): void
+    public function persist(Recipe $recipe): void
     {
         $this->connection->beginTransaction();
 
         try {
-            $this->connection->insert('recipe', [
-                'id' => $recipe->getId(),
-                'name' => $recipe->getName(),
-            ]);
+            $statement = $this->connection->prepare(<<<SQL
+                INSERT INTO tribe.recipe
+                    (id, name)
+                VALUES
+                    (?, ?)
+                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+            SQL);
+            $statement->bindValue(1, $recipe->getId());
+            $statement->bindValue(2, $recipe->getName());
+            $statement->executeStatement();
+
+            $this->connection->delete('ingredient', ['recipe_id' => $recipe->getId()]);
 
             foreach ($recipe->getIngredients() as $ingredient) {
                 $this->connection->insert('ingredient', [
@@ -90,23 +98,6 @@ class RecipeRepository implements RecipeRepositoryInterface
             throw $e;
         }
     }
-
-    //    public function persist(Recipe $recipe): void
-    //    {
-    //        $sql = <<<SQL
-    //                UPDATE recipe
-    //                SET
-    //                    id = ?,
-    //                    name = ?
-    //                WHERE
-    //                    id = ?
-    //            SQL;
-    //        $statement = $this->connection->prepare($sql);
-    //        $statement->bindValue(1, $recipe->getId());
-    //        $statement->bindValue(2, $recipe->getName());
-    //        $statement->bindValue(3, $recipe->getId());
-    //        $statement->executeQuery();
-    //    }
 
     /**
      * @param DomainEvent[] $events

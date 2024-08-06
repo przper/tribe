@@ -13,7 +13,7 @@ class InMemoryRecipeRepository implements RecipeRepositoryInterface
      */
     private array $recipes = [];
 
-    public function create(Recipe $recipe): void
+    public function persist(Recipe $recipe): void
     {
         $this->recipes[(string) $recipe->getId()] = $recipe;
     }

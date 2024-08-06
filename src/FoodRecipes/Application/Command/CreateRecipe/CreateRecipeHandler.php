@@ -42,7 +42,7 @@ final class CreateRecipeHandler
         }
         $recipe->setIngredients($ingredients);
 
-        $this->repository->create($recipe);
-        $this->recipeProjector->createRecipe($recipe);
+        $this->repository->persist($recipe);
+        $this->recipeProjector->persistRecipe($recipe);
     }
 }
