@@ -27,6 +27,8 @@ class RecipeProjectionTest extends KernelTestCase
                     ('0c53c94a-d821-11ee-8fbc-0242ac190003', 'RecipeProjector test')
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
             SQL);
+
+        $this->assertInstanceOf(RecipeProjection::class, $this->projection);
     }
 
     protected function tearDown(): void

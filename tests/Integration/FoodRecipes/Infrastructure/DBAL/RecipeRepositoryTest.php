@@ -35,6 +35,8 @@ class RecipeRepositoryTest extends KernelTestCase
                     ('0c53c94a-d821-11ee-8fbc-0242ac190002', 'RecipeDb test')
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
             SQL);
+
+        $this->assertInstanceOf(RecipeRepository::class, $this->repository);
     }
 
     protected function tearDown(): void
@@ -60,7 +62,7 @@ class RecipeRepositoryTest extends KernelTestCase
     }
 
     #[Test]
-    public function it_can_be_persisted(): void
+    public function it_persists_new_objects(): void
     {
         $id = new RecipeId('test');
 
@@ -98,5 +100,11 @@ class RecipeRepositoryTest extends KernelTestCase
 
         $this->assertSame('Tomatoes', (string) $dbIngredient2->getName());
         $this->assertSame('3 [can]', (string) $dbIngredient2->getAmount());
+    }
+
+    #[Test]
+    public function it_persists_existing_objects(): void
+    {
+        $this->fail();
     }
 }

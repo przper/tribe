@@ -32,3 +32,17 @@ services:
     Przper\Tribe\Shared\Domain\DomainEventDispatcher:
         arguments:
             $listeners: !tagged_iterator domain_event_listener
+
+    Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
+        class: Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository
+
+    Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
+        class: Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Projection\RecipeProjection
+
+when@test:
+    services:
+        Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
+            class: Tests\Doubles\Repositories\InMemoryRecipeRepository
+
+        Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
+            class: Tests\Doubles\Projection\InMemoryRecipeProjection
