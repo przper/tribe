@@ -39,11 +39,13 @@ class CreateRecipeHandlerTest extends TestCase
         $recipeSaved = $repository->getByIndex(0);
         $this->assertNotNull($recipeSaved);
         $this->assertSame('Chilli con Carne', (string) $recipeSaved->getName());
-        $this->assertCount(2, $recipeSaved->getIngredients()->getAll());
+        $this->assertCount(2, $recipeSaved->getIngredients());
 
         [$ingredient1, $ingredient2] = $recipeSaved->getIngredients()->getAll();
         $this->assertSame('Pork', (string) $ingredient1->getName());
+        $this->assertSame('1 [kilogram]', (string) $ingredient1->getAmount());
         $this->assertSame('Tomatoes', (string) $ingredient2->getName());
+        $this->assertSame('3 [can]', (string) $ingredient2->getAmount());
 
         $recipeId = (string) $recipeSaved->getId();
         $indexProjection = $projection->getIndexProjection($recipeId);
