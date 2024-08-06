@@ -69,12 +69,12 @@ class RecipeRepository implements RecipeRepositoryInterface
 
         try {
             $statement = $this->connection->prepare(<<<SQL
-                INSERT INTO tribe.recipe
-                    (id, name)
-                VALUES
-                    (?, ?)
-                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
-            SQL);
+                    INSERT INTO tribe.recipe
+                        (id, name)
+                    VALUES
+                        (?, ?)
+                    ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+                SQL);
             $statement->bindValue(1, $recipe->getId());
             $statement->bindValue(2, $recipe->getName());
             $statement->executeStatement();

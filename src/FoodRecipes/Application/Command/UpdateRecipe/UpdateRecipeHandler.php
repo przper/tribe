@@ -19,8 +19,7 @@ final class UpdateRecipeHandler
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository,
         private RecipeProjector $recipeProjector,
-    ) {
-    }
+    ) {}
 
     public function __invoke(UpdateRecipeCommand $command): void
     {

@@ -19,26 +19,26 @@ class RecipeProjection implements Projection
         array $ingredients,
     ): void {
         $sql = <<<SQL
-            INSERT INTO `projection_recipe_index`
-                (`recipe_id`, `name`)
-            VALUES
-                (?, ?)
-            ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);    
-        SQL;
+                INSERT INTO `projection_recipe_index`
+                    (`recipe_id`, `name`)
+                VALUES
+                    (?, ?)
+                ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);    
+            SQL;
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $recipeId);
         $statement->bindValue(2, $recipeName);
         $statement->executeQuery();
 
         $sql = <<<SQL
-            INSERT INTO `projection_recipe_detail`
-                (`recipe_id`, `name`, `ingredients`)
-            VALUES
-                (?, ?, ?)
-            ON DUPLICATE KEY UPDATE
-                `name` = VALUES(`name`),
-                `ingredients` = VALUES(`ingredients`)
-        SQL;
+                INSERT INTO `projection_recipe_detail`
+                    (`recipe_id`, `name`, `ingredients`)
+                VALUES
+                    (?, ?, ?)
+                ON DUPLICATE KEY UPDATE
+                    `name` = VALUES(`name`),
+                    `ingredients` = VALUES(`ingredients`)
+            SQL;
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $recipeId);
         $statement->bindValue(2, $recipeName);
