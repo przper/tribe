@@ -6,9 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
-use Przper\Tribe\Shared\Domain\DomainEvent;
-use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
 
@@ -34,19 +33,7 @@ class CreateRecipeHandlerTest extends TestCase
 
         $repository = new InMemoryRecipeRepository();
         $projection = new InMemoryRecipeProjection();
-        $eventDispatcher = new class implements DomainEventDispatcherInterface {
-            /**
-             * @var string[] $dispatchedEvents
-             */
-            public array $dispatchedEvents = [];
-
-            public function dispatch(DomainEvent ...$domainEvents): void
-            {
-                foreach ($domainEvents as $domainEvent) {
-                    $this->dispatchedEvents[] = $domainEvent->name;
-                }
-            }
-        };
+        $eventDispatcher = new InMemoryDomainEventDispatcher();
 
         $handler = new CreateRecipeHandler(
             $repository,

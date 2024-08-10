@@ -39,6 +39,9 @@ services:
     Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
         class: Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Projection\RecipeProjection
 
+    Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
+        class: Przper\Tribe\Shared\Domain\DomainEventDispatcher
+
 when@test:
     services:
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
@@ -46,3 +49,6 @@ when@test:
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
             class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection
+
+        Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher
