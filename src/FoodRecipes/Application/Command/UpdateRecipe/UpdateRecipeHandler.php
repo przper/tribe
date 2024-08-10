@@ -25,8 +25,6 @@ final class UpdateRecipeHandler
     {
         $recipe = $this->recipeRepository->get(new RecipeId($command->id));
 
-        $recipe->setName(Name::fromString($command->name));
-
         $ingredients = new Ingredients();
         foreach ($command->ingredients as $ingredientData) {
             $ingredient = Ingredient::create(
@@ -38,7 +36,7 @@ final class UpdateRecipeHandler
             );
             $ingredients->add($ingredient);
         }
-        $recipe->setIngredients($ingredients);
+        $recipe->update(Name::fromString($command->name), $ingredients);
 
         $this->recipeRepository->persist($recipe);
         $this->recipeProjector->persistRecipe($recipe);

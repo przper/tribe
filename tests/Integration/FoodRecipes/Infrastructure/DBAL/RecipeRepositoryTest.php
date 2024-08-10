@@ -68,8 +68,6 @@ class RecipeRepositoryTest extends KernelTestCase
 
         $this->assertNull($this->repository->get($id));
 
-        $recipe = Recipe::create($id, Name::fromString('Chilli con Carne'));
-
         $ingredients = new Ingredients();
         $ingredients->add(Ingredient::create(
             Name::fromString('Pork'),
@@ -80,7 +78,7 @@ class RecipeRepositoryTest extends KernelTestCase
             Amount::create(Quantity::fromFloat(3.0), Unit::fromString('can')),
         ));
 
-        $recipe->setIngredients($ingredients);
+        $recipe = Recipe::create($id, Name::fromString('Chilli con Carne'), $ingredients);
 
         $this->repository->persist($recipe);
 

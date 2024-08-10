@@ -26,10 +26,6 @@ final class CreateRecipeHandler
 
     public function __invoke(CreateRecipeCommand $command): void
     {
-        $recipe = Recipe::create(
-            new RecipeId((string) $this->idGenerator->generate()),
-            Name::fromString($command->name),
-        );
 
         $ingredients = new Ingredients();
         foreach ($command->ingredients as $ingredientData) {
@@ -42,7 +38,12 @@ final class CreateRecipeHandler
             );
             $ingredients->add($ingredient);
         }
-        $recipe->setIngredients($ingredients);
+
+        $recipe = Recipe::create(
+            new RecipeId((string) $this->idGenerator->generate()),
+            Name::fromString($command->name),
+            $ingredients,
+        );
 
         $this->repository->persist($recipe);
         $this->eventDispatcher->dispatch(...$recipe->pullEvents());

@@ -11,14 +11,12 @@ final class Recipe extends AggregateRoot
     private function __construct(
         private RecipeId $id,
         private Name $name,
-        private Ingredients $ingredients = new Ingredients(),
+        private Ingredients $ingredients,
     ) {}
 
-    public static function create(
-        RecipeId $id,
-        Name $name,
-    ): Recipe {
-        $recipe = new self($id, $name);
+    public static function create(RecipeId $id, Name $name, Ingredients $ingredients = new Ingredients()): Recipe
+    {
+        $recipe = new self($id, $name, $ingredients);
         $recipe->raise(RecipeCreated::create($id));
 
         return $recipe;
@@ -64,12 +62,5 @@ final class Recipe extends AggregateRoot
     public function getIngredients(): Ingredients
     {
         return $this->ingredients;
-    }
-
-    public function setIngredients(Ingredients $ingredients): self
-    {
-        $this->ingredients = $ingredients;
-
-        return $this;
     }
 }
