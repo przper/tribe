@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
+use Przper\Tribe\Shared\Domain\DomainEvent;
+use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
 use Tests\Doubles\Projection\InMemoryRecipeProjection;
 use Tests\Doubles\Repositories\InMemoryRecipeRepository;
@@ -32,7 +34,26 @@ class CreateRecipeHandlerTest extends TestCase
 
         $repository = new InMemoryRecipeRepository();
         $projection = new InMemoryRecipeProjection();
-        $handler = new CreateRecipeHandler($repository, new RecipeProjector($projection), new IdGenerator());
+        $eventDispatcher = new class implements DomainEventDispatcherInterface {
+            /**
+             * @var string[] $dispatchedEvents
+             */
+            public array $dispatchedEvents = [];
+
+            public function dispatch(DomainEvent ...$domainEvents): void
+            {
+                foreach ($domainEvents as $domainEvent) {
+                    $this->dispatchedEvents[] = $domainEvent->name;
+                }
+            }
+        };
+
+        $handler = new CreateRecipeHandler(
+            $repository,
+            new RecipeProjector($projection),
+            new IdGenerator(),
+            $eventDispatcher,
+        );
 
         $handler($command);
 
@@ -46,6 +67,9 @@ class CreateRecipeHandlerTest extends TestCase
         $this->assertSame('1 [kilogram]', (string) $ingredient1->getAmount());
         $this->assertSame('Tomatoes', (string) $ingredient2->getName());
         $this->assertSame('3 [can]', (string) $ingredient2->getAmount());
+
+        $this->assertCount(1, $eventDispatcher->dispatchedEvents);
+        $this->assertContains('recipe_created', $eventDispatcher->dispatchedEvents);
 
         $recipeId = (string) $recipeSaved->getId();
         $indexProjection = $projection->getIndexProjection($recipeId);

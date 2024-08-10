@@ -13,6 +13,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Przper\Tribe\Shared\Application\IdGeneratorInterface;
+use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 
 final class CreateRecipeHandler
 {
@@ -20,6 +21,7 @@ final class CreateRecipeHandler
         private RecipeRepositoryInterface $repository,
         private RecipeProjector $recipeProjector,
         private IdGeneratorInterface $idGenerator,
+        private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
 
     public function __invoke(CreateRecipeCommand $command): void
@@ -43,6 +45,7 @@ final class CreateRecipeHandler
         $recipe->setIngredients($ingredients);
 
         $this->repository->persist($recipe);
+        $this->eventDispatcher->dispatch(...$recipe->pullEvents());
         $this->recipeProjector->persistRecipe($recipe);
     }
 }

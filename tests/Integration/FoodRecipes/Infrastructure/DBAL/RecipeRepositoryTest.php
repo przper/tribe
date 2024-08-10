@@ -84,8 +84,6 @@ class RecipeRepositoryTest extends KernelTestCase
 
         $this->repository->persist($recipe);
 
-        $this->assertCount(0, $recipe->pullEvents());
-
         /** @var Recipe $dbRecipe */
         $dbRecipe = $this->repository->get($id);
 

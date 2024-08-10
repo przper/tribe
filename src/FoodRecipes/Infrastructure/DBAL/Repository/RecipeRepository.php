@@ -13,8 +13,6 @@ use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
-use Przper\Tribe\Shared\Domain\DomainEvent;
-use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 #[Autoconfigure(public: true)]
@@ -22,7 +20,6 @@ class RecipeRepository implements RecipeRepositoryInterface
 {
     public function __construct(
         private Connection $connection,
-        private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
 
     public function get(RecipeId $id): ?Recipe
@@ -90,20 +87,10 @@ class RecipeRepository implements RecipeRepositoryInterface
                 ]);
             }
 
-            $this->dispatchDomainEvents($recipe->pullEvents());
-
             $this->connection->commit();
         } catch (\Throwable $e) {
             $this->connection->rollBack();
             throw $e;
         }
-    }
-
-    /**
-     * @param DomainEvent[] $events
-     */
-    private function dispatchDomainEvents(array $events): void
-    {
-        $this->eventDispatcher->dispatch(...$events);
     }
 }
