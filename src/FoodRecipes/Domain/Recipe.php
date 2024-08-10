@@ -42,11 +42,23 @@ final class Recipe extends AggregateRoot
         return $this->name;
     }
 
-    public function setName(Name $name): self
+    public function update(?Name $name = null, ?Ingredients $ingredients = null): void
     {
-        $this->name = $name;
+        $isChanged = false;
 
-        return $this;
+        if ($name !== null) {
+            $isChanged = true;
+            $this->name = $name;
+        }
+
+        if ($ingredients !== null) {
+            $isChanged = true;
+            $this->ingredients = $ingredients;
+        }
+
+        if ($isChanged) {
+            $this->raise(RecipeUpdated::create($this->id));
+        }
     }
 
     public function getIngredients(): Ingredients
