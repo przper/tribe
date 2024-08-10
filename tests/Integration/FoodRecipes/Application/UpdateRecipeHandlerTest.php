@@ -7,7 +7,9 @@ use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeComman
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
 use Tests\Doubles\MotherObjects\RecipeMother;
@@ -17,6 +19,7 @@ class UpdateRecipeHandlerTest extends KernelTestCase
     private UpdateRecipeHandler $handler;
     private InMemoryRecipeRepository $repository;
     private InMemoryRecipeProjection $projection;
+    private InMemoryDomainEventDispatcher $eventDispatcher;
 
     protected function setUp(): void
     {
@@ -25,6 +28,7 @@ class UpdateRecipeHandlerTest extends KernelTestCase
         $this->handler = self::getContainer()->get(UpdateRecipeHandler::class);
         $this->repository = self::getContainer()->get(RecipeRepositoryInterface::class);
         $this->projection = self::getContainer()->get(RecipeProjection::class);
+        $this->eventDispatcher = self::getContainer()->get(DomainEventDispatcherInterface::class);
     }
 
     #[Test]
@@ -57,6 +61,10 @@ class UpdateRecipeHandlerTest extends KernelTestCase
         [$ingredient1] = $updatedRecipe->getIngredients()->getAll();
         $this->assertSame('Beans', (string) $ingredient1->getName());
         $this->assertSame('0.5 [kilogram]', (string) $ingredient1->getAmount());
+
+        $this->assertCount(0, $recipe->pullEvents());
+        $this->assertCount(1, $this->eventDispatcher->dispatchedEvents);
+        $this->assertContains('recipe_updated', $this->eventDispatcher->dispatchedEvents);
 
         $indexProjection = $this->projection->getIndexProjection($updatedRecipe->getId());
         $this->assertNotNull($indexProjection);

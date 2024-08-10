@@ -11,6 +11,7 @@ use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 #[Autoconfigure(public: true)]
@@ -19,6 +20,7 @@ final class UpdateRecipeHandler
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository,
         private RecipeProjector $recipeProjector,
+        private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
 
     public function __invoke(UpdateRecipeCommand $command): void
@@ -39,6 +41,7 @@ final class UpdateRecipeHandler
         $recipe->update(Name::fromString($command->name), $ingredients);
 
         $this->recipeRepository->persist($recipe);
+        $this->eventDispatcher->dispatch(...$recipe->pullEvents());
         $this->recipeProjector->persistRecipe($recipe);
     }
 }

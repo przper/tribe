@@ -28,6 +28,9 @@ class RecipeMother
 
     public function build(): Recipe
     {
-        return clone $this->recipe;
+        $recipe = clone $this->recipe;
+        $recipe->pullEvents();
+
+        return $recipe;
     }
 }
