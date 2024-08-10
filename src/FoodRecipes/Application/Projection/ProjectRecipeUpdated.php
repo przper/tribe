@@ -3,16 +3,27 @@
 namespace Przper\Tribe\FoodRecipes\Application\Projection;
 
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Recipe;
+use Przper\Tribe\FoodRecipes\Domain\RecipeId;
+use Przper\Tribe\FoodRecipes\Domain\RecipeUpdated;
+use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
+use Przper\Tribe\Shared\Domain\DomainEvent;
+use Przper\Tribe\Shared\Domain\DomainEventListenerInterface;
 
-class RecipeProjector
+class ProjectRecipeUpdated implements DomainEventListenerInterface
 {
     public function __construct(
+        private readonly RecipeRepository $repository,
         private readonly RecipeProjection $projection,
     ) {}
 
-    public function persistRecipe(Recipe $recipe): void
+    public function handle(DomainEvent $event): void
     {
+        if (!$event instanceof RecipeUpdated) {
+            return;
+        }
+
+        $recipe = $this->repository->get(new RecipeId($event->aggregateId));
+
         $serializedIngredients = [];
         /** @var Ingredient $ingredient */
         foreach ($recipe->getIngredients() as $ingredient) {

@@ -5,10 +5,8 @@ namespace Tests\Integration\FoodRecipes\Application;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
-use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher;
-use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
 
 class CreateRecipeHandlerTest extends TestCase
@@ -32,12 +30,10 @@ class CreateRecipeHandlerTest extends TestCase
         );
 
         $repository = new InMemoryRecipeRepository();
-        $projection = new InMemoryRecipeProjection();
         $eventDispatcher = new InMemoryDomainEventDispatcher();
 
         $handler = new CreateRecipeHandler(
             $repository,
-            new RecipeProjector($projection),
             new IdGenerator(),
             $eventDispatcher,
         );
@@ -57,24 +53,5 @@ class CreateRecipeHandlerTest extends TestCase
 
         $this->assertCount(1, $eventDispatcher->dispatchedEvents);
         $this->assertContains('recipe_created', $eventDispatcher->dispatchedEvents);
-
-        $recipeId = (string) $recipeSaved->getId();
-        $indexProjection = $projection->getIndexProjection($recipeId);
-        $this->assertNotNull($indexProjection);
-        $this->assertIsArray($indexProjection);
-        $this->assertArrayHasKey('id', $indexProjection);
-        $this->assertArrayHasKey('name', $indexProjection);
-        $this->assertSame('Chilli con Carne', $indexProjection['name']);
-
-        $detailProjection = $projection->getDetailProjection($recipeId);
-        $this->assertNotNull($detailProjection);
-        $this->assertIsArray($detailProjection);
-        $this->assertArrayHasKey('id', $detailProjection);
-        $this->assertArrayHasKey('name', $detailProjection);
-        $this->assertSame('Chilli con Carne', $detailProjection['name']);
-        $this->assertArrayHasKey('ingredients', $detailProjection);
-        $this->assertCount(2, $detailProjection['ingredients']);
-        $this->assertSame('Pork: 1 kilogram', $detailProjection['ingredients'][0]);
-        $this->assertSame('Tomatoes: 3 can', $detailProjection['ingredients'][1]);
     }
 }

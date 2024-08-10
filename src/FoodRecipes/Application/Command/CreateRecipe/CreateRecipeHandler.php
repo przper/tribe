@@ -2,7 +2,6 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe;
 
-use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
@@ -19,7 +18,6 @@ final class CreateRecipeHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,
-        private RecipeProjector $recipeProjector,
         private IdGeneratorInterface $idGenerator,
         private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
@@ -47,6 +45,5 @@ final class CreateRecipeHandler
 
         $this->repository->persist($recipe);
         $this->eventDispatcher->dispatch(...$recipe->pullEvents());
-        $this->recipeProjector->persistRecipe($recipe);
     }
 }
