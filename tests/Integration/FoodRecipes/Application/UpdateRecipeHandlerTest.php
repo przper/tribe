@@ -8,9 +8,9 @@ use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeHandle
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
 use Tests\Doubles\MotherObjects\RecipeMother;
-use Tests\Doubles\Projection\InMemoryRecipeProjection;
-use Tests\Doubles\Repositories\InMemoryRecipeRepository;
 
 class UpdateRecipeHandlerTest extends KernelTestCase
 {

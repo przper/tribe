@@ -42,7 +42,7 @@ services:
 when@test:
     services:
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
-            class: Tests\Doubles\Repositories\InMemoryRecipeRepository
+            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
-            class: Tests\Doubles\Projection\InMemoryRecipeProjection
+            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection

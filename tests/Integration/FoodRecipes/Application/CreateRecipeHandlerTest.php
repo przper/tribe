@@ -9,8 +9,8 @@ use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjector;
 use Przper\Tribe\Shared\Domain\DomainEvent;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
-use Tests\Doubles\Projection\InMemoryRecipeProjection;
-use Tests\Doubles\Repositories\InMemoryRecipeRepository;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
+use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
 
 class CreateRecipeHandlerTest extends TestCase
 {
