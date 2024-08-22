@@ -2,7 +2,7 @@
 
 use Symfony\Component\Dotenv\Dotenv;
 
-require_once './vendor/autoload.php';
+require_once (__DIR__ . '/vendor/autoload.php');
 
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__ . '/.env', '.env.local');
+$dotenv->load(__DIR__ . '/.env', __DIR__ . '/.env.local');
