@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Amount;
+use Przper\Tribe\FoodRecipes\Domain\NotMatchingAmountUnitException;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Tests\Doubles\MotherObjects\AmountMother;
@@ -88,5 +89,25 @@ class AmountTest extends TestCase
             AmountMother::new()->kilogram(3)->build(),
             false,
         ];
+    }
+
+    #[Test]
+    public function add_should_increase_quantity_when_units_are_same(): void
+    {
+        $a = AmountMother::new()->kilogram(2)->build();
+        $b = AmountMother::new()->kilogram(3)->build();
+        $a->add($b);
+
+        $this->assertEquals(Quantity::fromFloat(5), $a->getQuantity());
+    }
+
+    #[Test]
+    public function add_should_throw_exception_when_units_are_different(): void
+    {
+        $a = AmountMother::new()->kilogram()->build();
+        $b = AmountMother::new()->can()->build();
+
+        $this->expectException(NotMatchingAmountUnitException::class);
+        $a->add($b);
     }
 }

@@ -51,10 +51,22 @@ class Amount
         return $this->unit->isEqual($otherAmount->unit);
     }
 
+    /**
+     * @throws NotMatchingAmountUnitException
+     */
+    public function add(Amount $amount): void
+    {
+        if (!$this->isTheSame($amount)) {
+            throw new NotMatchingAmountUnitException();
+        }
+
+        $this->quantity = Quantity::sum($this->quantity, $amount->quantity);
+    }
+
     private function guard(): void {}
 
     public function __toString(): string
     {
-        return "$this->quantity [$this->unit]";
+        return "$this->quantity[$this->unit]";
     }
 }

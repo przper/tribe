@@ -37,4 +37,15 @@ class QuantityTest extends TestCase
             false,
         ];
     }
+
+    #[Test]
+    public function it_calculates_sum_of_two_quantities(): void
+    {
+        $quantity1 = Quantity::fromFloat(1.235);
+        $quantity2 = Quantity::fromFloat(10);
+
+        $sum = Quantity::sum($quantity1, $quantity2);
+
+        $this->assertEquals(11.235, (string) $sum);
+    }
 }

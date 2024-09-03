@@ -39,10 +39,18 @@ class Ingredient
     private function guard(): void {}
 
     /**
-     * Check if an Ingredient is the same as other Ingredient
+     * Check if an Ingredient is the same as other Ingredient. This method does not evaluate the Amount
      */
     public function isTheSame(self $ingredient): bool
     {
         return $this->name->isEqual($ingredient->name);
+    }
+
+    /**
+     * @throws NotMatchingAmountUnitException
+     */
+    public function addAmount(Amount $amount): void
+    {
+        $this->amount->add($amount);
     }
 }

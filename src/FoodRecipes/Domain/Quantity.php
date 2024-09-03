@@ -17,13 +17,17 @@ final readonly class Quantity
 
         return $quantity;
     }
-
-    private function guard(): void {}
-
     public function isEqual(Quantity $otherQuantity): bool
     {
         return $this->value === $otherQuantity->value;
     }
+
+    public static function sum(Quantity $a, Quantity $b): self
+    {
+        return new self($a->value + $b->value);
+    }
+
+    private function guard(): void {}
 
     public function __toString(): string
     {
