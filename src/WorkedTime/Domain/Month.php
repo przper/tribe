@@ -41,7 +41,7 @@ enum Month: string
 
     public function toIndex(): int
     {
-        return match($this) {
+        return match ($this) {
             self::January => 1,
             self::February => 2,
             self::March => 3,
