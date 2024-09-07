@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ProjectRecipeCreatedTest extends WebTestCase
 {
-    public function it_persists_projection(): void
+    public function test_it_persists_projection(): void
     {
         $this->fail();
 
