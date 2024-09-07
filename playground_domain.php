@@ -11,21 +11,52 @@ use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 
-$recipe = Recipe::restore(new RecipeId('test'), Name::fromString("Chili Con Carne"));
+function printRecipe(Recipe $recipe): void
+{
+    echo "Recipe for \"{$recipe->getName()}\"" . "\n";
 
-$ingredient1 = Ingredient::create(Name::fromString("Meat"));
-$ingredient1->setAmount(Amount::create(Quantity::fromFloat(1.2), Unit::fromString("kg")));
-$ingredient2 = Ingredient::create(Name::fromString("Beans"));
-$ingredient2->setAmount(Amount::create(Quantity::fromFloat(1), Unit::fromString("can")));
+    foreach ($recipe->getIngredients()->getAll() as $i => $ingredient) {
+        echo "{$i}: {$ingredient->getName()} - {$ingredient->getAmount()}" . "\n";
+    }
+    echo "\n";
+}
 
 $ingredients = new Ingredients();
-$ingredients->add($ingredient1);
-$ingredients->add($ingredient2);
+$ingredients->add(Ingredient::create(
+    Name::fromString("Meat"),
+    Amount::create(Quantity::fromFloat(1.2), Unit::fromString("kg")),
+));
+$ingredients->add(Ingredient::create(
+    Name::fromString("Beans"),
+    Amount::create(Quantity::fromFloat(1), Unit::fromString("can")),
+));
 
-$recipe->setIngredients($ingredients);
+$recipe = Recipe::restore(
+    new RecipeId('test'),
+    Name::fromString("Chili Con Carne"),
+    $ingredients,
+);
 
-echo "Recipe for \"{$recipe->getName()}\"" . "\n";
+echo "created\n";
+printRecipe($recipe);
 
-foreach ($ingredients->getAll() as $i => $ingredient) {
-    echo "{$i}: {$ingredient->getName()}" . "\n";
-}
+$recipe->changeName(Name::fromString("Spicy Chili con Carne"));
+$recipe->addIngredient(Ingredient::create(
+    Name::fromString("Jalapeno"),
+    Amount::create(Quantity::fromFloat(2), Unit::fromString("pieces")),
+));
+$recipe->addIngredient(Ingredient::create(
+    Name::fromString("Meat"),
+    Amount::create(Quantity::fromFloat(0.5), Unit::fromString("kg")),
+));
+
+echo "added\n";
+printRecipe($recipe);
+
+$recipe->setIngredient(Ingredient::create(
+    Name::fromString("Meat"),
+    Amount::create(Quantity::fromFloat(1.5), Unit::fromString("kg")),
+));
+
+echo "updated\n";
+printRecipe($recipe);

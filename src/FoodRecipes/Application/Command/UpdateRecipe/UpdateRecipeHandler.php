@@ -4,7 +4,6 @@ namespace Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe;
 
 use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
@@ -25,7 +24,11 @@ final class UpdateRecipeHandler
     {
         $recipe = $this->recipeRepository->get(new RecipeId($command->id));
 
-        $ingredients = new Ingredients();
+        $newName = Name::fromString($command->name);
+        if (!$recipe->getName()->isEqual($newName)) {
+            $recipe->changeName($newName);
+        }
+
         foreach ($command->ingredients as $ingredientData) {
             $ingredient = Ingredient::create(
                 Name::fromString($ingredientData['name']),
@@ -34,9 +37,8 @@ final class UpdateRecipeHandler
                     Unit::fromString($ingredientData['unit'])
                 ),
             );
-            $ingredients->add($ingredient);
+            $recipe->setIngredient($ingredient);
         }
-        $recipe->update(Name::fromString($command->name), $ingredients);
 
         $this->recipeRepository->persist($recipe);
         $this->eventDispatcher->dispatch(...$recipe->pullEvents());
