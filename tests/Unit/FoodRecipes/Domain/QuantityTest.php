@@ -5,6 +5,7 @@ namespace Tests\Unit\FoodRecipes\Domain;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Przper\Tribe\FoodRecipes\Domain\NegativeQuantityException;
 use Przper\Tribe\FoodRecipes\Domain\Quantity;
 
 class QuantityTest extends TestCase
@@ -14,6 +15,13 @@ class QuantityTest extends TestCase
         $quantity = Quantity::fromFloat(1.235);
 
         $this->assertEquals(1.235, (string) $quantity);
+    }
+
+    #[Test]
+    public function it_throws_NegativeQuantityException_if_created_from_negative_value(): void
+    {
+        $this->expectException(NegativeQuantityException::class);
+        Quantity::fromFloat(-10);
     }
 
     #[Test]
