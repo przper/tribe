@@ -29,6 +29,31 @@ class IngredientsTest extends TestCase
         $ingredients->add($ingredient);
 
         $this->assertTrue($ingredients->getAll()[0]->isTheSame($ingredient));
+        $this->assertCount(1, $ingredients->getAll());
+
+        $ingredients->add($ingredient);
+
+        $updatedAmount = IngredientMother::new()->cansOfTomatoes(2)->build();
+        $this->assertTrue($ingredients->getAll()[0]->isTheSame($updatedAmount));
+        $this->assertCount(1, $ingredients->getAll());
+    }
+
+    public function test_it_can_set_Ingredients(): void
+    {
+        $ingredients = new Ingredients();
+
+        $ingredientFirstVersion = IngredientMother::new()->cansOfTomatoes()->build();
+
+        $ingredients->set($ingredientFirstVersion);
+
+        $this->assertTrue($ingredients->getAll()[0]->isTheSame($ingredientFirstVersion));
+        $this->assertCount(1, $ingredients->getAll());
+
+        $ingredientSecondVersion = IngredientMother::new()->cansOfTomatoes(1.5)->build();
+        $ingredients->set($ingredientSecondVersion);
+
+        $this->assertTrue($ingredients->getAll()[0]->isTheSame($ingredientSecondVersion));
+        $this->assertCount(1, $ingredients->getAll());
     }
 
     public function test_it_checks_if_contains_Ingredient(): void

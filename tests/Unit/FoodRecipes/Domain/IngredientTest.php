@@ -3,6 +3,9 @@
 namespace Tests\Unit\FoodRecipes\Domain;
 
 use PHPUnit\Framework\TestCase;
+use Przper\Tribe\FoodRecipes\Domain\Amount;
+use Przper\Tribe\FoodRecipes\Domain\Quantity;
+use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Tests\Doubles\MotherObjects\IngredientMother;
 
 class IngredientTest extends TestCase
@@ -25,5 +28,25 @@ class IngredientTest extends TestCase
         $this->assertTrue($ingredient1->isTheSame($ingredient1));
         $this->assertFalse($ingredient1->isTheSame($ingredient2));
         $this->assertTrue($ingredient1->isTheSame($ingredient3));
+    }
+
+    public function test_addAmount(): void
+    {
+        $ingredient = IngredientMother::new()->kilogramsOfMeat()->build();
+        $extraAmount = Amount::create(Quantity::fromFloat(2.0), Unit::fromString('kilogram'));
+
+        $ingredient->addAmount($extraAmount);
+
+        $this->assertSame('3', (string) $ingredient->getAmount()->getQuantity());
+    }
+
+    public function test_setAmount(): void
+    {
+        $ingredient = IngredientMother::new()->kilogramsOfMeat()->build();
+        $newAmount = Amount::create(Quantity::fromFloat(2.0), Unit::fromString('kilogram'));
+
+        $ingredient->setAmount($newAmount);
+
+        $this->assertSame('2', (string) $ingredient->getAmount()->getQuantity());
     }
 }

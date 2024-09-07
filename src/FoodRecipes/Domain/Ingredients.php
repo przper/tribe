@@ -24,6 +24,25 @@ class Ingredients extends Collection
     {
         if (!$this->contains($ingredient)) {
             $this->ingredients[] = $ingredient;
+        } else {
+            foreach ($this->ingredients as $i => $storedIngredient) {
+                if ($storedIngredient->isTheSame($ingredient)) {
+                    $this->ingredients[$i]->addAmount($ingredient->getAmount());
+                }
+            }
+        }
+    }
+
+    public function set(Ingredient $ingredient): void
+    {
+        if (!$this->contains($ingredient)) {
+            $this->ingredients[] = $ingredient;
+        } else {
+            foreach ($this->ingredients as $i => $storedIngredient) {
+                if ($storedIngredient->isTheSame($ingredient)) {
+                    $this->ingredients[$i] = $ingredient;
+                }
+            }
         }
     }
 
