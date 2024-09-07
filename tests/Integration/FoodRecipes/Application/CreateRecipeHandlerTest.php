@@ -47,9 +47,9 @@ class CreateRecipeHandlerTest extends TestCase
 
         [$ingredient1, $ingredient2] = $recipeSaved->getIngredients()->getAll();
         $this->assertSame('Pork', (string) $ingredient1->getName());
-        $this->assertSame('1 [kilogram]', (string) $ingredient1->getAmount());
+        $this->assertSame('1[kilogram]', (string) $ingredient1->getAmount());
         $this->assertSame('Tomatoes', (string) $ingredient2->getName());
-        $this->assertSame('3 [can]', (string) $ingredient2->getAmount());
+        $this->assertSame('3[can]', (string) $ingredient2->getAmount());
 
         $this->assertCount(1, $eventDispatcher->dispatchedEvents);
         $this->assertContains('recipe_created', $eventDispatcher->dispatchedEvents);

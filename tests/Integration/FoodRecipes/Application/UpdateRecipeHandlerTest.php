@@ -56,7 +56,7 @@ class UpdateRecipeHandlerTest extends KernelTestCase
 
         [$ingredient1] = $updatedRecipe->getIngredients()->getAll();
         $this->assertSame('Beans', (string) $ingredient1->getName());
-        $this->assertSame('0.5 [kilogram]', (string) $ingredient1->getAmount());
+        $this->assertSame('0.5[kilogram]', (string) $ingredient1->getAmount());
 
         $this->assertCount(0, $recipe->pullEvents());
         $this->assertCount(1, $this->eventDispatcher->dispatchedEvents);
