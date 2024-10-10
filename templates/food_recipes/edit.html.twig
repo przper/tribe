@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content">
+        <h1>Update "{{ recipe.name }}" Recipe</h1>
+
+        <form method="POST">
+            <div>
+                <h3>Recipe</h3>
+                <div>
+                    <label>
+                        Name
+                        <input name="name" value="{{ recipe.name }}">
+                    </label>
+                </div>
+            </div>
+
+            <div id="#ingredients">
+                <h3>Ingredients</h3>
+                {% for ingredient in recipe.ingredients %}
+                    <div>
+                        <div>#{{ loop.index }}</div>
+                        <div>
+                            <label>
+                                Name
+                                <input name="ingredients[{{ loop.index0 }}][name]" value="{{ ingredient.name }}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Quantity
+                                <input name="ingredients[{{ loop.index0 }}][quantity]" value="{{ ingredient.amount.quantity }}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Unit
+                                <input name="ingredients[{{ loop.index0 }}][unit]" value="{{ ingredient.amount.unit }}">
+                            </label>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div>
+                    <button type="button">Add one more ingredient (soon)</button>
+                </div>
+            </div>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}
