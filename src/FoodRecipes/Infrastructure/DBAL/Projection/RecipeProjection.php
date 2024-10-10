@@ -3,7 +3,7 @@
 namespace Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Projection;
 
 use Doctrine\DBAL\Connection;
-use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection as Projection;
+use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjectionInterface as Projection;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
 #[Autoconfigure(public: true)]

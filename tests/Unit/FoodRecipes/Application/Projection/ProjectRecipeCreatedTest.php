@@ -27,7 +27,7 @@ class ProjectRecipeCreatedTest extends TestCase
 
         $repository = new InMemoryRecipeRepository();
         $repository->persist($recipe);
-        $projection = new InMemoryRecipeProjection();
+        $projection = new InMemoryRecipeProjection;
 
         $projector = new ProjectRecipeCreated($repository, $projection);
 

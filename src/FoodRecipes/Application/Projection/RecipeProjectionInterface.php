@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Projection;
 
-interface RecipeProjection
+interface RecipeProjectionInterface
 {
     /**
      * @param string[] $ingredients

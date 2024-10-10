@@ -13,7 +13,7 @@ class ProjectRecipeCreated implements DomainEventListenerInterface
 {
     public function __construct(
         private readonly RecipeRepositoryInterface $repository,
-        private readonly RecipeProjection $projection,
+        private readonly RecipeProjectionInterface $projection,
     ) {}
 
     public function handle(DomainEvent $event): void

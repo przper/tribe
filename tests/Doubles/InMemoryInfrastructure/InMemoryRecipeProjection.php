@@ -2,7 +2,7 @@
 
 namespace Tests\Doubles\InMemoryInfrastructure;
 
-use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection;
+use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjectionInterface;
 
 /**
  * @phpstan-type Recipe array{
@@ -11,7 +11,7 @@ use Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection;
  *      ingredients: string[],
  *  }
  */
-class InMemoryRecipeProjection implements RecipeProjection
+class InMemoryRecipeProjection implements RecipeProjectionInterface
 {
     /**
      * @var array<string, array<string, string>> $recipeIndexProjection

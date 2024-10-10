@@ -47,7 +47,7 @@ when@test:
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
             class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository
 
-        Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjection:
+        Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjectionInterface:
             class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection
 
         Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
