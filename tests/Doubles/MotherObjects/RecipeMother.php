@@ -26,6 +26,32 @@ class RecipeMother
         return new self();
     }
 
+    public function id(string|RecipeId $id): self
+    {
+        if (is_string($id)) {
+            $id = new RecipeId($id);
+        }
+
+        $this->recipe = Recipe::create(
+            id: $id,
+            name: $this->recipe->getName(),
+            ingredients: $this->recipe->getIngredients()
+        );
+
+        return $this;
+    }
+
+    public function name(string|Name $name): self
+    {
+        if (is_string($name)) {
+            $name = Name::fromString($name);
+        }
+
+        $this->recipe->changeName($name);
+
+        return $this;
+    }
+
     public function build(): Recipe
     {
         $recipe = clone $this->recipe;
