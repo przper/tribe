@@ -59,7 +59,7 @@ class UpdateRecipeHandlerTest extends KernelTestCase
         $this->assertSame('0.5[kilogram]', (string) $ingredient1->getAmount());
 
         $this->assertCount(0, $recipe->pullEvents());
-        $this->assertCount(1, $this->eventDispatcher->dispatchedEvents);
+        $this->assertCount(2, $this->eventDispatcher->dispatchedEvents);
         $this->assertContains('recipe_updated', $this->eventDispatcher->dispatchedEvents);
     }
 }

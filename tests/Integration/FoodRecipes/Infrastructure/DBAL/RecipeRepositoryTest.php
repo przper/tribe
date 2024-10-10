@@ -92,15 +92,25 @@ class RecipeRepositoryTest extends KernelTestCase
 
         [$dbIngredient1, $dbIngredient2] = $dbRecipe->getIngredients()->getAll();
         $this->assertSame('Pork', (string) $dbIngredient1->getName());
-        $this->assertSame('1 [kilogram]', (string) $dbIngredient1->getAmount());
+        $this->assertSame('1[kilogram]', (string) $dbIngredient1->getAmount());
 
         $this->assertSame('Tomatoes', (string) $dbIngredient2->getName());
-        $this->assertSame('3 [can]', (string) $dbIngredient2->getAmount());
+        $this->assertSame('3[can]', (string) $dbIngredient2->getAmount());
     }
 
     #[Test]
     public function it_persists_existing_objects(): void
     {
-        $this->fail();
+        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+
+        $recipe = $this->repository->get($id);
+
+        $recipe->changeName(Name::fromString('Updated name'));
+
+        $this->repository->persist($recipe);
+
+        $recipe = $this->repository->get($id);
+
+        $this->assertEquals('Updated name', $recipe->getName());
     }
 }
