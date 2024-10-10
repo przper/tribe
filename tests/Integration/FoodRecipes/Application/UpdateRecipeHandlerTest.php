@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\FoodRecipes\Application\Command;
+namespace Tests\Integration\FoodRecipes\Application;
 
 use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeCommand;
