@@ -2,6 +2,10 @@
 
 {% block body %}
     <div class="content">
+        <div>
+            <a href="{{ path('recipe_index') }}">Back to index</a>
+            <a href="{{ path('recipe_update', { id: recipe.recipe_id }) }}">Edit</a>
+        </div>
         <h1>{{ recipe.name }}</h1>
 
         <div>
