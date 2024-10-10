@@ -10,6 +10,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeCreated;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
+use Tests\Doubles\MotherObjects\IngredientMother;
 use Tests\Doubles\MotherObjects\RecipeMother;
 
 class ProjectRecipeCreatedTest extends TestCase
@@ -20,6 +21,8 @@ class ProjectRecipeCreatedTest extends TestCase
         $recipe = RecipeMother::new()
             ->id($recipeId)
             ->name('Chilli con Carne')
+            ->addIngredient(IngredientMother::new()->kilogramsOfMeat(1.5)->build())
+            ->addIngredient(IngredientMother::new()->cansOfTomatoes(3.0)->build())
             ->build();
 
         $repository = new InMemoryRecipeRepository();
@@ -27,7 +30,6 @@ class ProjectRecipeCreatedTest extends TestCase
         $projection = new InMemoryRecipeProjection();
 
         $projector = new ProjectRecipeCreated($repository, $projection);
-
 
         $event = RecipeCreated::create($recipeId);
 
@@ -48,7 +50,7 @@ class ProjectRecipeCreatedTest extends TestCase
         $this->assertSame('Chilli con Carne', $detailProjection['name']);
         $this->assertArrayHasKey('ingredients', $detailProjection);
         $this->assertCount(2, $detailProjection['ingredients']);
-        $this->assertSame('Pork: 1 kilogram', $detailProjection['ingredients'][0]);
+        $this->assertSame('Meat: 1.5 kilogram', $detailProjection['ingredients'][0]);
         $this->assertSame('Tomatoes: 3 can', $detailProjection['ingredients'][1]);
     }
 }
