@@ -14,10 +14,16 @@ class RecipeProjection implements Projection
     ) {}
 
     public function persistRecipe(
-        string $recipeId,
-        string $recipeName,
+        string $id,
+        string $name,
         array $ingredients,
     ): void {
+        $this->handleIndexProjection($id, $name);
+        $this->handleDetailProjection($id, $name, $ingredients);
+    }
+
+    private function handleIndexProjection(string $id, string $name): void
+    {
         $sql = <<<SQL
                 INSERT INTO `projection_recipe_index`
                     (`recipe_id`, `name`)
@@ -26,10 +32,16 @@ class RecipeProjection implements Projection
                 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);    
             SQL;
         $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $recipeId);
-        $statement->bindValue(2, $recipeName);
+        $statement->bindValue(1, $id);
+        $statement->bindValue(2, $name);
         $statement->executeQuery();
+    }
 
+    /**
+     * @param string[] $ingredients
+     */
+    private function handleDetailProjection(string $id, string $name, array $ingredients): void
+    {
         $sql = <<<SQL
                 INSERT INTO `projection_recipe_detail`
                     (`recipe_id`, `name`, `ingredients`)
@@ -40,8 +52,8 @@ class RecipeProjection implements Projection
                     `ingredients` = VALUES(`ingredients`)
             SQL;
         $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $recipeId);
-        $statement->bindValue(2, $recipeName);
+        $statement->bindValue(1, $id);
+        $statement->bindValue(2, $name);
         $statement->bindValue(3, json_encode($ingredients));
         $statement->executeQuery();
     }
