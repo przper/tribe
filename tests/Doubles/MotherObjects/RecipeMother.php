@@ -2,6 +2,7 @@
 
 namespace Tests\Doubles\MotherObjects;
 
+use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
@@ -49,6 +50,12 @@ class RecipeMother
 
         $this->recipe->changeName($name);
 
+        return $this;
+    }
+
+    public function addIngredient(Ingredient $ingredient): self
+    {
+        $this->recipe->addIngredient($ingredient);
         return $this;
     }
 
