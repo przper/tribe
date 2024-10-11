@@ -75,17 +75,17 @@ class RecipeProjectionTest extends KernelTestCase
     public function it_updates_existing_detail_projection(): void
     {
         $this->connection->executeStatement(<<<SQL
-            INSERT INTO tribe.projection_recipe_detail
-                (id, recipe_id, name, ingredients)
-            VALUES
-                (
-                    'd2801565-87b2-11ef-a5f7-0242ac140002',
-                    '0c53c94a-d821-11ee-8fbc-0242ac190003',
-                    'RecipeProjector Detail Projection test',
-                    '["Tomato: 1 can"]'
-                )
-            ;
-        SQL);
+                INSERT INTO tribe.projection_recipe_detail
+                    (id, recipe_id, name, ingredients)
+                VALUES
+                    (
+                        'd2801565-87b2-11ef-a5f7-0242ac140002',
+                        '0c53c94a-d821-11ee-8fbc-0242ac190003',
+                        'RecipeProjector Detail Projection test',
+                        '["Tomato: 1 can"]'
+                    )
+                ;
+            SQL);
 
         $projectionsCount = $this->connection->executeQuery(
             "SELECT COUNT(DISTINCT(id)) FROM projection_recipe_detail WHERE recipe_id = '0c53c94a-d821-11ee-8fbc-0242ac190003'"
@@ -143,16 +143,16 @@ class RecipeProjectionTest extends KernelTestCase
     public function it_updates_existing_index_projection(): void
     {
         $this->connection->executeStatement(<<<SQL
-            INSERT INTO tribe.projection_recipe_index
-                (id, recipe_id, name)
-            VALUES
-                (
-                    'd2801565-87b2-11ef-a5f7-0242ac140002',
-                    '0c53c94a-d821-11ee-8fbc-0242ac190003',
-                    'RecipeProjector Detail Projection test'
-                )
-            ;
-        SQL);
+                INSERT INTO tribe.projection_recipe_index
+                    (id, recipe_id, name)
+                VALUES
+                    (
+                        'd2801565-87b2-11ef-a5f7-0242ac140002',
+                        '0c53c94a-d821-11ee-8fbc-0242ac190003',
+                        'RecipeProjector Detail Projection test'
+                    )
+                ;
+            SQL);
 
         $projectionsCount = $this->connection->executeQuery(
             "SELECT COUNT(DISTINCT(id)) FROM projection_recipe_index WHERE recipe_id = '0c53c94a-d821-11ee-8fbc-0242ac190003'"

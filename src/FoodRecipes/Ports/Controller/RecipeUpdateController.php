@@ -16,8 +16,7 @@ class RecipeUpdateController extends AbstractController
     public function __construct(
         private readonly UpdateRecipeHandler $updateRecipeHandler,
         private readonly RecipeRepositoryInterface $recipeRepository,
-    ) {
-    }
+    ) {}
 
     #[Route('/recipe/{id}/update', name: 'recipe_update', methods: ['GET', 'POST'])]
     public function __invoke(string $id, Request $request): Response

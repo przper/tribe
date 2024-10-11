@@ -55,7 +55,7 @@ class Ingredients extends Collection
         }
 
         foreach ($this->ingredients as $i => $storedIngredient) {
-            if($storedIngredient->isTheSame($ingredient)) {
+            if ($storedIngredient->isTheSame($ingredient)) {
                 unset($this->ingredients[$i]);
             }
         }
