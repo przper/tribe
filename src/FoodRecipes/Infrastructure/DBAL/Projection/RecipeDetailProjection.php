@@ -56,10 +56,10 @@ final class RecipeDetailProjection implements RecipeDetailProjectionInterface
     public function changeRecipeIngredients(string $recipeId, array $ingredients): void
     {
         $sql = <<<SQL
-            UPDATE `projection_recipe_detail`
-            SET `ingredients` = ?
-            WHERE `recipe_id` = ?
-        SQL;
+                UPDATE `projection_recipe_detail`
+                SET `ingredients` = ?
+                WHERE `recipe_id` = ?
+            SQL;
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, json_encode($ingredients));
         $statement->bindValue(2, $recipeId);
