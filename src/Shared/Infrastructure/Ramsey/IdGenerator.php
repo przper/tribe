@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\Shared\Infrastructure\Ramsey;
 
-use Przper\Tribe\Shared\Application\IdGeneratorInterface;
+use Przper\Tribe\Shared\Application\Service\IdGeneratorInterface;
 use Przper\Tribe\Shared\Domain\Id;
 use Ramsey\Uuid\Uuid;
 

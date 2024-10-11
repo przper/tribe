@@ -11,7 +11,7 @@ use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
-use Przper\Tribe\Shared\Application\IdGeneratorInterface;
+use Przper\Tribe\Shared\Application\Service\IdGeneratorInterface;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 
 final class CreateRecipeHandler

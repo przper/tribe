@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\Shared\Application;
+namespace Przper\Tribe\Shared\Application\Service;
 
 use Przper\Tribe\Shared\Domain\Id;
 
