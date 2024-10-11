@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\FoodRecipes\Ports\Controller;
 
-use Przper\Tribe\FoodRecipes\Application\Query\GetRecipe;
+use Przper\Tribe\FoodRecipes\Application\Query\GetRecipeDetail;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class RecipeDetailController extends AbstractController
 {
     public function __construct(
-        private readonly GetRecipe $getRecipeQuery,
+        private readonly GetRecipeDetail $getRecipeQuery,
     ) {}
 
     #[Route('/recipe/{id}', name: 'recipe_detail')]

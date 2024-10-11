@@ -4,16 +4,14 @@ namespace Tests\Integration\FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Test;
-use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
-use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeDetail;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
-use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Query\GetRecipe;
+use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Query\GetRecipeDetail;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class GetRecipeTest extends KernelTestCase
+class GetRecipeDetailTest extends KernelTestCase
 {
-    private GetRecipe $query;
+    private GetRecipeDetail $query;
     private Connection $connection;
 
     protected function setUp(): void
@@ -21,7 +19,7 @@ class GetRecipeTest extends KernelTestCase
         self::bootKernel();
         $container = self::getContainer();
 
-        $this->query = $container->get(GetRecipe::class);
+        $this->query = $container->get(GetRecipeDetail::class);
         $this->connection = $container->get(Connection::class);
 
         $this->connection->executeQuery(<<<SQL
