@@ -48,7 +48,7 @@ final class Recipe extends AggregateRoot
     public function changeName(Name $name): void
     {
         $this->name = $name;
-        $this->raise(RecipeUpdated::create($this->id));
+        $this->raise(RecipeNameChanged::create($this->id));
     }
 
     /**
@@ -57,7 +57,7 @@ final class Recipe extends AggregateRoot
     public function addIngredient(Ingredient $ingredient): void
     {
         $this->ingredients->add($ingredient);
-        $this->raise(RecipeUpdated::create($this->id));
+        $this->raise(RecipeIngredientsChanged::create($this->id));
     }
 
     /**
@@ -66,12 +66,12 @@ final class Recipe extends AggregateRoot
     public function setIngredient(Ingredient $ingredient): void
     {
         $this->ingredients->set($ingredient);
-        $this->raise(RecipeUpdated::create($this->id));
+        $this->raise(RecipeIngredientsChanged::create($this->id));
     }
 
     public function removeIngredient(Ingredient $ingredient): void
     {
         $this->ingredients->remove($ingredient);
-        $this->raise(RecipeUpdated::create($this->id));
+        $this->raise(RecipeIngredientsChanged::create($this->id));
     }
 }

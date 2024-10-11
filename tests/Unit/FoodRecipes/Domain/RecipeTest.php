@@ -12,7 +12,8 @@ use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeCreated;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
-use Przper\Tribe\FoodRecipes\Domain\RecipeUpdated;
+use Przper\Tribe\FoodRecipes\Domain\RecipeIngredientsChanged;
+use Przper\Tribe\FoodRecipes\Domain\RecipeNameChanged;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Tests\Doubles\MotherObjects\IngredientMother;
 
@@ -76,7 +77,7 @@ class RecipeTest extends TestCase
 
         $this->assertSame('Spicy Chilli con Carne', (string) $recipe->getName());
         $this->assertCount(1, $events);
-        $this->assertInstanceOf(RecipeUpdated::class, $events[0]);
+        $this->assertInstanceOf(RecipeNameChanged::class, $events[0]);
         $this->assertEquals($id, $events[0]->aggregateId);
     }
 
@@ -96,7 +97,7 @@ class RecipeTest extends TestCase
 
         $this->assertCount(1, $recipe->getIngredients()->getAll());
         $this->assertCount(1, $events);
-        $this->assertInstanceOf(RecipeUpdated::class, $events[0]);
+        $this->assertInstanceOf(RecipeIngredientsChanged::class, $events[0]);
         $this->assertEquals($id, $events[0]->aggregateId);
     }
 
@@ -116,7 +117,7 @@ class RecipeTest extends TestCase
 
         $this->assertCount(1, $recipe->getIngredients()->getAll());
         $this->assertCount(1, $events);
-        $this->assertInstanceOf(RecipeUpdated::class, $events[0]);
+        $this->assertInstanceOf(RecipeIngredientsChanged::class, $events[0]);
         $this->assertEquals($id, $events[0]->aggregateId);
     }
 
