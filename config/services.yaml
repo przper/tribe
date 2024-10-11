@@ -38,8 +38,11 @@ when@test:
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
             class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository
 
-        Przper\Tribe\FoodRecipes\Application\Projection\RecipeProjectionInterface:
-            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeProjection
+        Przper\Tribe\FoodRecipes\Application\Projection\RecipeDetailProjectionInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeDetailProjection
+
+        Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeIndexProjection
 
         Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
             class: Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher

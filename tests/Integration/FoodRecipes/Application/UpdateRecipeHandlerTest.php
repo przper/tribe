@@ -60,6 +60,7 @@ class UpdateRecipeHandlerTest extends KernelTestCase
 
         $this->assertCount(0, $recipe->pullEvents());
         $this->assertCount(2, $this->eventDispatcher->dispatchedEvents);
-        $this->assertContains('recipe_updated', $this->eventDispatcher->dispatchedEvents);
+        $this->assertContains('recipe_name_changed', $this->eventDispatcher->dispatchedEvents);
+        $this->assertContains('recipe_ingredients_changed', $this->eventDispatcher->dispatchedEvents);
     }
 }
