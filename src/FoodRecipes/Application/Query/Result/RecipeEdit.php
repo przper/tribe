@@ -11,6 +11,5 @@ final readonly class RecipeEdit
         public string $id,
         public string $name,
         public array $ingredients,
-    ) {
-    }
+    ) {}
 }

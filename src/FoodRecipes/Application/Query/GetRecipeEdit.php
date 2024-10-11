@@ -13,8 +13,7 @@ final readonly class GetRecipeEdit
 {
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository,
-    ) {
-    }
+    ) {}
 
     public function execute(RecipeId $id): ?RecipeEdit
     {
