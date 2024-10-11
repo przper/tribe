@@ -29,6 +29,10 @@ final class UpdateRecipeHandler
             $recipe->changeName($newName);
         }
 
+        foreach ($recipe->getIngredients() as $ingredient) {
+            $recipe->removeIngredient($ingredient);
+        }
+
         foreach ($command->ingredients as $ingredientData) {
             $ingredient = Ingredient::create(
                 Name::fromString($ingredientData['name']),
