@@ -24,7 +24,9 @@ final class Version20240714202346 extends AbstractMigration
                     `ingredients` JSON DEFAULT (JSON_ARRAY()),
                     CONSTRAINT `fk_projection_recipe_detail_recipe`
                         FOREIGN KEY (recipe_id) REFERENCES recipe (id)
-                        ON DELETE CASCADE
+                        ON DELETE CASCADE,
+                    CONSTRAINT `projection_recipe_detail_recipe_id_index`
+                        UNIQUE (recipe_id)
                 );
             SQL);
     }

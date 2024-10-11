@@ -23,7 +23,9 @@ final class Version20240712213419 extends AbstractMigration
                     `name`  VARCHAR(255) NOT NULL,
                     CONSTRAINT `fk_projection_recipe_index_recipe`
                         FOREIGN KEY (recipe_id) REFERENCES recipe (id)
-                        ON DELETE CASCADE
+                        ON DELETE CASCADE,
+                    CONSTRAINT `projection_recipe_index_recipe_id_index`
+                        UNIQUE (recipe_id)
                 );
             SQL);
     }
