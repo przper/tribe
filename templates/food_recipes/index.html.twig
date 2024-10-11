@@ -9,10 +9,10 @@
         <div>
             <ol>
                 {% for recipe in recipes %}
-                        <li>
-                            {{ recipe.name }}
-                            <a href="{{ path('recipe_detail', {id: recipe.recipe_id}) }}">Show</a>
-                        </li>
+                    <li>
+                        {{ recipe.name }}
+                        <a href="{{ path('recipe_detail', {id: recipe.recipe_id}) }}">Show</a>
+                    </li>
                 {% else %}
                     <div>List is empty :( Add something!</div>
                 {% endfor %}
