@@ -119,4 +119,21 @@ class RecipeTest extends TestCase
         $this->assertInstanceOf(RecipeUpdated::class, $events[0]);
         $this->assertEquals($id, $events[0]->aggregateId);
     }
+
+    #[Test]
+    public function it_can_remove_an_Ingredient(): void
+    {
+        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $name = Name::fromString('Chili con Carne');
+        $ingredient = IngredientMother::new()->kilogramsOfMeat()->build();
+        $ingredients = new Ingredients();
+        $ingredients->add($ingredient);
+
+        $recipe = Recipe::restore($id, $name, $ingredients);
+        $this->assertCount(1, $recipe->getIngredients()->getAll());
+
+        $recipe->removeIngredient($ingredient);
+
+        $this->assertCount(0, $recipe->getIngredients()->getAll());
+    }
 }

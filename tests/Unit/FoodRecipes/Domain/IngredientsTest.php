@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\FoodRecipes\Domain;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Tests\Doubles\MotherObjects\IngredientMother;
@@ -67,5 +68,24 @@ class IngredientsTest extends TestCase
         $ingredients->add($ingredient);
 
         $this->assertTrue($ingredients->contains($ingredient));
+    }
+
+    #[Test]
+    public function it_can_remove_Ingredient(): void
+    {
+        $ingredients = new Ingredients();
+
+        $ingredient1 = IngredientMother::new()->cansOfTomatoes()->build();
+        $ingredient2 = IngredientMother::new()->kilogramsOfMeat()->build();
+        $ingredients->add($ingredient1);
+        $ingredients->add($ingredient2);
+
+        $this->assertTrue($ingredients->contains($ingredient1));
+        $this->assertTrue($ingredients->contains($ingredient2));
+
+        $ingredients->remove($ingredient1);
+
+        $this->assertFalse($ingredients->contains($ingredient1));
+        $this->assertTrue($ingredients->contains($ingredient2));
     }
 }

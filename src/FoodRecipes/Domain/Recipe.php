@@ -68,4 +68,10 @@ final class Recipe extends AggregateRoot
         $this->ingredients->set($ingredient);
         $this->raise(RecipeUpdated::create($this->id));
     }
+
+    public function removeIngredient(Ingredient $ingredient): void
+    {
+        $this->ingredients->remove($ingredient);
+        $this->raise(RecipeUpdated::create($this->id));
+    }
 }
