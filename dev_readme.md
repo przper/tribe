@@ -1,7 +1,17 @@
+# Requirenments
+- php 8.3
+- docker
+- This repository uses a [local docker proxy](https://github.com/nicwortel/local-development-proxy) to allow to have multiple docker containers running at the same time
+- make
+- Polcode's LINK Api Key's to run WorkedTime module
+
 # Set up
 ## Initial run
 1. Run `make` to build project
 2. Run `vendor/bin/doctrine-migrations migrate` to migrate db
+
+# Usage
+1. Go to [tribe.localhost](http://tribe.localhost) in browser
 
 ## Refresh project
 1. Run `vendor/bin/doctrine-migrations migrate first` to reset DB (to state before first migration)

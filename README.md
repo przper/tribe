@@ -4,6 +4,8 @@
 
 [Miro Event Storming](https://miro.com/app/board/uXjVNEcy_3I=/)
 
+## Goal
+
 ### Lista zakupów
 Cel: Lista zakupów współdzielona między użytkownikami. 
 Wymagania:
@@ -20,3 +22,6 @@ Wymagania:
 - W3: Wyszukiwanie po tagach (np. wołowina, gofry, obiad, deser, pomidory, itp.)
 - W4: Eksport do listy zakupów i udostępnienie innym przez email oraz link do strony
 - W5: Użytkownik może dodawać notatki
+
+## Developer's documentation
+See [dev_readme.md](dev_readme.md)
