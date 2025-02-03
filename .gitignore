@@ -2,6 +2,8 @@
 
 .php-cs-fixer.cache
 
+playground_*.php
+
 docker-compose.override.yaml
 ###> phpstan/phpstan ###
 phpstan.neon
