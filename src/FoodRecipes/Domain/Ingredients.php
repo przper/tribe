@@ -9,7 +9,7 @@ use Przper\Tribe\Shared\Domain\Collection;
 /**
  * @extends Collection<Ingredient>
  */
-class Ingredients extends Collection
+final class Ingredients extends Collection
 {
     /** @var Ingredient[] */
     private array $ingredients = [];

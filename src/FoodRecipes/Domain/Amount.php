@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\FoodRecipes\Domain;
 
-class Amount
+final class Amount
 {
     private function __construct(
         private Quantity $quantity,

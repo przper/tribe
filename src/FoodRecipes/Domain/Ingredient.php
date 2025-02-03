@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Przper\Tribe\FoodRecipes\Domain;
 
-class Ingredient
+final class Ingredient
 {
     private function __construct(
         private readonly Name $name,
