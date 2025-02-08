@@ -55,7 +55,7 @@ class GetRecipeDetailTest extends KernelTestCase
     #[Test]
     public function it_retrieves_recipe_by_id(): void
     {
-        $result = $this->query->execute(new RecipeId('e3b8ee06-7377-451c-88c1-fde290a61ac4'));
+        $result = $this->query->execute('e3b8ee06-7377-451c-88c1-fde290a61ac4');
 
         $this->assertInstanceOf(RecipeDetail::class, $result);
         $this->assertSame('e3b8ee06-7377-451c-88c1-fde290a61ac4', $result->recipe_id);

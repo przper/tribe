@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipeEdit;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeEdit;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
@@ -39,7 +38,7 @@ class GetRecipeEditTest extends KernelTestCase
     #[Test]
     public function it_retrieves_recipe_by_id(): void
     {
-        $result = $this->query->execute(new RecipeId('e3b8ee06-7377-451c-88c1-fde290a61ac4'));
+        $result = $this->query->execute('e3b8ee06-7377-451c-88c1-fde290a61ac4');
 
         $this->assertInstanceOf(RecipeEdit::class, $result);
         $this->assertSame('e3b8ee06-7377-451c-88c1-fde290a61ac4', $result->id);

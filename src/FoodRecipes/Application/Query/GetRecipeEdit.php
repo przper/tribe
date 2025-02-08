@@ -15,9 +15,9 @@ final readonly class GetRecipeEdit
         private RecipeRepositoryInterface $recipeRepository,
     ) {}
 
-    public function execute(RecipeId $id): ?RecipeEdit
+    public function execute(string $recipeId): ?RecipeEdit
     {
-        $recipe = $this->recipeRepository->get($id);
+        $recipe = $this->recipeRepository->get(new RecipeId($recipeId));
 
         if (!$recipe instanceof DomainRecipe) {
             return null;

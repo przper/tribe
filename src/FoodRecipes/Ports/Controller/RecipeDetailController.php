@@ -3,7 +3,6 @@
 namespace Przper\Tribe\FoodRecipes\Ports\Controller;
 
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipeDetail;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,7 +16,7 @@ class RecipeDetailController extends AbstractController
     #[Route('/recipe/{id}', name: 'recipe_detail')]
     public function __invoke(string $id): Response
     {
-        $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
+        $recipe = $this->getRecipeQuery->execute($id);
 
         return $this->render('food_recipes/detail.html.twig', [
             'recipe' => $recipe,

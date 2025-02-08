@@ -5,7 +5,6 @@ namespace Przper\Tribe\FoodRecipes\Ports\Controller;
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeHandler;
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipeEdit;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +20,7 @@ class RecipeUpdateController extends AbstractController
     #[Route('/recipe/{id}/update', name: 'recipe_update', methods: ['GET', 'POST'])]
     public function __invoke(string $id, Request $request): Response
     {
-        $recipe = $this->getRecipeQuery->execute(new RecipeId($id));
+        $recipe = $this->getRecipeQuery->execute($id);
 
         if ($request->getMethod() === 'POST') {
             call_user_func($this->updateRecipeHandler, new UpdateRecipeCommand(
