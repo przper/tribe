@@ -10,9 +10,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
-#[Autoconfigure(public: true)]
 final class UpdateRecipeHandler
 {
     public function __construct(

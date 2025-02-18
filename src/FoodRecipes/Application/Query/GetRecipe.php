@@ -3,19 +3,18 @@
 namespace Przper\Tribe\FoodRecipes\Application\Query;
 
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
-use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeEdit;
-use Przper\Tribe\FoodRecipes\Application\Query\Result\RecipeEdit as ApplicationRecipe;
+use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\Recipe as DomainRecipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 
-final readonly class GetRecipeEdit
+final readonly class GetRecipe
 {
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository,
     ) {}
 
-    public function execute(string $recipeId): ?RecipeEdit
+    public function execute(string $recipeId): ?Recipe
     {
         $recipe = $this->recipeRepository->get(new RecipeId($recipeId));
 
@@ -35,7 +34,7 @@ final readonly class GetRecipeEdit
             );
         }
 
-        return new ApplicationRecipe(
+        return new Recipe(
             id: (string) $recipe->getId(),
             name: (string) $recipe->getName(),
             ingredients: $applicationIngredients,

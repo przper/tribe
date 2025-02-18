@@ -2,7 +2,7 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Query\Result;
 
-final readonly class RecipeEdit
+final readonly class Recipe
 {
     /**
      * @param Ingredient[] $ingredients

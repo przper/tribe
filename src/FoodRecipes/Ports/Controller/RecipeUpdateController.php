@@ -4,7 +4,7 @@ namespace Przper\Tribe\FoodRecipes\Ports\Controller;
 
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe\UpdateRecipeHandler;
-use Przper\Tribe\FoodRecipes\Application\Query\GetRecipeEdit;
+use Przper\Tribe\FoodRecipes\Application\Query\GetRecipe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ class RecipeUpdateController extends AbstractController
 {
     public function __construct(
         private readonly UpdateRecipeHandler $updateRecipeHandler,
-        private readonly GetRecipeEdit $getRecipeQuery,
+        private readonly GetRecipe $getRecipeQuery,
     ) {}
 
     #[Route('/recipe/{id}/update', name: 'recipe_update', methods: ['GET', 'POST'])]
