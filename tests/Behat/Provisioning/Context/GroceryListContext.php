@@ -6,6 +6,11 @@ use Behat\Step\Then;
 use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;
+use Przper\Tribe\Provisioning\Domain\GroceryList;
+use Przper\Tribe\Provisioning\Domain\GroceryListItem;
+use Przper\Tribe\Provisioning\Domain\ItemName;
+use Przper\Tribe\Provisioning\Domain\Quantity;
+use Przper\Tribe\Provisioning\Domain\Unit;
 
 class GroceryListContext implements Context
 {
