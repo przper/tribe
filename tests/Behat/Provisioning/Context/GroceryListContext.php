@@ -2,6 +2,7 @@
 
 namespace Tests\Behat\Provisioning\Context;
 
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Behat\Behat\Context\Context;
@@ -43,5 +44,25 @@ class GroceryListContext implements Context
         Assert::assertEquals($itemName, $item->getItemName());
         Assert::assertEquals(new Quantity($quantity), $item->getQuantity());
         Assert::assertEquals(new Unit($unit), $item->getUnit());
+    }
+
+    #[Given('there is :itemName with amount of :quantity :unit on the grocery list')]
+    public function thereIsWithAmountOfKilogramOnTheGroceryList(string $itemName, float $quantity, string $unit): void
+    {
+        $this->iAddTheToTheGroceryList($quantity, $unit, $itemName);
+    }
+
+    #[When('I want to remove :itemName item from the grocery list')]
+    public function iWantToRemoveItemFromTheGroceryList(string $itemName): void
+    {
+        $this->groceryList->removeItemByName(new ItemName($itemName));
+    }
+
+    #[Then('I should not see :itemName on the grocery list')]
+    public function iShouldNotSeeOnTheGroceryList(string $itemName): void
+    {
+        $item = $this->groceryList->getItemByName(new ItemName($itemName));
+
+        Assert::assertNull($item);
     }
 }

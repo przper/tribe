@@ -34,4 +34,9 @@ final class GroceryList extends AggregateRoot
 
         return null;
     }
+
+    public function removeItemByName(ItemName $itemName): void
+    {
+        $this->items->remove($itemName);
+    }
 }

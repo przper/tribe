@@ -20,6 +20,15 @@ class GroceryListItems extends Collection
         $this->items[] = $item;
     }
 
+    public function remove(ItemName $itemName)
+    {
+        foreach ($this->items as $i => $item) {
+            if ($item->getItemName()->isEqualTo($itemName)) {
+                unset($this->items[$i]);
+            }
+        }
+    }
+
     protected function getItems(): array
     {
         return $this->items;
