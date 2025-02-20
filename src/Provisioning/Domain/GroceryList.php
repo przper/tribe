@@ -24,7 +24,7 @@ final class GroceryList extends AggregateRoot
         $this->items->add($item);
     }
 
-    public function getItemByName(string $name): ?GroceryListItem
+    public function getItemByName(ItemName $name): ?GroceryListItem
     {
         foreach ($this->items as $item) {
             if ($item->getItemName()->isEqualTo($name)) {

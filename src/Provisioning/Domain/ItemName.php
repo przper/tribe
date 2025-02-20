@@ -8,12 +8,8 @@ final readonly class ItemName
         public string $value,
     ) {}
 
-    public function isEqualTo(string|ItemName $name): bool
+    public function isEqualTo(ItemName $name): bool
     {
-        if ($name instanceof ItemName) {
-            $name = $name->value;
-        }
-
-        return $name === $this->value;
+        return $name->value === $this->value;
     }
 }

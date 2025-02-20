@@ -36,10 +36,11 @@ class GroceryListContext implements Context
     #[Then('I should see that item :itemName is listed with :quantity :unit amount in the grocery list')]
     public function iShouldSeeThatItemIsListedWithAmountInTheGroceryList(string $itemName, float $quantity, string $unit): void
     {
+        $itemName = new ItemName($itemName);
         $item = $this->groceryList->getItemByName($itemName);
 
         Assert::assertInstanceOf(GroceryListItem::class, $item);
-        Assert::assertEquals(new ItemName($itemName), $item->getItemName());
+        Assert::assertEquals($itemName, $item->getItemName());
         Assert::assertEquals(new Quantity($quantity), $item->getQuantity());
         Assert::assertEquals(new Unit($unit), $item->getUnit());
     }
