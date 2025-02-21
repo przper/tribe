@@ -26,17 +26,22 @@ final class GroceryList extends AggregateRoot
 
     public function getItemByName(ItemName $name): ?GroceryListItem
     {
-        foreach ($this->items as $item) {
-            if ($item->getItemName()->isEqualTo($name)) {
-                return $item;
-            }
-        }
-
-        return null;
+        return $this->items->getItem($name);
     }
 
+    /**
+     * @throws ItemNotFoundOnGroceryListException
+     */
     public function removeItemByName(ItemName $itemName): void
     {
         $this->items->remove($itemName);
+    }
+
+    /**
+     * @throws ItemNotFoundOnGroceryListException
+     */
+    public function pickUp(ItemName $itemName): void
+    {
+        $this->items->pickUp($itemName);
     }
 }

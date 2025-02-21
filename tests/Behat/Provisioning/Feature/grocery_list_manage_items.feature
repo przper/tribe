@@ -1,4 +1,4 @@
-Feature: Grocery list
+Feature: Manage items on Grocery List
   As a tribesman
   In order to buy products
   I need to be able to put needed products on the grocery list

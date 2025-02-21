@@ -8,11 +8,12 @@ class GroceryListItem
         private ItemName $itemName,
         private Quantity $quantity,
         private Unit $unit,
+        private GroceryListItemStatus $status,
     ) {}
 
     public static function create(ItemName $itemName, Quantity $quantity, Unit $unit): self
     {
-        return new self($itemName, $quantity, $unit);
+        return new self($itemName, $quantity, $unit, GroceryListItemStatus::ToBuy);
     }
 
     public function getItemName(): ItemName
@@ -28,5 +29,25 @@ class GroceryListItem
     public function getUnit(): Unit
     {
         return $this->unit;
+    }
+
+    public function getStatus(): GroceryListItemStatus
+    {
+        return $this->status;
+    }
+
+    public function pickUp(): void
+    {
+        $this->status = GroceryListItemStatus::PickedUp;
+    }
+
+    public function isPickedUp(): bool
+    {
+        return $this->status === GroceryListItemStatus::PickedUp;
+    }
+
+    public function isToBuy(): bool
+    {
+        return $this->status === GroceryListItemStatus::ToBuy;
     }
 }

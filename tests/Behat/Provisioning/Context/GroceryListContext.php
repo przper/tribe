@@ -65,4 +65,22 @@ class GroceryListContext implements Context
 
         Assert::assertNull($item);
     }
+
+    #[When('I mark :itemName as PickedUp')]
+    public function iMarkAsPickedUp(string $itemName): void
+    {
+        $this->groceryList->pickUp(new ItemName($itemName));
+    }
+
+    #[Then('I should see :itemName as PickedUp')]
+    public function iShouldSeeAsGathered(string $itemName): void
+    {
+        Assert::assertTrue($this->groceryList->getItemByName(new ItemName($itemName))?->isPickedUp());
+    }
+
+    #[Then('I should see :itemName as ToBuy')]
+    public function iShouldSeeAsToBuy(string $itemName): void
+    {
+        Assert::assertTrue($this->groceryList->getItemByName(new ItemName($itemName))?->isToBuy());
+    }
 }

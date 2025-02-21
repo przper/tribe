@@ -20,13 +20,45 @@ class GroceryListItems extends Collection
         $this->items[] = $item;
     }
 
-    public function remove(ItemName $itemName)
+    /**
+     * @throws ItemNotFoundOnGroceryListException
+     */
+    public function remove(ItemName $itemName): void
     {
         foreach ($this->items as $i => $item) {
             if ($item->getItemName()->isEqualTo($itemName)) {
                 unset($this->items[$i]);
+                return;
             }
         }
+
+        throw new ItemNotFoundOnGroceryListException();
+    }
+
+    public function getItem(ItemName $itemName): ?GroceryListItem
+    {
+        foreach ($this->items as $item) {
+            if ($item->getItemName()->isEqualTo($itemName)) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @throws ItemNotFoundOnGroceryListException
+     */
+    public function pickUp(ItemName $itemName): void
+    {
+        foreach ($this->items as $item) {
+            if ($item->getItemName()->isEqualTo($itemName)) {
+                $item->pickUp();
+                return;
+            }
+        }
+
+        throw new ItemNotFoundOnGroceryListException();
     }
 
     protected function getItems(): array
