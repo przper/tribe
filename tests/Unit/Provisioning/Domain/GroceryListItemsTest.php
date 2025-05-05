@@ -17,11 +17,12 @@ class GroceryListItemsTest extends TestCase
     public function getByItemName(): void
     {
         $sut = GroceryListItems::create();
-        $sut->add(GroceryListItemMother::new()
-            ->name('Meat')
-            ->quantity(1.0)
-            ->unit('kilogram')
-            ->build()
+        $sut->add(
+            GroceryListItemMother::new()
+                ->name('Meat')
+                ->quantity(1.0)
+                ->unit('kilogram')
+                ->build()
         );
 
         $this->assertInstanceOf(GroceryListItem::class, $sut->getItem(Name::fromString('Meat')));

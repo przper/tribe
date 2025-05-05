@@ -8,9 +8,7 @@ use Przper\Tribe\Shared\Domain\Name;
 /** @extends Collection<GroceryListItem> */
 class GroceryListItems extends Collection
 {
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /** @var GroceryListItem[] $items */
     private array $items = [];

@@ -59,7 +59,7 @@ class GroceryListItem
     public function add(GroceryListItem $item): GroceryListItem
     {
         if (!$this->is($item)) {
-            throw new NotMatchingItemsException;
+            throw new NotMatchingItemsException();
         }
 
         $this->amount->add($item->amount);
