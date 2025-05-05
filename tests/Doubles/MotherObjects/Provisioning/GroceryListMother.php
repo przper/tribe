@@ -37,11 +37,11 @@ class GroceryListMother
     public function build(): GroceryList
     {
         $groceryList = GroceryList::create($this->id);
-        
+
         foreach ($this->items as $item) {
             $groceryList->add($item);
         }
-        
+
         return $groceryList;
     }
 }

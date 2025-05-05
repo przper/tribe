@@ -51,12 +51,12 @@ class GetGroceryListTest extends KernelTestCase
 
         $this->assertInstanceOf(GroceryListResult::class, $result);
         $this->assertCount(2, $result->items);
-        
+
         $this->assertSame('Bread', $result->items[0]->name);
         $this->assertSame(2.0, $result->items[0]->quantity);
         $this->assertSame('loaf', $result->items[0]->unit);
         $this->assertSame(GroceryListItemStatus::ToBuy, $result->items[0]->status);
-        
+
         $this->assertSame('Milk', $result->items[1]->name);
         $this->assertSame(1.0, $result->items[1]->quantity);
         $this->assertSame('liter', $result->items[1]->unit);
