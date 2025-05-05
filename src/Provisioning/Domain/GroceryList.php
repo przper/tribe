@@ -8,16 +8,23 @@ use Przper\Tribe\Shared\Domain\Name;
 final class GroceryList extends AggregateRoot
 {
     private function __construct(
+        private GroceryListId $id,
         private GroceryListItems $items,
     ) {}
 
-    public static function create(): self
+    public static function create(GroceryListId $id): self
     {
         $list = new self(
+            id: $id,
             items: GroceryListItems::create(),
         );
 
         return $list;
+    }
+
+    public static function restore(GroceryListId $id, GroceryListItems $items): self
+    {
+        return new self($id, $items);
     }
 
     public function add(GroceryListItem $item): void
@@ -33,6 +40,11 @@ final class GroceryList extends AggregateRoot
     public function getItems(): GroceryListItems
     {
         return $this->items;
+    }
+
+    public function getId(): GroceryListId
+    {
+        return $this->id;
     }
 
     /**

@@ -8,6 +8,7 @@ use Behat\Step\Then;
 use Behat\Step\When;
 use PHPUnit\Framework\Assert;
 use Przper\Tribe\Provisioning\Domain\GroceryList;
+use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListItem;
 use Przper\Tribe\Shared\Domain\Name;
 use Tests\Doubles\MotherObjects\Shared\AmountMother;
@@ -18,7 +19,7 @@ class GroceryListContext implements Context
 
     public function __construct()
     {
-        $this->groceryList = GroceryList::create();
+        $this->groceryList = GroceryList::create(new GroceryListId('2'));
     }
 
     #[When('I add the :quantity :unit of :item to the grocery list')]

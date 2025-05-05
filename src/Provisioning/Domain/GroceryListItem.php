@@ -18,6 +18,11 @@ class GroceryListItem
         return new self($name, $amount, GroceryListItemStatus::ToBuy);
     }
 
+    public static function restore(Name $name, Amount $amount, GroceryListItemStatus $status): self
+    {
+        return new self($name, $amount, $status);
+    }
+
     public function getName(): Name
     {
         return $this->name;
