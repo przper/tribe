@@ -47,4 +47,23 @@ class GroceryListItem
     {
         return $this->status === GroceryListItemStatus::ToBuy;
     }
+
+    public function is(GroceryListItem $item): bool
+    {
+        return $this->name->is($item->name) && $this->amount->isCompatible($item->amount);
+    }
+
+    /**
+     * @throws NotMatchingItemsException
+     */
+    public function add(GroceryListItem $item): GroceryListItem
+    {
+        if (!$this->is($item)) {
+            throw new NotMatchingItemsException;
+        }
+
+        $this->amount->add($item->amount);
+
+        return $this;
+    }
 }

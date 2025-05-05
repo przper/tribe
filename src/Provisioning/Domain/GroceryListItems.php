@@ -8,6 +8,10 @@ use Przper\Tribe\Shared\Domain\Name;
 /** @extends Collection<GroceryListItem> */
 class GroceryListItems extends Collection
 {
+    private function __construct()
+    {
+    }
+
     /** @var GroceryListItem[] $items */
     private array $items = [];
 
@@ -18,6 +22,13 @@ class GroceryListItems extends Collection
 
     public function add(GroceryListItem $item): void
     {
+        foreach ($this->items as $i => $storedItem) {
+            if ($storedItem->is($item)) {
+                $this->items[$i] = $storedItem->add($item);
+                return;
+            }
+        }
+
         $this->items[] = $item;
     }
 

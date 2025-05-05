@@ -3,7 +3,7 @@ Feature: Manage items on Grocery List
   In order to buy products
   I need to be able to put needed products on the grocery list
 
-  Scenario: Add item to grocery list
+  Scenario: Add new item to grocery list
     When I add the 1.0 kilogram of "Meat" to the grocery list
     Then I should see that item "Meat" is listed with 1.0 kilogram amount in the grocery list
 
@@ -11,3 +11,9 @@ Feature: Manage items on Grocery List
     Given there is "Meat" with amount of 1.0 kilogram on the grocery list
     When I want to remove "Meat" item from the grocery list
     Then I should not see "Meat" on the grocery list
+
+  Scenario: Add item to grocery list that already has that item
+    Given there is "Meat" with amount of 1.0 kilogram on the grocery list
+    When I add the 0.5 kilogram of "Meat" to the grocery list
+    Then I should see that item "Meat" is listed with 1.5 kilogram amount in the grocery list
+    And there is 1 items with name "Meat"

@@ -3,9 +3,9 @@
 namespace Tests\Doubles\MotherObjects;
 
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Name;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
+use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
 
 class RecipeMother
