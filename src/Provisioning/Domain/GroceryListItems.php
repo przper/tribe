@@ -3,6 +3,7 @@
 namespace Przper\Tribe\Provisioning\Domain;
 
 use Przper\Tribe\Shared\Domain\Collection;
+use Przper\Tribe\Shared\Domain\Name;
 
 /** @extends Collection<GroceryListItem> */
 class GroceryListItems extends Collection
@@ -23,10 +24,10 @@ class GroceryListItems extends Collection
     /**
      * @throws ItemNotFoundOnGroceryListException
      */
-    public function remove(ItemName $itemName): void
+    public function remove(Name $itemName): void
     {
         foreach ($this->items as $i => $item) {
-            if ($item->getItemName()->isEqualTo($itemName)) {
+            if ($item->getName()->is($itemName)) {
                 unset($this->items[$i]);
                 return;
             }
@@ -35,10 +36,10 @@ class GroceryListItems extends Collection
         throw new ItemNotFoundOnGroceryListException();
     }
 
-    public function getItem(ItemName $itemName): ?GroceryListItem
+    public function getItem(Name $itemName): ?GroceryListItem
     {
         foreach ($this->items as $item) {
-            if ($item->getItemName()->isEqualTo($itemName)) {
+            if ($item->getName()->is($itemName)) {
                 return $item;
             }
         }
@@ -49,10 +50,10 @@ class GroceryListItems extends Collection
     /**
      * @throws ItemNotFoundOnGroceryListException
      */
-    public function pickUp(ItemName $itemName): void
+    public function pickUp(Name $itemName): void
     {
         foreach ($this->items as $item) {
-            if ($item->getItemName()->isEqualTo($itemName)) {
+            if ($item->getName()->is($itemName)) {
                 $item->pickUp();
                 return;
             }

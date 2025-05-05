@@ -3,6 +3,7 @@
 namespace Przper\Tribe\Provisioning\Domain;
 
 use Przper\Tribe\Shared\Domain\AggregateRoot;
+use Przper\Tribe\Shared\Domain\Name;
 
 final class GroceryList extends AggregateRoot
 {
@@ -24,15 +25,20 @@ final class GroceryList extends AggregateRoot
         $this->items->add($item);
     }
 
-    public function getItemByName(ItemName $name): ?GroceryListItem
+    public function getItemByName(Name $name): ?GroceryListItem
     {
         return $this->items->getItem($name);
+    }
+
+    public function getItems(): GroceryListItems
+    {
+        return $this->items;
     }
 
     /**
      * @throws ItemNotFoundOnGroceryListException
      */
-    public function removeItemByName(ItemName $itemName): void
+    public function removeItemByName(Name $itemName): void
     {
         $this->items->remove($itemName);
     }
@@ -40,7 +46,7 @@ final class GroceryList extends AggregateRoot
     /**
      * @throws ItemNotFoundOnGroceryListException
      */
-    public function pickUp(ItemName $itemName): void
+    public function pickUp(Name $itemName): void
     {
         $this->items->pickUp($itemName);
     }

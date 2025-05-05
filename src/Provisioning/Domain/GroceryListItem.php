@@ -2,33 +2,30 @@
 
 namespace Przper\Tribe\Provisioning\Domain;
 
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Name;
+
 class GroceryListItem
 {
     private function __construct(
-        private ItemName $itemName,
-        private Quantity $quantity,
-        private Unit $unit,
+        private Name $name,
+        private Amount $amount,
         private GroceryListItemStatus $status,
     ) {}
 
-    public static function create(ItemName $itemName, Quantity $quantity, Unit $unit): self
+    public static function create(Name $name, Amount $amount): self
     {
-        return new self($itemName, $quantity, $unit, GroceryListItemStatus::ToBuy);
+        return new self($name, $amount, GroceryListItemStatus::ToBuy);
     }
 
-    public function getItemName(): ItemName
+    public function getName(): Name
     {
-        return $this->itemName;
+        return $this->name;
     }
 
-    public function getQuantity(): Quantity
+    public function getAmount(): Amount
     {
-        return $this->quantity;
-    }
-
-    public function getUnit(): Unit
-    {
-        return $this->unit;
+        return $this->amount;
     }
 
     public function getStatus(): GroceryListItemStatus

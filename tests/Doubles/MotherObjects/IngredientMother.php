@@ -2,11 +2,11 @@
 
 namespace Tests\Doubles\MotherObjects;
 
-use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Name;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 
 class IngredientMother
 {
