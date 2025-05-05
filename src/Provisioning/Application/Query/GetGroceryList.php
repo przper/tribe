@@ -6,9 +6,7 @@ use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryListItem;
 use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
-#[Autoconfigure(public: true)]
 final readonly class GetGroceryList
 {
     public function __construct(
