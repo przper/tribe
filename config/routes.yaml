@@ -4,6 +4,12 @@ food_recipes:
         namespace: Przper\Tribe\FoodRecipes\Ports\Controller
     type: attribute
 
+provisioning:
+    resource:
+        path: ../src/Provisioning/Ports/Controller
+        namespace: Przper\Tribe\Provisioning\Ports\Controller
+    type: attribute
+
 worked_time:
     resource:
         path: ../src/WorkedTime/Ports/Controller
