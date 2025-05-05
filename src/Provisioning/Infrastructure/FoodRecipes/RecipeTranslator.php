@@ -4,9 +4,7 @@ namespace Przper\Tribe\Provisioning\Infrastructure\FoodRecipes;
 
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipe;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
-use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
-#[Autoconfigure(public: true)]
 final readonly class RecipeTranslator
 {
     public function __construct(
