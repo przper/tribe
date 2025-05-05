@@ -2,15 +2,15 @@
 
 namespace Tests\Behat\Provisioning\Context;
 
+use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
-use Behat\Behat\Context\Context;
 use PHPUnit\Framework\Assert;
 use Przper\Tribe\Provisioning\Domain\GroceryList;
 use Przper\Tribe\Provisioning\Domain\GroceryListItem;
 use Przper\Tribe\Shared\Domain\Name;
-use Tests\Doubles\MotherObjects\AmountMother;
+use Tests\Doubles\MotherObjects\Shared\AmountMother;
 
 class GroceryListContext implements Context
 {

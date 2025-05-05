@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles\MotherObjects;
+namespace Tests\Doubles\MotherObjects\Shared;
 
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\Quantity;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles\InMemoryInfrastructure;
+namespace Tests\Doubles\InMemoryInfrastructure\Shared;
 
 use Przper\Tribe\Shared\Domain\DomainEvent;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;

@@ -8,8 +8,8 @@ use Przper\Tribe\Provisioning\Domain\GroceryListItem;
 use Przper\Tribe\Provisioning\Domain\GroceryListItems;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
-use Tests\Doubles\MotherObjects\AmountMother;
 use Tests\Doubles\MotherObjects\Provisioning\GroceryListItemMother;
+use Tests\Doubles\MotherObjects\Shared\AmountMother;
 
 class GroceryListItemsTest extends TestCase
 {

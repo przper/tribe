@@ -35,14 +35,14 @@ services:
 
 when@test:
     services:
+        Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\Shared\InMemoryDomainEventDispatcher
+
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
-            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository
+            class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeRepository
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeDetailProjectionInterface:
-            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeDetailProjection
+            class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeDetailProjection
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface:
-            class: Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeIndexProjection
-
-        Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
-            class: Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher
+            class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeIndexProjection

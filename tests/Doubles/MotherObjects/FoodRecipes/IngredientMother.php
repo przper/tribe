@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles\MotherObjects;
+namespace Tests\Doubles\MotherObjects\FoodRecipes;
 
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\Shared\Domain\Amount;

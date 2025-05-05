@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Doubles\InMemoryInfrastructure;
+namespace Tests\Doubles\InMemoryInfrastructure\FoodRecipes;
 
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;

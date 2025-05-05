@@ -15,7 +15,7 @@ use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
-use Tests\Doubles\MotherObjects\IngredientMother;
+use Tests\Doubles\MotherObjects\FoodRecipes\IngredientMother;
 
 class RecipeTest extends TestCase
 {

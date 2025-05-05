@@ -5,7 +5,7 @@ namespace Tests\Unit\FoodRecipes\Domain;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
-use Tests\Doubles\MotherObjects\IngredientMother;
+use Tests\Doubles\MotherObjects\FoodRecipes\IngredientMother;
 
 class IngredientsTest extends TestCase
 {

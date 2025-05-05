@@ -6,8 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
 use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
-use Tests\Doubles\InMemoryInfrastructure\InMemoryDomainEventDispatcher;
-use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
+use Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeRepository;
+use Tests\Doubles\InMemoryInfrastructure\Shared\InMemoryDomainEventDispatcher;
 
 class CreateRecipeHandlerTest extends TestCase
 {

@@ -9,7 +9,7 @@ use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\NotMatchingAmountUnitException;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
-use Tests\Doubles\MotherObjects\AmountMother;
+use Tests\Doubles\MotherObjects\Shared\AmountMother;
 
 class AmountTest extends TestCase
 {

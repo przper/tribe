@@ -9,7 +9,7 @@ use Przper\Tribe\FoodRecipes\Application\Projection\RecipeDetailProjectionInterf
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeNameChanged;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Tests\Doubles\MotherObjects\RecipeMother;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeMother;
 
 class ProjectRecipeDetailWhenRecipeNameChangedTest extends TestCase
 {

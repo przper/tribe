@@ -8,9 +8,9 @@ use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Tests\Doubles\InMemoryInfrastructure\InMemoryRecipeRepository;
-use Tests\Doubles\MotherObjects\IngredientMother;
-use Tests\Doubles\MotherObjects\RecipeMother;
+use Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeRepository;
+use Tests\Doubles\MotherObjects\FoodRecipes\IngredientMother;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeMother;
 
 class GetRecipeTest extends KernelTestCase
 {
