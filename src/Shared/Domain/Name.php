@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Przper\Tribe\FoodRecipes\Domain;
+namespace Przper\Tribe\Shared\Domain;
 
 final readonly class Name
 {
@@ -18,9 +18,9 @@ final readonly class Name
         return $name;
     }
 
-    public function isEqual(self $otherName): bool
+    public function is(self $otherName): bool
     {
-        return $this->value === $otherName->value;
+        return strtolower($this->value) === strtolower($otherName->value);
     }
 
     private function guard(): void {}

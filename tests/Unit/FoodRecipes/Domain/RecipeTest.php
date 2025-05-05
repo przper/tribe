@@ -4,17 +4,17 @@ namespace Tests\Unit\FoodRecipes\Domain;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
-use Przper\Tribe\FoodRecipes\Domain\Name;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeCreated;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeIngredientsChanged;
 use Przper\Tribe\FoodRecipes\Domain\RecipeNameChanged;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 use Tests\Doubles\MotherObjects\IngredientMother;
 
 class RecipeTest extends TestCase

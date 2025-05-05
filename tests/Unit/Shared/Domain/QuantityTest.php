@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Unit\FoodRecipes\Domain;
+namespace Tests\Unit\Shared\Domain;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\NegativeQuantityException;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\NegativeQuantityException;
+use Przper\Tribe\Shared\Domain\Quantity;
 
 class QuantityTest extends TestCase
 {

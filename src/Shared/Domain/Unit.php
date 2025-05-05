@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Przper\Tribe\FoodRecipes\Domain;
+namespace Przper\Tribe\Shared\Domain;
 
 final readonly class Unit
 {
@@ -25,7 +25,7 @@ final readonly class Unit
         return $this->value;
     }
 
-    public function isEqual(Unit $unit): bool
+    public function is(Unit $unit): bool
     {
         return strtolower($this->value) === strtolower($unit->value);
     }

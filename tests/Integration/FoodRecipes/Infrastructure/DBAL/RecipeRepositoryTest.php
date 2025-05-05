@@ -4,15 +4,15 @@ namespace Tests\Integration\FoodRecipes\Infrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Test;
-use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\Ingredients;
-use Przper\Tribe\FoodRecipes\Domain\Name;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
 use Przper\Tribe\FoodRecipes\Infrastructure\DBAL\Repository\RecipeRepository;
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class RecipeRepositoryTest extends KernelTestCase

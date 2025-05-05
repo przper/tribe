@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Przper\Tribe\FoodRecipes\Domain;
+namespace Przper\Tribe\Shared\Domain;
 
 final readonly class Quantity
 {

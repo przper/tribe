@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Przper\Tribe\FoodRecipes\Domain;
 
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\NotMatchingAmountUnitException;
+
 final class Ingredient
 {
     private function __construct(
@@ -43,7 +47,7 @@ final class Ingredient
      */
     public function isTheSame(self $ingredient): bool
     {
-        return $this->name->isEqual($ingredient->name);
+        return $this->name->is($ingredient->name);
     }
 
     /**

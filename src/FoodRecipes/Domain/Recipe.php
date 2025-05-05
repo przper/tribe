@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Przper\Tribe\FoodRecipes\Domain;
 
 use Przper\Tribe\Shared\Domain\AggregateRoot;
+use Przper\Tribe\Shared\Domain\Name;
 
 final class Recipe extends AggregateRoot
 {

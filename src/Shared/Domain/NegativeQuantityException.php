@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\FoodRecipes\Domain;
+namespace Przper\Tribe\Shared\Domain;
 
 class NegativeQuantityException extends \Exception
 {

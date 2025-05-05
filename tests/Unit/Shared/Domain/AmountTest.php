@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Unit\FoodRecipes\Domain;
+namespace Tests\Unit\Shared\Domain;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\Amount;
-use Przper\Tribe\FoodRecipes\Domain\NotMatchingAmountUnitException;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\NotMatchingAmountUnitException;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 use Tests\Doubles\MotherObjects\AmountMother;
 
 class AmountTest extends TestCase
@@ -61,7 +61,7 @@ class AmountTest extends TestCase
     #[DataProvider('isSame')]
     public function isTheSame_to_another_Amount(Amount $a, Amount $b, bool $expected): void
     {
-        $this->assertSame($expected, $a->isTheSame($b));
+        $this->assertSame($expected, $a->isCompatible($b));
     }
 
     public static function isSame(): \Generator

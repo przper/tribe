@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\FoodRecipes\Domain;
+namespace Przper\Tribe\Shared\Domain;
 
 final class Amount
 {
@@ -41,14 +41,14 @@ final class Amount
         return $this;
     }
 
-    public function isEqual(Amount $otherAmount): bool
+    public function isCompatible(Amount $otherAmount): bool
     {
-        return $this->quantity->isEqual($otherAmount->quantity) && $this->unit->isEqual($otherAmount->unit);
+        return $this->unit->is($otherAmount->unit);
     }
 
-    public function isTheSame(Amount $otherAmount): bool
+    public function isEqual(Amount $otherAmount): bool
     {
-        return $this->unit->isEqual($otherAmount->unit);
+        return $this->quantity->isEqual($otherAmount->quantity) && $this->unit->is($otherAmount->unit);
     }
 
     /**
@@ -56,7 +56,7 @@ final class Amount
      */
     public function add(Amount $amount): void
     {
-        if (!$this->isTheSame($amount)) {
+        if (!$this->isCompatible($amount)) {
             throw new NotMatchingAmountUnitException();
         }
 

@@ -3,9 +3,9 @@
 namespace Tests\Unit\FoodRecipes\Domain;
 
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\FoodRecipes\Domain\Amount;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Amount;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 use Tests\Doubles\MotherObjects\IngredientMother;
 
 class IngredientTest extends TestCase

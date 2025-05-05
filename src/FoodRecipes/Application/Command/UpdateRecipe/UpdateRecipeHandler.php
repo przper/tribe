@@ -2,14 +2,14 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe;
 
-use Przper\Tribe\FoodRecipes\Domain\Amount;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
-use Przper\Tribe\FoodRecipes\Domain\Name;
-use Przper\Tribe\FoodRecipes\Domain\Quantity;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\FoodRecipes\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
+use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\Quantity;
+use Przper\Tribe\Shared\Domain\Unit;
 
 final class UpdateRecipeHandler
 {
@@ -23,7 +23,7 @@ final class UpdateRecipeHandler
         $recipe = $this->recipeRepository->get(new RecipeId($command->id));
 
         $newName = Name::fromString($command->name);
-        if (!$recipe->getName()->isEqual($newName)) {
+        if (!$recipe->getName()->is($newName)) {
             $recipe->changeName($newName);
         }
 
