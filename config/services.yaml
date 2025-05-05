@@ -46,3 +46,6 @@ when@test:
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface:
             class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeIndexProjection
+            
+        Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\Provisioning\InMemoryGroceryListRepository

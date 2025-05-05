@@ -3,6 +3,7 @@
 namespace Tests\Doubles\MotherObjects\Provisioning;
 
 use Przper\Tribe\Provisioning\Domain\GroceryListItem;
+use Przper\Tribe\Provisioning\Domain\GroceryListItemStatus;
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
@@ -13,6 +14,7 @@ class GroceryListItemMother
     private Name $name;
     private Quantity $quantity;
     private Unit $unit;
+    private GroceryListItemStatus $status = GroceryListItemStatus::ToBuy;
 
     private function __construct()
     {
@@ -28,7 +30,7 @@ class GroceryListItemMother
 
     public function build(): GroceryListItem
     {
-        return GroceryListItem::create($this->name, Amount::create($this->quantity, $this->unit));
+        return GroceryListItem::restore($this->name, Amount::create($this->quantity, $this->unit), $this->status);
     }
 
     public function name(string $string): self
@@ -46,6 +48,19 @@ class GroceryListItemMother
     public function unit(string $unit): self
     {
         $this->unit = Unit::fromString($unit);
+        return $this;
+    }
+
+    public function toBuy(): self
+    {
+        $this->status = GroceryListItemStatus::ToBuy;
+        return $this;
+    }
+
+
+    public function pickedUp(): self
+    {
+        $this->status = GroceryListItemStatus::PickedUp;
         return $this;
     }
 }

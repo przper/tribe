@@ -24,7 +24,11 @@ final readonly class GetGroceryListFromFoodRecipe
 
         $groceryListItems = [];
         foreach ($recipe->ingredients as $ingredient) {
-            $groceryListItems[] = new GroceryListItem($ingredient->name, $ingredient->quantity, $ingredient->unit);
+            $groceryListItems[] = new GroceryListItem(
+                name: $ingredient->name,
+                quantity: $ingredient->quantity,
+                unit: $ingredient->unit,
+            );
         }
 
         return new GroceryList($groceryListItems);
