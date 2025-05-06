@@ -25,3 +25,26 @@ body .content {
     padding: 10px;
     margin-top: 50px;
 }
+
+.modal {
+    padding: 1em;
+    border-radius: 0.5em;
+    border: 1px solid #ccc;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+    margin-top: 1em;
+}

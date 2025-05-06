@@ -1,0 +1,44 @@
+<button type="button" onclick="document.getElementById('add-recipe-to-grocery-list-modal').showModal()">Add to List</button>
+
+<dialog id="add-recipe-to-grocery-list-modal" class="modal">
+    <div class="modal-content">
+        <h3>Add this recipe to Grocery List</h3>
+        <form id="grocery-form" method="POST">
+            <input type="hidden" name="groceryListAction" value="add-recipe-to-grocery-list">
+            <input type="hidden" name="recipeId" value="{{ recipe.recipe_id }}">
+            <select id="groceryListSelect">
+                <option value="" selected disabled>Select a list:</option>
+                {% for list in groceryLists %}
+                    <option value="{{ list.id }}">{{ list.id }}</option>
+                {% endfor %}
+            </select>
+            <div class="modal-actions">
+                <button type="submit">Add</button>
+                <button type="button" onclick="document.getElementById('add-recipe-to-grocery-list-modal').close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</dialog>
+
+<script>
+    document.getElementById('grocery-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const groceryListId = document.getElementById('groceryListSelect').value;
+        const url = '/api/v1/groceries/' + groceryListId;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                groceryListAction: 'add-recipe-to-grocery-list',
+                recipeId: document.querySelector('input[name="recipeId"]').value
+            })
+        }).then(response => {
+            if (response.ok) {
+                document.getElementById('add-recipe-to-grocery-list-modal').close();
+            }
+        });
+    });
+</script>

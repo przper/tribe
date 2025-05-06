@@ -5,6 +5,9 @@
         <div>
             <a href="{{ path('recipe_index') }}">Back to index</a>
             <a href="{{ path('recipe_update', { id: recipe.recipe_id }) }}">Edit</a>
+            {% if groceryLists is not empty %}
+                {% include 'food_recipes/_add_to_grocery_list.html.twig' %}
+            {% endif %}
         </div>
         <h1>{{ recipe.name }}</h1>
 
