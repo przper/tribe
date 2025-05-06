@@ -3,6 +3,7 @@
 namespace Przper\Tribe\Provisioning\Ports\Controller;
 
 use Przper\Tribe\Provisioning\Application\Query\GetGroceryList;
+use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ class GroceryListDetailController extends AbstractController
     {
         $groceryList = $this->getGroceryList->execute($id);
 
-        if ($groceryList === null) {
+        if (!$groceryList instanceof GroceryList) {
             throw $this->createNotFoundException('Grocery list not found');
         }
 

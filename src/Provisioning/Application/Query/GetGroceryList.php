@@ -4,6 +4,7 @@ namespace Przper\Tribe\Provisioning\Application\Query;
 
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryListItem;
+use Przper\Tribe\Provisioning\Domain\GroceryList as GroceryListQuery;
 use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface;
 
@@ -17,7 +18,7 @@ final readonly class GetGroceryList
     {
         $groceryList = $this->groceryListRepository->get(new GroceryListId($groceryListId));
 
-        if ($groceryList === null) {
+        if (!$groceryList instanceof GroceryListQuery) {
             return null;
         }
 

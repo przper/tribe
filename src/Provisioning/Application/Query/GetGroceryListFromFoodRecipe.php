@@ -4,6 +4,7 @@ namespace Przper\Tribe\Provisioning\Application\Query;
 
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryListItem;
+use Przper\Tribe\Provisioning\Infrastructure\FoodRecipes\Recipe;
 use Przper\Tribe\Provisioning\Infrastructure\FoodRecipes\RecipeTranslator;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 
@@ -18,7 +19,7 @@ final readonly class GetGroceryListFromFoodRecipe
     {
         $recipe = $this->recipeTranslator->translate($recipeId);
 
-        if ($recipe === null) {
+        if (!$recipe instanceof Recipe) {
             return null;
         }
 

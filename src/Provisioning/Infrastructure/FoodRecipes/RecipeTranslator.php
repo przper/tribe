@@ -4,6 +4,7 @@ namespace Przper\Tribe\Provisioning\Infrastructure\FoodRecipes;
 
 use Przper\Tribe\FoodRecipes\Application\Query\GetRecipe;
 use Przper\Tribe\FoodRecipes\Application\Query\Result\Ingredient;
+use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe as RecipeQuery;
 
 final readonly class RecipeTranslator
 {
@@ -15,7 +16,7 @@ final readonly class RecipeTranslator
     {
         $foodRecipe = $this->getRecipeDetail->execute($recipeId);
 
-        if ($foodRecipe === null) {
+        if (!$foodRecipe instanceof RecipeQuery) {
             return null;
         }
 

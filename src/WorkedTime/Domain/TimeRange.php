@@ -30,11 +30,7 @@ final readonly class TimeRange
             return true;
         }
 
-        if ($this->start->isPast($timeRange->end)) {
-            return true;
-        }
-
-        return false;
+        return $this->start->isPast($timeRange->end);
     }
 
     public function getDuration(): TimeDuration

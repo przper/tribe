@@ -5,7 +5,8 @@
 all: vendor
 
 .PHONY: fix
-fix: tools/php-cs-fixer/composer.lock
+fix: composer.lock tools/php-cs-fixer/composer.lock
+	vendor/bin/rector process
 	cd tools/php-cs-fixer; composer install
 	tools/php-cs-fixer/vendor/bin/php-cs-fixer fix
 
@@ -23,6 +24,7 @@ clean:
 test: lint unit-tests behaviour-tests integration-tests
 
 lint: vendor
+	vendor/bin/rector process --dry-run --no-progress-bar
 	vendor/bin/phpstan analyse -c phpstan.neon
 
 unit-tests: vendor
