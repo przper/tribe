@@ -11,8 +11,7 @@ class GetGroceryListsController extends AbstractController
 {
     public function __construct(
         private GetGroceryLists $getGroceryListsQuery,
-    ) {
-    }
+    ) {}
 
     #[Route('/groceries', name: 'index', methods: ['GET'])]
     public function __invoke(): JsonResponse

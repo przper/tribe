@@ -19,24 +19,25 @@ class HttpRecipeTranslatorTest extends TestCase
     protected function setUp(): void
     {
         $this->httpClient = new MockHttpClient([
-            new MockResponse(<<<JSON
-                {
-                  "id": "01927b25-67b9-708a-a00d-357e3e558ef1",
-                  "name": "test 4",
-                  "ingredients": [
-                    {
-                      "name": "Meat",
-                      "quantity": 1.5,
-                      "unit": "kilogram"
-                    },
-                    {
-                      "name": "Tomatoes",
-                      "quantity":3,
-                      "unit": "can"
-                    }
-                  ]
-                }
-            JSON
+            new MockResponse(
+                <<<JSON
+                        {
+                          "id": "01927b25-67b9-708a-a00d-357e3e558ef1",
+                          "name": "test 4",
+                          "ingredients": [
+                            {
+                              "name": "Meat",
+                              "quantity": 1.5,
+                              "unit": "kilogram"
+                            },
+                            {
+                              "name": "Tomatoes",
+                              "quantity":3,
+                              "unit": "can"
+                            }
+                          ]
+                        }
+                    JSON
             ),
         ]);
 

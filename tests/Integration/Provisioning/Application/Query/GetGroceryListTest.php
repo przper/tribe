@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Provisioning\Application;
+namespace Integration\Provisioning\Application\Query;
 
 use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\Provisioning\Application\Query\GetGroceryList;
