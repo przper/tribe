@@ -44,9 +44,11 @@ services:
 
 when@test:
     services:
+        # Shared
         Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
             class: Tests\Doubles\InMemoryInfrastructure\Shared\InMemoryDomainEventDispatcher
 
+        # FoodRecipes
         Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface:
             class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeRepository
 
@@ -55,6 +57,11 @@ when@test:
 
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface:
             class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeIndexProjection
-            
+
+
+        # Provisioning
         Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface:
             class: Tests\Doubles\InMemoryInfrastructure\Provisioning\InMemoryGroceryListRepository
+
+        Przper\Tribe\Provisioning\AntiCorruption\FoodRecipes\RecipeTranslatorInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\Provisioning\InMemoryRecipeTranslator

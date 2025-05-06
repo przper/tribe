@@ -11,7 +11,7 @@ class InMemoryGroceryListRepository implements GroceryListRepositoryInterface
     /**
      * @var GroceryList[] $groceryLists
      */
-    private array $groceryLists = [];
+    public array $groceryLists = [];
 
     public function persist(GroceryList $groceryList): void
     {
