@@ -4,6 +4,16 @@ food_recipes:
         namespace: Przper\Tribe\FoodRecipes\Ports\Controller
     type: attribute
 
+food_recipes_api:
+    resource:
+        path: ../src/FoodRecipes/Ports/Api
+        namespace: Przper\Tribe\FoodRecipes\Ports\Api
+    type: attribute
+    prefix: /api/v1
+    name_prefix: food_recipes.api.
+    format: json
+    locale: en
+
 provisioning:
     resource:
         path: ../src/Provisioning/Ports/Controller
