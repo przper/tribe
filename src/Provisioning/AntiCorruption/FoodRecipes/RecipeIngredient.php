@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\Provisioning\Infrastructure\FoodRecipes;
+namespace Przper\Tribe\Provisioning\AntiCorruption\FoodRecipes;
 
 final readonly class RecipeIngredient
 {
