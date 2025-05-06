@@ -33,6 +33,15 @@ services:
         arguments:
             $listeners: !tagged_iterator domain_event_listener
 
+    tribe.internal_http_client:
+        class: Symfony\Contracts\HttpClient\HttpClientInterface
+        factory: ['Symfony\Component\HttpClient\HttpClient', 'createForBaseUri']
+        arguments:
+            $baseUri: '%env(APP_URL)%'
+            $defaultOptions:
+                headers:
+                    Accept: 'application/json'
+
 when@test:
     services:
         Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface:
