@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\Provisioning\Ports\Controller;
+namespace Przper\Tribe\Provisioning\Ports\Web;
 
 use Przper\Tribe\Provisioning\Application\Query\GetGroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;

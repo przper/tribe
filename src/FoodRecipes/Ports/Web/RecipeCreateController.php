@@ -1,6 +1,6 @@
 <?php
 
-namespace Przper\Tribe\FoodRecipes\Ports\Controller;
+namespace Przper\Tribe\FoodRecipes\Ports\Web;
 
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
