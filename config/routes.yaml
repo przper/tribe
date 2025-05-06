@@ -1,7 +1,7 @@
 food_recipes:
     resource:
-        path: ../src/FoodRecipes/Ports/Controller
-        namespace: Przper\Tribe\FoodRecipes\Ports\Controller
+        path: ../src/FoodRecipes/Ports/Web
+        namespace: Przper\Tribe\FoodRecipes\Ports\Web
     type: attribute
 
 food_recipes_api:
@@ -16,9 +16,19 @@ food_recipes_api:
 
 provisioning:
     resource:
-        path: ../src/Provisioning/Ports/Controller
-        namespace: Przper\Tribe\Provisioning\Ports\Controller
+        path: ../src/Provisioning/Ports/Web
+        namespace: Przper\Tribe\Provisioning\Ports\Web
     type: attribute
+
+provisioning_api:
+    resource:
+        path: ../src/Provisioning/Ports/Api
+        namespace: Przper\Tribe\Provisioning\Ports\Api
+    type: attribute
+    prefix: /api/v1
+    name_prefix: provisioning.api.
+    format: json
+    locale: en
 
 worked_time:
     resource:
