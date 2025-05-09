@@ -17,6 +17,7 @@ final readonly class Quantity
 
         return $quantity;
     }
+
     public function isEqual(Quantity $otherQuantity): bool
     {
         return $this->value === $otherQuantity->value;

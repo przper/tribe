@@ -4,23 +4,26 @@ namespace Przper\Tribe\Identity\Domain;
 
 final readonly class Email
 {
+    /**
+     * @throws InvalidEmailException
+     */
     private function __construct(
         private string $value,
-    ) {}
+    ) {
+        $this->guard();
+    }
 
+    /**
+     * @throws InvalidEmailException
+     */
     public static function fromString(string $value): self
     {
-        $email = new self($value);
-        $email->guard();
-
-        return $email;
+        return new self($value);
     }
 
-    public function is(self $otherEmail): bool
-    {
-        return strtolower($this->value) === strtolower($otherEmail->value);
-    }
-
+    /**
+     * @throws InvalidEmailException
+     */
     private function guard(): void
     {
         if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {

@@ -2,7 +2,4 @@
 
 namespace Przper\Tribe\Identity\Domain;
 
-class InvalidEmailException extends \Exception
-{
-
-}
+class InvalidEmailException extends \Exception {}

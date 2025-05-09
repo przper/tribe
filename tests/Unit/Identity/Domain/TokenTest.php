@@ -16,7 +16,7 @@ class TokenTest extends TestCase
         $token = Token::create();
 
         // Token value should be a 64-character hexadecimal string (32 bytes as hex)
-        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string)$token);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $token);
     }
 
     #[Test]
@@ -24,7 +24,7 @@ class TokenTest extends TestCase
     {
         $tokens = [];
         for ($i = 0; $i < 100; $i++) {
-            $tokens[] = (string)Token::create();
+            $tokens[] = (string) Token::create();
         }
 
         // All tokens should be unique
@@ -37,7 +37,7 @@ class TokenTest extends TestCase
         $originalValue = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
         $token = Token::restore($originalValue);
 
-        $this->assertSame($originalValue, (string)$token);
+        $this->assertSame($originalValue, (string) $token);
     }
 
     #[Test]
@@ -71,7 +71,7 @@ class TokenTest extends TestCase
     public function it_should_accept_valid_token_values(string $validValue): void
     {
         $token = Token::restore($validValue);
-        $this->assertSame($validValue, (string)$token);
+        $this->assertSame($validValue, (string) $token);
     }
 
     #[Test]
@@ -80,7 +80,7 @@ class TokenTest extends TestCase
     {
         $token = Token::restore($value);
 
-        $this->assertSame($value, (string)$token);
+        $this->assertSame($value, (string) $token);
         $this->assertSame($value, $token->__toString());
     }
 
