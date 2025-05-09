@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Projection\ProjectRecipeIndexWhenRecipeCreated;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface;
 use Przper\Tribe\FoodRecipes\Domain\RecipeCreated;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeIdMother;
 use Tests\Doubles\MotherObjects\FoodRecipes\RecipeMother;
 
 class ProjectRecipeIndexWhenRecipeCreatedTest extends TestCase
@@ -28,6 +28,6 @@ class ProjectRecipeIndexWhenRecipeCreatedTest extends TestCase
             ->method('createRecipe');
 
         $projector = new ProjectRecipeIndexWhenRecipeCreated($repository, $projection);
-        $projector->handle(RecipeCreated::create(new RecipeId('test')));
+        $projector->handle(RecipeCreated::create(RecipeIdMother::random()));
     }
 }

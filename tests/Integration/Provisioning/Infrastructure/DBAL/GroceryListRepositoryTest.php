@@ -9,7 +9,9 @@ use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListItemStatus;
 use Przper\Tribe\Provisioning\Infrastructure\DBAL\Repository\GroceryListRepository;
 use Przper\Tribe\Shared\Domain\Name;
+use Przper\Tribe\Shared\Domain\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\Doubles\MotherObjects\Provisioning\GroceryListIdMother;
 use Tests\Doubles\MotherObjects\Provisioning\GroceryListItemMother;
 use Tests\Doubles\MotherObjects\Shared\AmountMother;
 
@@ -58,7 +60,7 @@ class GroceryListRepositoryTest extends KernelTestCase
 
     public function test_get(): void
     {
-        $id = new GroceryListId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = GroceryListId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
 
         $result = $this->repository->get($id);
 
@@ -70,7 +72,7 @@ class GroceryListRepositoryTest extends KernelTestCase
     #[Test]
     public function it_persists_new_objects(): void
     {
-        $id = new GroceryListId('test');
+        $id = GroceryListIdMother::random();
 
         $this->assertNull($this->repository->get($id));
 
@@ -103,7 +105,7 @@ class GroceryListRepositoryTest extends KernelTestCase
     #[Test]
     public function it_updates_existing_objects_and_changes_item_status(): void
     {
-        $id = new GroceryListId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = GroceryListId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
 
         $groceryList = $this->repository->get($id);
         $this->assertNotNull($groceryList);

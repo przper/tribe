@@ -10,6 +10,7 @@ use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 final class UpdateRecipeHandler
 {
@@ -20,7 +21,7 @@ final class UpdateRecipeHandler
 
     public function __invoke(UpdateRecipeCommand $command): void
     {
-        $recipe = $this->recipeRepository->get(new RecipeId($command->id));
+        $recipe = $this->recipeRepository->get(RecipeId::fromString($command->id));
 
         $newName = Name::fromString($command->name);
         if (!$recipe->getName()->is($newName)) {

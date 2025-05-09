@@ -27,6 +27,9 @@ final readonly class Quantity
         return new self($a->value + $b->value);
     }
 
+    /**
+     * @throws NegativeQuantityException
+     */
     private function guard(): void
     {
         if ($this->value < 0) {

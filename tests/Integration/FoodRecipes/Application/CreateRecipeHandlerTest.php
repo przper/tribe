@@ -5,7 +5,7 @@ namespace Tests\Integration\FoodRecipes\Application;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeCommand;
 use Przper\Tribe\FoodRecipes\Application\Command\CreateRecipe\CreateRecipeHandler;
-use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
+use Przper\Tribe\Shared\Infrastructure\Ramsey\UuidGenerator;
 use Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeRepository;
 use Tests\Doubles\InMemoryInfrastructure\Shared\InMemoryDomainEventDispatcher;
 
@@ -34,7 +34,7 @@ class CreateRecipeHandlerTest extends TestCase
 
         $handler = new CreateRecipeHandler(
             $repository,
-            new IdGenerator(),
+            new UuidGenerator(),
             $eventDispatcher,
         );
 

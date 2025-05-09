@@ -7,18 +7,18 @@ use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
-use Przper\Tribe\Shared\Application\Service\IdGeneratorInterface;
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
+use Przper\Tribe\Shared\Domain\UuidGeneratorInterface;
 
 final class CreateRecipeHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,
-        private IdGeneratorInterface $idGenerator,
+        private UuidGeneratorInterface $uuidGenerator,
         private DomainEventDispatcherInterface $eventDispatcher,
     ) {}
 
@@ -38,7 +38,7 @@ final class CreateRecipeHandler
         }
 
         $recipe = Recipe::create(
-            new RecipeId((string) $this->idGenerator->generate()),
+            RecipeId::fromUuid($this->uuidGenerator->generate()),
             Name::fromString($command->name),
             $ingredients,
         );

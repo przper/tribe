@@ -7,6 +7,7 @@ use Przper\Tribe\Provisioning\Application\Query\Result\GroceryListItem;
 use Przper\Tribe\Provisioning\Domain\GroceryList as GroceryListQuery;
 use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 final readonly class GetGroceryList
 {
@@ -16,7 +17,7 @@ final readonly class GetGroceryList
 
     public function execute(string $groceryListId): ?GroceryList
     {
-        $groceryList = $this->groceryListRepository->get(new GroceryListId($groceryListId));
+        $groceryList = $this->groceryListRepository->get(GroceryListId::fromString($groceryListId));
 
         if (!$groceryList instanceof GroceryListQuery) {
             return null;

@@ -13,7 +13,9 @@ use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeIdMother;
 
 class RecipeRepositoryTest extends KernelTestCase
 {
@@ -52,7 +54,7 @@ class RecipeRepositoryTest extends KernelTestCase
 
     public function test_get(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
 
         $result = $this->repository->get($id);
 
@@ -64,7 +66,7 @@ class RecipeRepositoryTest extends KernelTestCase
     #[Test]
     public function it_persists_new_objects(): void
     {
-        $id = new RecipeId('test');
+        $id = RecipeIdMother::random();
 
         $this->assertNull($this->repository->get($id));
 
@@ -101,7 +103,7 @@ class RecipeRepositoryTest extends KernelTestCase
     #[Test]
     public function it_persists_existing_objects(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
 
         $recipe = $this->repository->get($id);
 

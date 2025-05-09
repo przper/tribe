@@ -15,13 +15,14 @@ use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Uuid;
 use Tests\Doubles\MotherObjects\FoodRecipes\IngredientMother;
 
 class RecipeTest extends TestCase
 {
     public function test_it_can_be_created_from_valid_data(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $name = Name::fromString('Chili con Carne');
         $ingredients = new Ingredients();
         $ingredients->add(IngredientMother::new()->kilogramsOfMeat()->build());
@@ -40,7 +41,7 @@ class RecipeTest extends TestCase
 
     public function test_it_can_be_restored_from_valid_data(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $name = Name::fromString('Chili con Carne');
         $ingredients = new Ingredients();
         $ingredients->add(Ingredient::create(
@@ -65,7 +66,7 @@ class RecipeTest extends TestCase
 
     public function test_it_can_change_its_name(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $recipe = Recipe::restore(
             $id,
             Name::fromString('Chilli con Carne'),
@@ -83,7 +84,7 @@ class RecipeTest extends TestCase
 
     public function test_it_can_add_an_Ingredient(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $recipe = Recipe::restore(
             $id,
             Name::fromString('Chilli con Carne'),
@@ -103,7 +104,7 @@ class RecipeTest extends TestCase
 
     public function test_it_can_set_an_Ingredient(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $recipe = Recipe::restore(
             $id,
             Name::fromString('Chilli con Carne'),
@@ -124,7 +125,7 @@ class RecipeTest extends TestCase
     #[Test]
     public function it_can_remove_an_Ingredient(): void
     {
-        $id = new RecipeId('0c53c94a-d821-11ee-8fbc-0242ac190002');
+        $id = RecipeId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $name = Name::fromString('Chili con Carne');
         $ingredient = IngredientMother::new()->kilogramsOfMeat()->build();
         $ingredients = new Ingredients();

@@ -14,7 +14,7 @@ class GroceryListMother
 
     private function __construct()
     {
-        $this->id = new GroceryListId('f3b8ee06-7377-451c-88c1-fde290a61ac4');
+        $this->id = GroceryListIdMother::random();
     }
 
     public static function new(): self
@@ -24,7 +24,7 @@ class GroceryListMother
 
     public function id(string $id): self
     {
-        $this->id = new GroceryListId($id);
+        $this->id = GroceryListId::fromString($id);
         return $this;
     }
 

@@ -7,6 +7,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\FoodRecipes\Domain\RecipeNameChanged;
 use Przper\Tribe\Shared\Domain\DomainEvent;
 use Przper\Tribe\Shared\Domain\DomainEventListenerInterface;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 class ProjectRecipeDetailWhenRecipeNameChanged implements DomainEventListenerInterface
 {
@@ -21,7 +22,7 @@ class ProjectRecipeDetailWhenRecipeNameChanged implements DomainEventListenerInt
             return;
         }
 
-        $recipe = $this->repository->get(new RecipeId($event->aggregateId));
+        $recipe = $this->repository->get(RecipeId::fromString($event->aggregateId));
 
         $this->projection->changeRecipeName(
             $recipe->getId(),

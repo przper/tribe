@@ -7,6 +7,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\Shared\Domain\DomainEvent;
 use Przper\Tribe\Shared\Domain\DomainEventListenerInterface;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 class ProjectRecipeIndexWhenRecipeCreated implements DomainEventListenerInterface
 {
@@ -21,7 +22,7 @@ class ProjectRecipeIndexWhenRecipeCreated implements DomainEventListenerInterfac
             return;
         }
 
-        $recipe = $this->repository->get(new RecipeId($event->aggregateId));
+        $recipe = $this->repository->get(RecipeId::fromString($event->aggregateId));
 
         $this->projection->createRecipe(
             $recipe->getId(),

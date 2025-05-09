@@ -4,14 +4,14 @@ namespace Tests\Unit\Shared\Infrastructure\Ramsey;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
+use Przper\Tribe\Shared\Infrastructure\Ramsey\UuidGenerator;
 
 class IdGeneratorTest extends TestCase
 {
     #[Test]
     public function it_created_different_uuid_every_time(): void
     {
-        $generator = new IdGenerator();
+        $generator = new UuidGenerator();
 
         $createdIds = [];
         foreach (range(0, 100) as $i) {

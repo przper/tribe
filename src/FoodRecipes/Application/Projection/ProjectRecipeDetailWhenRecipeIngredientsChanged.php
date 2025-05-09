@@ -8,6 +8,7 @@ use Przper\Tribe\FoodRecipes\Domain\RecipeIngredientsChanged;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
 use Przper\Tribe\Shared\Domain\DomainEvent;
 use Przper\Tribe\Shared\Domain\DomainEventListenerInterface;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 class ProjectRecipeDetailWhenRecipeIngredientsChanged implements DomainEventListenerInterface
 {
@@ -22,7 +23,7 @@ class ProjectRecipeDetailWhenRecipeIngredientsChanged implements DomainEventList
             return;
         }
 
-        $recipe = $this->repository->get(new RecipeId($event->aggregateId));
+        $recipe = $this->repository->get(RecipeId::fromString($event->aggregateId));
 
         $serializedIngredients = [];
         /** @var Ingredient $ingredient */

@@ -5,25 +5,26 @@ namespace Integration\Provisioning\Application\Query;
 use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\Provisioning\Application\Query\GetGroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList as GroceryListResult;
-use Przper\Tribe\Provisioning\Domain\GroceryList;
+use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListItemStatus;
 use Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\Doubles\MotherObjects\Provisioning\GroceryListIdMother;
 use Tests\Doubles\MotherObjects\Provisioning\GroceryListItemMother;
 use Tests\Doubles\MotherObjects\Provisioning\GroceryListMother;
 
 class GetGroceryListTest extends KernelTestCase
 {
+    private GroceryListId $id;
     private GetGroceryList $sut;
-    private GroceryList $groceryList;
-    private string $groceryListId = 'f3b8ee06-7377-451c-88c1-fde290a61ac4';
 
     protected function setUp(): void
     {
         $this->sut = self::getContainer()->get(GetGroceryList::class);
+        $this->id = GroceryListIdMother::random();
 
-        $this->groceryList = GroceryListMother::new()
-            ->id($this->groceryListId)
+        $groceryList = GroceryListMother::new()
+            ->id($this->id)
             ->addItem(
                 GroceryListItemMother::new()
                     ->name('Bread')
@@ -41,13 +42,13 @@ class GetGroceryListTest extends KernelTestCase
             )
             ->build();
 
-        self::getContainer()->get(GroceryListRepositoryInterface::class)->persist($this->groceryList);
+        self::getContainer()->get(GroceryListRepositoryInterface::class)->persist($groceryList);
     }
 
     #[Test]
     public function it_gets_grocery_list_by_id(): void
     {
-        $result = $this->sut->execute($this->groceryListId);
+        $result = $this->sut->execute($this->id);
 
         $this->assertInstanceOf(GroceryListResult::class, $result);
         $this->assertCount(2, $result->items);

@@ -2,20 +2,21 @@
 
 namespace Przper\Tribe\Shared\Domain;
 
-readonly class Id
+abstract readonly class Id
 {
-    public function __construct(
-        private string $id,
-    ) {
-        $this->guard();
-    }
+    final private function __construct(
+        private Uuid $id,
+    ) {}
 
-    public function getId(): string
+    public static function fromUuid(Uuid $uuid): static
     {
-        return $this->id;
+        return new static($uuid);
     }
 
-    private function guard(): void {}
+    public static function fromString(string $id): static
+    {
+        return new static(new Uuid($id));
+    }
 
     public function __toString(): string
     {

@@ -6,18 +6,18 @@ use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\Shared\Domain\Name;
-use Przper\Tribe\Shared\Infrastructure\Ramsey\IdGenerator;
+use Przper\Tribe\Shared\Infrastructure\Ramsey\UuidGenerator;
 
 class RecipeMother
 {
     private Recipe $recipe;
-    private IdGenerator $idGenerator;
+    private UuidGenerator $idGenerator;
 
     private function __construct()
     {
-        $this->idGenerator = new IdGenerator();
+        $this->idGenerator = new UuidGenerator();
         $this->recipe = Recipe::create(
-            new RecipeId($this->idGenerator->generate()),
+            RecipeId::fromUuid($this->idGenerator->generate()),
             Name::fromString('Test 123'),
         );
     }
@@ -30,7 +30,7 @@ class RecipeMother
     public function id(string|RecipeId $id): self
     {
         if (is_string($id)) {
-            $id = new RecipeId($id);
+            $id = RecipeId::fromString($id);
         }
 
         $this->recipe = Recipe::create(

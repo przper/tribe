@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Projection\ProjectRecipeDetailWhenRecipeIngredientsChanged;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeDetailProjectionInterface;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeIngredientsChanged;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeIdMother;
 use Tests\Doubles\MotherObjects\FoodRecipes\RecipeMother;
 
 class ProjectRecipeDetailWhenRecipeIngredientsChangedTest extends TestCase
@@ -28,6 +28,6 @@ class ProjectRecipeDetailWhenRecipeIngredientsChangedTest extends TestCase
             ->method('changeRecipeIngredients');
 
         $projector = new ProjectRecipeDetailWhenRecipeIngredientsChanged($repository, $projection);
-        $projector->handle(RecipeIngredientsChanged::create(new RecipeId('test')));
+        $projector->handle(RecipeIngredientsChanged::create(RecipeIdMother::random()));
     }
 }

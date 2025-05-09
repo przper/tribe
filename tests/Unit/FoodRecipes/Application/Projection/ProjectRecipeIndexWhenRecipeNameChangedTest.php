@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\FoodRecipes\Application\Projection\ProjectRecipeIndexWhenRecipeNameChanged;
 use Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface;
-use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeNameChanged;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Tests\Doubles\MotherObjects\FoodRecipes\RecipeIdMother;
 use Tests\Doubles\MotherObjects\FoodRecipes\RecipeMother;
 
 class ProjectRecipeIndexWhenRecipeNameChangedTest extends TestCase
@@ -28,6 +28,6 @@ class ProjectRecipeIndexWhenRecipeNameChangedTest extends TestCase
             ->method('changeRecipeName');
 
         $projector = new ProjectRecipeIndexWhenRecipeNameChanged($repository, $projection);
-        $projector->handle(RecipeNameChanged::create(new RecipeId('test')));
+        $projector->handle(RecipeNameChanged::create(RecipeIdMother::random()));
     }
 }

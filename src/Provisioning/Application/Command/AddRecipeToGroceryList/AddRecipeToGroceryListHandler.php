@@ -13,6 +13,7 @@ use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 final readonly class AddRecipeToGroceryListHandler
 {
@@ -24,7 +25,7 @@ final readonly class AddRecipeToGroceryListHandler
 
     public function __invoke(AddRecipeToGroceryListCommand $command): void
     {
-        $groceryList = $this->groceryListRepository->get(new GroceryListId($command->groceryListId));
+        $groceryList = $this->groceryListRepository->get(GroceryListId::fromString($command->groceryListId));
 
         if (!$groceryList instanceof GroceryList) {
             return;

@@ -7,6 +7,7 @@ use Przper\Tribe\FoodRecipes\Application\Query\Result\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\Recipe as DomainRecipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Przper\Tribe\Shared\Domain\Uuid;
 
 final readonly class GetRecipe
 {
@@ -16,7 +17,7 @@ final readonly class GetRecipe
 
     public function execute(string $recipeId): ?Recipe
     {
-        $recipe = $this->recipeRepository->get(new RecipeId($recipeId));
+        $recipe = $this->recipeRepository->get(RecipeId::fromString($recipeId));
 
         if (!$recipe instanceof DomainRecipe) {
             return null;
