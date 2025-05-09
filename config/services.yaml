@@ -24,6 +24,14 @@ services:
             tags:
                 - domain_event_listener
 
+        Przper\Tribe\Identity\Domain\EmailSpecificationInterface:
+            tags:
+                - tribe.identity.email_specification
+
+        Przper\Tribe\Identity\Domain\PasswordSpecificationInterface:
+            tags:
+                - tribe.identity.password_specification
+
     Doctrine\DBAL\Connection:
         factory: ['Przper\Tribe\Shared\Infrastructure\DBAL\DoctrineConnectionFactory', 'createConnection']
         arguments:
@@ -41,6 +49,11 @@ services:
             $defaultOptions:
                 headers:
                     Accept: 'application/json'
+
+    Przper\Tribe\Identity\Domain\UserFactory:
+        arguments:
+            $emailSpecifications: !tagged_iterator tribe.identity.email_specification
+            $passwordSpecifications: !tagged_iterator tribe.identity.password_specification
 
 when@test:
     services:
