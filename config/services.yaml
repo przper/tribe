@@ -50,6 +50,10 @@ services:
                 headers:
                     Accept: 'application/json'
 
+    Przper\Tribe\Identity\Domain\MinimalLengthPasswordSpecification:
+        arguments:
+            $minimalPasswordLength: 16
+
     Przper\Tribe\Identity\Domain\UserFactory:
         arguments:
             $emailSpecifications: !tagged_iterator tribe.identity.email_specification
