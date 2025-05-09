@@ -38,4 +38,19 @@ class User extends AggregateRoot
     {
         return $this->name;
     }
+
+    public function getEmail(): Email
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): HashedPassword
+    {
+        return $this->password;
+    }
+
+    public function getToken(): Token
+    {
+        return $this->token;
+    }
 }

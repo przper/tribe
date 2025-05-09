@@ -4,7 +4,7 @@ namespace Przper\Tribe\Identity\Domain;
 
 interface UserRepositoryInterface
 {
-    public function get(UserId $userId): User;
+    public function get(UserId $userId): ?User;
 
     public function emailExists(Email $email): bool;
 

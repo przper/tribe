@@ -26,6 +26,11 @@ final readonly class HashedPassword
         return $this->value === $hashedPassword->value;
     }
 
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
     /**
      * @throws InvalidHashedPassword
      */

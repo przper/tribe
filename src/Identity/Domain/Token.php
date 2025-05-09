@@ -31,6 +31,11 @@ final readonly class Token
         return new self($value);
     }
 
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
     /**
      * @throws InvalidTokenException
      */
@@ -44,10 +49,5 @@ final readonly class Token
         if (!preg_match('/^[0-9a-f]{64}$/', $this->value)) {
             throw new InvalidTokenException("Token must contain only hexadecimal characters.");
         }
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
     }
 }
