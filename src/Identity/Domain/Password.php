@@ -5,7 +5,7 @@ namespace Przper\Tribe\Identity\Domain;
 final readonly class Password
 {
     private function __construct(
-        public string $value,
+        private string $value,
     ) {}
 
     public static function fromString(string $value): self
@@ -13,7 +13,7 @@ final readonly class Password
         return new self($value);
     }
 
-    public function __toString(): string
+    public function getValue(): string
     {
         return $this->value;
     }
