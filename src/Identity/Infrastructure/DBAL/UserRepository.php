@@ -19,10 +19,31 @@ final class UserRepository implements UserRepositoryInterface
         private Connection $connection,
     ) {}
 
-    public function get(UserId $userId): ?User
+    public function getById(UserId $userId): ?User
     {
         $statement = $this->connection->prepare("SELECT * FROM identity_user WHERE id = ?");
         $statement->bindValue(1, $userId);
+        $userData = $statement->executeQuery();
+
+        if (!$userData->rowCount()) {
+            return null;
+        }
+
+        $userData = $userData->fetchAssociative();
+
+        return User::restore(
+            UserId::fromString($userData['id']),
+            Name::fromString($userData['name']),
+            Email::fromString($userData['email']),
+            HashedPassword::fromString($userData['password']),
+            Token::restore($userData['token'])
+        );
+    }
+
+    public function getByEmail(Email $email): ?User
+    {
+        $statement = $this->connection->prepare("SELECT * FROM identity_user WHERE email = ?");
+        $statement->bindValue(1, $email);
         $userData = $statement->executeQuery();
 
         if (!$userData->rowCount()) {

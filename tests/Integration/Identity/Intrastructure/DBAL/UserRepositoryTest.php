@@ -62,7 +62,7 @@ class UserRepositoryTest extends KernelTestCase
     {
         $id = UserId::fromString('0c53c94a-d821-11ee-8fbc-0242ac190003');
 
-        $result = $this->repository->get($id);
+        $result = $this->repository->getById($id);
 
         $this->assertNotNull($result);
         $this->assertInstanceOf(User::class, $result);
@@ -75,7 +75,30 @@ class UserRepositoryTest extends KernelTestCase
     {
         $id = UserId::fromString('non-existent-id');
 
-        $result = $this->repository->get($id);
+        $result = $this->repository->getById($id);
+
+        $this->assertNull($result);
+    }
+
+    #[Test]
+    public function it_can_get_user_by_email(): void
+    {
+        $email = Email::fromString('test@example.com');
+
+        $result = $this->repository->getByEmail($email);
+
+        $this->assertNotNull($result);
+        $this->assertInstanceOf(User::class, $result);
+        $this->assertSame('Test User', (string) $result->getName());
+        $this->assertSame('0c53c94a-d821-11ee-8fbc-0242ac190003', (string) $result->getId());
+    }
+
+    #[Test]
+    public function it_returns_null_when_user_email_not_found(): void
+    {
+        $email = Email::fromString('idontexist@example.com');
+
+        $result = $this->repository->getByEmail($email);
 
         $this->assertNull($result);
     }
@@ -101,7 +124,7 @@ class UserRepositoryTest extends KernelTestCase
     {
         $id = UserId::fromString('test');
 
-        $this->assertNull($this->repository->get($id));
+        $this->assertNull($this->repository->getById($id));
 
         $password = HashedPassword::fromString(str_pad('new_password_', 60));
         $token = Token::create();
@@ -115,7 +138,7 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->repository->persist($user);
 
-        $retrievedUser = $this->repository->get($id);
+        $retrievedUser = $this->repository->getById($id);
 
         $this->assertNotNull($retrievedUser);
         $this->assertInstanceOf(User::class, $retrievedUser);
@@ -130,7 +153,7 @@ class UserRepositoryTest extends KernelTestCase
     {
         $id = UserId::fromString('0c53c94a-d821-11ee-8fbc-0242ac190003');
 
-        $user = $this->repository->get($id);
+        $user = $this->repository->getById($id);
         $this->assertNotNull($user);
 
         $password = HashedPassword::fromString(str_pad('updated_password', 60));
@@ -145,7 +168,7 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->repository->persist($updatedUser);
 
-        $retrievedUser = $this->repository->get($id);
+        $retrievedUser = $this->repository->getById($id);
 
         $this->assertNotNull($retrievedUser);
         $this->assertSame('Updated User', (string) $retrievedUser->getName());

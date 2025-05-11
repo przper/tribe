@@ -12,9 +12,20 @@ class InMemoryUserRepository implements UserRepositoryInterface
     /** @var array<string, User> $users */
     public array $users = [];
 
-    public function get(UserId $userId): ?User
+    public function getById(UserId $userId): ?User
     {
         return $this->users[(string) $userId] ?? null;
+    }
+
+    public function getByEmail(Email $email): ?User
+    {
+        foreach ($this->users as $user) {
+            if ($user->getEmail()->is($email)) {
+                return $user;
+            }
+        }
+
+        return null;
     }
 
     public function emailExists(Email $email): bool
