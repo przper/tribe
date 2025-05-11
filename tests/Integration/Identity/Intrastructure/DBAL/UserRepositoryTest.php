@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Identity\DBAL;
+namespace Tests\Integration\Identity\Intrastructure\DBAL;
 
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Test;

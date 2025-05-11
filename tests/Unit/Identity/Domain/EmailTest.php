@@ -21,7 +21,7 @@ class EmailTest extends TestCase
         $emailObject = Email::fromString($email);
 
         if ($expectedValid) {
-            $this->assertEquals($email, (string) $emailObject);
+            $this->assertEquals($email, (string)$emailObject);
         }
     }
 
@@ -38,5 +38,14 @@ class EmailTest extends TestCase
             'invalid email with multiple @' => ['test@@example.com', false],
             'empty email' => ['', false],
         ];
+    }
+
+    #[Test]
+    public function is_other_Email(): void
+    {
+        $sut = Email::fromString('test@test.com');
+
+        $this->assertTrue($sut->is(Email::fromString('test@test.com')));
+        $this->assertFalse($sut->is(Email::fromString('admin@admin.com')));
     }
 }

@@ -21,6 +21,11 @@ final readonly class Email
         return new self($value);
     }
 
+    public function is(Email $email): bool
+    {
+        return $this->value === $email->value;
+    }
+
     /**
      * @throws InvalidEmailException
      */

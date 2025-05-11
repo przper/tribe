@@ -75,10 +75,13 @@ when@test:
         Przper\Tribe\FoodRecipes\Application\Projection\RecipeIndexProjectionInterface:
             class: Tests\Doubles\InMemoryInfrastructure\FoodRecipes\InMemoryRecipeIndexProjection
 
-
         # Provisioning
         Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface:
             class: Tests\Doubles\InMemoryInfrastructure\Provisioning\InMemoryGroceryListRepository
 
         Przper\Tribe\Provisioning\AntiCorruption\FoodRecipes\RecipeTranslatorInterface:
             class: Tests\Doubles\InMemoryInfrastructure\Provisioning\InMemoryRecipeTranslator
+
+        # Identity
+        Przper\Tribe\Identity\Domain\UserRepositoryInterface:
+            class: Tests\Doubles\InMemoryInfrastructure\Identity\InMemoryUserRepository

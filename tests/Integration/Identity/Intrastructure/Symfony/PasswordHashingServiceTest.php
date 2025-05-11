@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Identity\Symfony;
+namespace Tests\Integration\Identity\Intrastructure\Symfony;
 
 use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\Identity\Domain\HashedPassword;

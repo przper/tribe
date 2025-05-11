@@ -11,6 +11,6 @@ final readonly class MinimalLengthPasswordSpecification implements PasswordSpeci
 
     public function isSatisfiedBy(Password $password): bool
     {
-        return strlen($password->value) >= $this->minimalPasswordLength;
+        return strlen($password->getValue()) >= $this->minimalPasswordLength;
     }
 }
