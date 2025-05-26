@@ -6,8 +6,8 @@ services:
             target: web
         environment:
             APP_ENV: dev
-            XDEBUG_ENABLED: 1
             DATABASE_URL: mysqli://user:password@db:3306/tribe?serverVersion=mariadb-10.6.17
+            MESSENGER_RABBITMQ_TRANSPORT_DSN: amqp://guest:guest@rabbitmq:5672/%2f/events
         volumes:
             - ./:/var/www/html:rw,cached
             - ./docker/php/php.dev.ini:/usr/local/etc/php/conf.d/php.dev.ini:rw,cached
