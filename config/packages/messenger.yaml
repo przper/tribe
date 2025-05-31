@@ -6,8 +6,8 @@ framework:
                     enabled: true
                     allow_no_handlers: true
                     allow_no_senders: true
-#                middleware:
-#                    - validation
+                middleware:
+                    - validation
 
         serializer:
             default_serializer: messenger.transport.symfony_serializer
@@ -18,27 +18,24 @@ framework:
         transports:
             # sync: 'sync://'
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            event:
+            events:
                 dsn: '%env(MESSENGER_RABBITMQ_TRANSPORT_DSN)%'
-                serializer: Przper\Tribe\Shared\AntiCorruption\SharedEventSerializer
+                serializer: Przper\Tribe\Shared\AntiCorruption\ExternalEventSerializer
                 options:
-                    auto_setup: false
                     exchange:
                         name: events
-                        type: fanout
-                        default_publish_routing_key: from_external
+                        type: topic
                     queues:
-                        events:
-                            binding_keys: [from_external]
+                        events_tribe:
+                            binding_keys:
+                                - authentication.user.*
             # failed: 'doctrine://default?queue_name=failed'
 
         # Uncomment this to send failed messages to this transport for later handling.
         # failure_transport: failed
 
         routing:
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
-            Przper\Tribe\Shared\AntiCorruption\SharedEventInterface: event
+            Przper\Tribe\Shared\AntiCorruption\ExternalEventInterface: events
 
 # when@test:
 #    framework:
