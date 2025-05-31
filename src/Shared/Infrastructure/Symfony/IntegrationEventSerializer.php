@@ -1,11 +1,11 @@
 <?php
 
-namespace Przper\Tribe\Shared\AntiCorruption;
+namespace Przper\Tribe\Shared\Infrastructure\Symfony;
 
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
-class ExternalEventSerializer implements SerializerInterface
+class IntegrationEventSerializer implements SerializerInterface
 {
     public function decode(array $encodedEnvelope): Envelope
     {
