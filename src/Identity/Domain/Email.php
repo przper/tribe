@@ -32,7 +32,7 @@ final readonly class Email
     private function guard(): void
     {
         if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidEmailException($this->value);
+            throw new InvalidEmailException("Invalid email format: $this->value");
         }
     }
 
