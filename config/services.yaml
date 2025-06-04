@@ -24,6 +24,10 @@ services:
             tags:
                 - domain_event_listener
 
+        Przper\Tribe\Shared\AntiCorruption\IntegrationEventListenerInterface:
+            tags:
+                - {name: messenger.message_handler, method: handle }
+
         Przper\Tribe\Identity\Domain\EmailSpecificationInterface:
             tags:
                 - tribe.identity.email_specification

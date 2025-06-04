@@ -2,12 +2,9 @@
 
 namespace Przper\Tribe\Shared\AntiCorruption;
 
-use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
-
-#[AutoconfigureTag('tribe.integration_event')]
 interface IntegrationEventInterface
 {
-    public function getVersion(): int;
+    public static function getVersion(): int;
 
-    public function getEventName(): string;
+    public static function getEventName(): string;
 }
