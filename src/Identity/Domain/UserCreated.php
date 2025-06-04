@@ -8,7 +8,7 @@ final readonly class UserCreated extends DomainEvent
 {
     public const EVENT_VERSION = 1;
 
-    public const EVENT_NAME = 'user_created';
+    public const EVENT_NAME = 'identity.user_created';
 
     private function __construct(string $aggregateId)
     {
