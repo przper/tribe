@@ -11,22 +11,20 @@ class User extends AggregateRoot
         private UserId $id,
         private Name $name,
         private Email $email,
-        private HashedPassword $password,
-        private Token $token,
     ) {}
 
-    public static function create(UserId $id, Name $name, Email $email, HashedPassword $password, Token $token): self
+    public static function create(UserId $id, Name $name, Email $email): self
     {
-        $user = new self($id, $name, $email, $password, $token);
+        $user = new self($id, $name, $email);
 
         $user->raise(UserCreated::create($id));
 
         return $user;
     }
 
-    public static function restore(UserId $id, Name $name, Email $email, HashedPassword $password, Token $token): self
+    public static function restore(UserId $id, Name $name, Email $email): self
     {
-        return new self($id, $name, $email, $password, $token);
+        return new self($id, $name, $email);
     }
 
     public function getId(): UserId
@@ -42,15 +40,5 @@ class User extends AggregateRoot
     public function getEmail(): Email
     {
         return $this->email;
-    }
-
-    public function getPassword(): HashedPassword
-    {
-        return $this->password;
-    }
-
-    public function getToken(): Token
-    {
-        return $this->token;
     }
 }

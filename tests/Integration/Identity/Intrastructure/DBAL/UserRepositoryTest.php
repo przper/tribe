@@ -5,8 +5,6 @@ namespace Tests\Integration\Identity\Intrastructure\DBAL;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Test;
 use Przper\Tribe\Identity\Domain\Email;
-use Przper\Tribe\Identity\Domain\HashedPassword;
-use Przper\Tribe\Identity\Domain\Token;
 use Przper\Tribe\Identity\Domain\User;
 use Przper\Tribe\Identity\Domain\UserId;
 use Przper\Tribe\Identity\Infrastructure\DBAL\UserRepository;
@@ -28,19 +26,15 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->connection->executeQuery(<<<SQL
             INSERT INTO identity_user
-                (id, name, email, password, token)
+                (id, name, email)
             VALUES (
                 '0c53c94a-d821-11ee-8fbc-0242ac190003',
                 'Test User',
-                'test@example.com',
-                '\$2y\$10\$abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01',
-                '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+                'test@example.com'
             )
             ON DUPLICATE KEY UPDATE 
                 name = VALUES(name),
-                email = VALUES(email),
-                password = VALUES(password),
-                token = VALUES(token);
+                email = VALUES(email)
         SQL);
 
         $this->assertInstanceOf(UserRepository::class, $this->repository);
@@ -126,14 +120,10 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->assertNull($this->repository->getById($id));
 
-        $password = HashedPassword::fromString(str_pad('new_password_', 60));
-        $token = Token::create();
         $user = User::restore(
             $id,
             Name::fromString('New User'),
             Email::fromString('new@example.com'),
-            $password,
-            $token,
         );
 
         $this->repository->persist($user);
@@ -144,8 +134,6 @@ class UserRepositoryTest extends KernelTestCase
         $this->assertInstanceOf(User::class, $retrievedUser);
         $this->assertSame('New User', (string) $retrievedUser->getName());
         $this->assertSame('new@example.com', (string) $retrievedUser->getEmail());
-        $this->assertSame($password->getValue(), $retrievedUser->getPassword()->getValue());
-        $this->assertSame($token->getValue(), $retrievedUser->getToken()->getValue());
     }
 
     #[Test]
@@ -156,14 +144,10 @@ class UserRepositoryTest extends KernelTestCase
         $user = $this->repository->getById($id);
         $this->assertNotNull($user);
 
-        $password = HashedPassword::fromString(str_pad('updated_password', 60));
-        $token = Token::create();
         $updatedUser = User::restore(
             $id,
             Name::fromString('Updated User'),
             Email::fromString('updated@example.com'),
-            $password,
-            $token,
         );
 
         $this->repository->persist($updatedUser);
@@ -173,7 +157,5 @@ class UserRepositoryTest extends KernelTestCase
         $this->assertNotNull($retrievedUser);
         $this->assertSame('Updated User', (string) $retrievedUser->getName());
         $this->assertSame('updated@example.com', (string) $retrievedUser->getEmail());
-        $this->assertSame($password->getValue(), $retrievedUser->getPassword()->getValue());
-        $this->assertSame($token->getValue(), $retrievedUser->getToken()->getValue());
     }
 }

@@ -21,8 +21,6 @@ final class Version20250507071622 extends AbstractMigration
                 `id`         VARCHAR(255) DEFAULT (UUID()) PRIMARY KEY,
                 `name`       VARCHAR(255) NOT NULL,
                 `email`      VARCHAR(255) NOT NULL,
-                `password`   VARCHAR(255) NOT NULL,
-                `token`      VARCHAR(255) NOT NULL,
                 `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
                 `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()
             );

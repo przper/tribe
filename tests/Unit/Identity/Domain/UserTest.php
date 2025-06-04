@@ -5,8 +5,6 @@ namespace Tests\Unit\Identity\Domain;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\Identity\Domain\Email;
-use Przper\Tribe\Identity\Domain\HashedPassword;
-use Przper\Tribe\Identity\Domain\Token;
 use Przper\Tribe\Identity\Domain\User;
 use Przper\Tribe\Identity\Domain\UserCreated;
 use Przper\Tribe\Identity\Domain\UserId;
@@ -21,10 +19,8 @@ class UserTest extends TestCase
         $id = UserId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $name = Name::fromString('John Doe');
         $email = Email::fromString('john@example.com');
-        $password = HashedPassword::fromString(str_pad('hashed_password', 60, '0'));
-        $token = Token::create();
 
-        $sut = User::create($id, $name, $email, $password, $token);
+        $sut = User::create($id, $name, $email);
         $events = $sut->pullEvents();
 
         $this->assertSame('0c53c94a-d821-11ee-8fbc-0242ac190002', (string) $sut->getId());
@@ -40,10 +36,8 @@ class UserTest extends TestCase
         $id = UserId::fromUuid(new Uuid('0c53c94a-d821-11ee-8fbc-0242ac190002'));
         $name = Name::fromString('John Doe');
         $email = Email::fromString('john@example.com');
-        $password = HashedPassword::fromString(str_pad('hashed_password', 60, '0'));
-        $token = Token::create();
 
-        $sut = User::restore($id, $name, $email, $password, $token);
+        $sut = User::restore($id, $name, $email);
         $events = $sut->pullEvents();
 
         $this->assertSame('0c53c94a-d821-11ee-8fbc-0242ac190002', (string) $sut->getId());

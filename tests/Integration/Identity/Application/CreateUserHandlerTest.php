@@ -33,7 +33,6 @@ class CreateUserHandlerTest extends KernelTestCase
         $command = new CreateUserCommand(
             name: 'John Doe',
             email: 'john.doe@example.com',
-            password: 'StrongPassword123!'
         );
 
         call_user_func($this->sut, $command);
@@ -44,6 +43,6 @@ class CreateUserHandlerTest extends KernelTestCase
         $this->assertSame('John Doe', (string) $createdUser->getName());
         $this->assertTrue($createdUser->getEmail()->is(Email::fromString('john.doe@example.com')));
         $this->assertNotEmpty($this->eventDispatcher->dispatchedEvents);
-        $this->assertContains('user_created', $this->eventDispatcher->dispatchedEvents);
+        $this->assertContains('identity.user_created', $this->eventDispatcher->dispatchedEvents);
     }
 }

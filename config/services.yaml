@@ -32,10 +32,6 @@ services:
             tags:
                 - tribe.identity.email_specification
 
-        Przper\Tribe\Identity\Domain\PasswordSpecificationInterface:
-            tags:
-                - tribe.identity.password_specification
-
     Doctrine\DBAL\Connection:
         factory: ['Przper\Tribe\Shared\Infrastructure\DBAL\DoctrineConnectionFactory', 'createConnection']
         arguments:
@@ -54,14 +50,9 @@ services:
                 headers:
                     Accept: 'application/json'
 
-    Przper\Tribe\Identity\Domain\MinimalLengthPasswordSpecification:
-        arguments:
-            $minimalPasswordLength: 16
-
     Przper\Tribe\Identity\Domain\UserFactory:
         arguments:
             $emailSpecifications: !tagged_iterator tribe.identity.email_specification
-            $passwordSpecifications: !tagged_iterator tribe.identity.password_specification
 
 when@test:
     services:

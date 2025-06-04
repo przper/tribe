@@ -25,7 +25,6 @@ class CreateUserHandler
         $user = $this->userFactory->create(
             name: Name::fromString($command->name),
             email: Email::fromString($command->email),
-            password: Password::fromString($command->password),
         );
 
         $this->userRepository->persist($user);

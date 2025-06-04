@@ -24,7 +24,6 @@ final class UserCreatedIntegrationEventListener implements IntegrationEventListe
         ($this->createUserHandler)(new CreateUserCommand(
             name: $event->name ?? $event->email,
             email: $event->email,
-            password: '$ecretPassword1234',
         ));
     }
 }

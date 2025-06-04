@@ -35,8 +35,6 @@ final class UserRepository implements UserRepositoryInterface
             UserId::fromString($userData['id']),
             Name::fromString($userData['name']),
             Email::fromString($userData['email']),
-            HashedPassword::fromString($userData['password']),
-            Token::restore($userData['token'])
         );
     }
 
@@ -56,8 +54,6 @@ final class UserRepository implements UserRepositoryInterface
             UserId::fromString($userData['id']),
             Name::fromString($userData['name']),
             Email::fromString($userData['email']),
-            HashedPassword::fromString($userData['password']),
-            Token::restore($userData['token'])
         );
     }
 
@@ -78,21 +74,17 @@ final class UserRepository implements UserRepositoryInterface
         try {
             $statement = $this->connection->prepare(<<<SQL
                 INSERT INTO identity_user
-                    (id, name, email, password, token)
+                    (id, name, email)
                 VALUES
-                    (?, ?, ?, ?, ?)
+                    (?, ?, ?)
                 ON DUPLICATE KEY UPDATE 
                     name = VALUES(name),
-                    email = VALUES(email),
-                    password = VALUES(password),
-                    token = VALUES(token);
+                    email = VALUES(email)
             SQL);
 
             $statement->bindValue(1, (string)$user->getId());
             $statement->bindValue(2, (string)$user->getName());
             $statement->bindValue(3, (string)$user->getEmail());
-            $statement->bindValue(4, $user->getPassword()->getValue());
-            $statement->bindValue(5, $user->getToken()->getValue());
             $statement->executeStatement();
 
             $this->connection->commit();
