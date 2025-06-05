@@ -54,6 +54,10 @@ services:
         arguments:
             $emailSpecifications: !tagged_iterator tribe.identity.email_specification
 
+    tribe.custom_jwt_authenticator:
+        class: Przper\Tribe\Identity\Infrastructure\Symfony\JWTAuthenticator
+        parent: lexik_jwt_authentication.security.jwt_authenticator
+
 when@test:
     services:
         # Shared

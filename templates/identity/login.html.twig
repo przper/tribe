@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content">
+        {% if error is defined  %}
+            <div>{{ error }}</div>
+        {% endif %}
+
+        <form action="{{ path('identity.login') }}" method="post">
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ last_username ?? null }}" required>
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

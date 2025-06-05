@@ -35,3 +35,10 @@ worked_time:
         path: ../src/WorkedTime/Ports/Controller
         namespace: Przper\Tribe\WorkedTime\Ports\Controller
     type: attribute
+
+identity:
+    resource:
+        path: ../src/Identity/Ports/Web
+        namespace: Przper\Tribe\Identity\Ports\Web
+    type: attribute
+    name_prefix: identity.
