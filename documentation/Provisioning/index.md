@@ -1,4 +1,4 @@
-# Provisioning Bounding Context
+# Provisioning Bounded Context
 
 ## Description
 (to do)
