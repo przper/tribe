@@ -25,6 +25,7 @@ class EmailTest extends TestCase
         }
     }
 
+    /** @return array<string, array<int, boolean|string>> */
     public static function emailFormatProvider(): array
     {
         return [

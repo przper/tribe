@@ -48,6 +48,7 @@ class GetRecipesTest extends KernelTestCase
                     'd6e9c61c-a995-45af-b4c6-ea1caa9b1c25'
                 ); 
             SQL);
+        parent::tearDown();
     }
 
     #[Test]

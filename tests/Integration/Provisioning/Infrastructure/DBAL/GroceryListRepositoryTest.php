@@ -56,6 +56,7 @@ class GroceryListRepositoryTest extends KernelTestCase
                     '0c53c94a-d821-11ee-8fbc-0242ac190002'
                 ); 
             SQL);
+        parent::tearDown();
     }
 
     public function test_get(): void

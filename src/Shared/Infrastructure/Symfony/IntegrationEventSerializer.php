@@ -9,6 +9,10 @@ use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 class IntegrationEventSerializer implements SerializerInterface
 {
+    /**
+     * @param array<string, mixed> $encodedEnvelope
+     * @throws \Exception
+     */
     public function decode(array $encodedEnvelope): Envelope
     {
         $body = json_decode($encodedEnvelope['body'], true);
@@ -25,6 +29,9 @@ class IntegrationEventSerializer implements SerializerInterface
         return new Envelope($integrationEvent);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function encode(Envelope $envelope): array
     {
         $message = $envelope->getMessage();

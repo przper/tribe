@@ -3,6 +3,7 @@
 namespace Tests\Unit\Identity\Domain;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Przper\Tribe\Identity\Domain\Email;
 use Przper\Tribe\Identity\Domain\InvalidEmailException;
@@ -15,8 +16,13 @@ use Przper\Tribe\Shared\Domain\UuidGeneratorInterface;
 
 class UserFactoryTest extends TestCase
 {
+    /** @var UuidGeneratorInterface&MockObject $idGenerator */
     private UuidGeneratorInterface $idGenerator;
+
+    /** @var EmailSpecificationInterface&MockObject $emailSpecification */
     private EmailSpecificationInterface $emailSpecification;
+
+    /** @var UserFactory */
     private UserFactory $userFactory;
 
     protected function setUp(): void
@@ -76,6 +82,7 @@ class UserFactoryTest extends TestCase
         $email = Email::fromString('john.doe@example.com');
 
         $this->emailSpecification
+            ->expects($this->once())
             ->method('isSatisfiedBy')
             ->willReturn(false);
 
