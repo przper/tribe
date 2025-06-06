@@ -2,7 +2,9 @@
 
 namespace Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe;
 
-final readonly class UpdateRecipeCommand
+use Przper\Tribe\Shared\Application\Command\Sync\Command;
+
+final readonly class UpdateRecipeCommand implements Command
 {
     /**
      * @param list<array{name: string, quantity: float, unit: string}> $ingredients

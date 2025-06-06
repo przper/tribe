@@ -4,14 +4,14 @@ namespace Przper\Tribe\Identity\Ports\Integration;
 
 use Przper\Tribe\Identity\AntiCorruption\Integration\Authentication\UserCreated;
 use Przper\Tribe\Identity\Application\Command\CreateUser\CreateUserCommand;
-use Przper\Tribe\Identity\Application\Command\CreateUser\CreateUserHandler;
 use Przper\Tribe\Shared\AntiCorruption\IntegrationEventInterface;
 use Przper\Tribe\Shared\AntiCorruption\IntegrationEventListenerInterface;
+use Przper\Tribe\Shared\Application\Command\Async\CommandBus;
 
 final class UserCreatedIntegrationEventListener implements IntegrationEventListenerInterface
 {
     public function __construct(
-        private CreateUserHandler $createUserHandler,
+        private CommandBus $commandBus,
     ) {
     }
 
@@ -21,7 +21,7 @@ final class UserCreatedIntegrationEventListener implements IntegrationEventListe
             return;
         }
 
-        ($this->createUserHandler)(new CreateUserCommand(
+        $this->commandBus->dispatch(new CreateUserCommand(
             name: $event->name ?? $event->email,
             email: $event->email,
         ));

@@ -2,7 +2,9 @@
 
 namespace Przper\Tribe\Identity\Application\Command\CreateUser;
 
-final readonly class CreateUserCommand
+use Przper\Tribe\Shared\Application\Command\Async\Command;
+
+final readonly class CreateUserCommand implements Command
 {
     public function __construct(
         public string $name,

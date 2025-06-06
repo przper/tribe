@@ -3,9 +3,9 @@
 namespace Przper\Tribe\Provisioning\Ports\Api;
 
 use Przper\Tribe\Provisioning\Application\Command\AddRecipeToGroceryList\AddRecipeToGroceryListCommand;
-use Przper\Tribe\Provisioning\Application\Command\AddRecipeToGroceryList\AddRecipeToGroceryListHandler;
 use Przper\Tribe\Provisioning\Application\Query\GetGroceryList;
 use Przper\Tribe\Provisioning\Application\Query\Result\GroceryList;
+use Przper\Tribe\Shared\Application\Command\Sync\CommandBus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +18,7 @@ class GroceryListActionController extends AbstractController
 
     public function __construct(
         private readonly GetGroceryList $getGroceryList,
-        private readonly AddRecipeToGroceryListHandler $addRecipeToGroceryListHandler,
+        private readonly CommandBus $commandBus,
     ) {}
 
     #[Route('/groceries/{id}', name: 'action', methods: ['POST'])]
@@ -42,7 +42,7 @@ class GroceryListActionController extends AbstractController
         }
 
         if ($action === self::ADD_RECIPE_TO_GROCERY_LIST_ACTION) {
-            ($this->addRecipeToGroceryListHandler)(new AddRecipeToGroceryListCommand($id, $request['recipeId']));
+            $this->commandBus->dispatch(new AddRecipeToGroceryListCommand($id, $request['recipeId']));
 
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }

@@ -8,14 +8,14 @@ use Przper\Tribe\Provisioning\Domain\GroceryList;
 use Przper\Tribe\Provisioning\Domain\GroceryListId;
 use Przper\Tribe\Provisioning\Domain\GroceryListItem;
 use Przper\Tribe\Provisioning\Domain\GroceryListRepositoryInterface;
+use Przper\Tribe\Shared\Application\Command\Sync\Command;
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
-use Przper\Tribe\Shared\Domain\Uuid;
 
-final readonly class AddRecipeToGroceryListHandler
+final readonly class AddRecipeToGroceryListHandler implements Command
 {
     public function __construct(
         private GroceryListRepositoryInterface $groceryListRepository,

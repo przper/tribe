@@ -7,6 +7,7 @@ use Przper\Tribe\FoodRecipes\Domain\Ingredients;
 use Przper\Tribe\FoodRecipes\Domain\Recipe;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Przper\Tribe\Shared\Application\Command\Sync\CommandHandler;
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
@@ -14,7 +15,7 @@ use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
 use Przper\Tribe\Shared\Domain\UuidGeneratorInterface;
 
-final class CreateRecipeHandler
+final class CreateRecipeHandler implements CommandHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $repository,

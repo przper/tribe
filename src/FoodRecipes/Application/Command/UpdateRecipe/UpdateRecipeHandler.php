@@ -5,14 +5,14 @@ namespace Przper\Tribe\FoodRecipes\Application\Command\UpdateRecipe;
 use Przper\Tribe\FoodRecipes\Domain\Ingredient;
 use Przper\Tribe\FoodRecipes\Domain\RecipeId;
 use Przper\Tribe\FoodRecipes\Domain\RecipeRepositoryInterface;
+use Przper\Tribe\Shared\Application\Command\Sync\CommandHandler;
 use Przper\Tribe\Shared\Domain\Amount;
 use Przper\Tribe\Shared\Domain\DomainEventDispatcherInterface;
 use Przper\Tribe\Shared\Domain\Name;
 use Przper\Tribe\Shared\Domain\Quantity;
 use Przper\Tribe\Shared\Domain\Unit;
-use Przper\Tribe\Shared\Domain\Uuid;
 
-final class UpdateRecipeHandler
+final class UpdateRecipeHandler implements CommandHandler
 {
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository,
