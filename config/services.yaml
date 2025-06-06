@@ -20,13 +20,24 @@ services:
             - '../src/Kernel.php'
 
     _instanceof:
+        # Shared
         Przper\Tribe\Shared\Domain\DomainEventListenerInterface:
             tags:
                 - domain_event_listener
 
+        Przper\Tribe\Shared\Application\Command\Sync\CommandHandler:
+            tags:
+                - { name: 'messenger.message_handler', bus: command.sync.bus }
+
+        Przper\Tribe\Shared\Application\Command\Async\CommandHandler:
+            tags:
+                - { name: 'messenger.message_handler', bus: command.async.bus }
+
         Przper\Tribe\Shared\AntiCorruption\IntegrationEventListenerInterface:
             tags:
                 - {name: messenger.message_handler, method: handle }
+
+        # Identity
 
         Przper\Tribe\Identity\Domain\EmailSpecificationInterface:
             tags:

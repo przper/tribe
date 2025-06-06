@@ -1,17 +1,21 @@
 framework:
     messenger:
+        default_bus: command.sync.bus
+
         buses:
-            event.bus:
-                default_middleware:
-                    enabled: true
-                    allow_no_handlers: true
-                    allow_no_senders: true
-                middleware:
-#                    - validation
+            command.sync.bus: ~
+            command.async.bus: ~
 
         transports:
-            # sync: 'sync://'
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            sync: 'sync://'
+            async:
+                dsn: '%env(MESSENGER_RABBITMQ_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: tribe_async
+                        type: fanout
+                    queues:
+                        commands_tribe: ~
             events:
                 dsn: '%env(MESSENGER_RABBITMQ_TRANSPORT_DSN)%'
                 serializer: Przper\Tribe\Shared\Infrastructure\Symfony\IntegrationEventSerializer
@@ -23,16 +27,19 @@ framework:
                         events_tribe:
                             binding_keys:
                                 - authentication.user.*
-            # failed: 'doctrine://default?queue_name=failed'
+#            failed: 'doctrine://default?queue_name=failed'
 
         # Uncomment this to send failed messages to this transport for later handling.
-        # failure_transport: failed
+#        failure_transport: failed
 
         routing:
+            Przper\Tribe\Shared\Application\Command\Sync\Command: sync
+            Przper\Tribe\Shared\Application\Command\Async\Command: async
             Przper\Tribe\Shared\AntiCorruption\IntegrationEventInterface: events
 
 when@test:
     framework:
         messenger:
             transports:
+                async: 'in-memory://'
                 events: 'in-memory://'
