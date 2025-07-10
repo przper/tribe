@@ -2,16 +2,31 @@
 
 namespace Przper\Tribe\Shared\Infrastructure\Symfony;
 
-use Przper\Tribe\Identity\AntiCorruption\Integration\Authentication\UserCreated;
+use Przper\Tribe\Shared\AntiCorruption\IntegrationEventFactory;
 use Przper\Tribe\Shared\AntiCorruption\IntegrationEventInterface;
+use Przper\Tribe\Shared\AntiCorruption\NotSupportedIntegrationEventException;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
 class IntegrationEventSerializer implements SerializerInterface
 {
+    /** @var array<string, IntegrationEventFactory<IntegrationEventInterface>> $integrationEventFactories */
+    private array $integrationEventFactories;
+
+    /** @param iterable<IntegrationEventFactory<IntegrationEventInterface>> $integrationEventFactories */
+    public function __construct(
+        #[AutowireIterator('tribe.shared.integration_event_factory')]
+        iterable $integrationEventFactories,
+    ) {
+        foreach ($integrationEventFactories as $integrationEventFactory) {
+            $this->integrationEventFactories[$integrationEventFactory->getExternalEventName()] = $integrationEventFactory;
+        }
+    }
+
     /**
      * @param array<string, mixed> $encodedEnvelope
-     * @throws \Exception
+     * @throws NotSupportedIntegrationEventException
      */
     public function decode(array $encodedEnvelope): Envelope
     {
@@ -21,10 +36,7 @@ class IntegrationEventSerializer implements SerializerInterface
             throw new \Exception('Event name is not set!');
         }
 
-        $integrationEvent = match ($eventName) {
-            UserCreated::getEventName() => new UserCreated($body['userId'], $body['email'], $body['name']),
-            default => null,
-        };
+        $integrationEvent = $this->integrationEventFactories[$eventName]->createFromArray($body);
 
         return new Envelope($integrationEvent);
     }

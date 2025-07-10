@@ -33,6 +33,10 @@ services:
             tags:
                 - { name: 'messenger.message_handler', bus: command.async.bus }
 
+        Przper\Tribe\Shared\AntiCorruption\IntegrationEventFactory:
+            tags:
+                - tribe.shared.integration_event_factory
+
         Przper\Tribe\Shared\AntiCorruption\IntegrationEventListenerInterface:
             tags:
                 - {name: messenger.message_handler, method: handle }
